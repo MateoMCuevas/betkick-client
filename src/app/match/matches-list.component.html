@@ -1,0 +1,35 @@
+<!-- <div class="matches">
+  <div class="match" *ngFor="let match of matches">
+    <img src="{{match.awayTeam.crest}}" class="team-crest" alt="">
+    <img src="{{match.homeTeam.crest}}" class="team-crest" alt="">
+  </div>
+</div>
+<mat-divider></mat-divider>
+ -->
+
+<div *ngFor="let match of matches" class="match-container">
+  <div class="match-header">
+    <p>{{ match.utcDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
+    <h3>{{ match.competition.name }}</h3>
+  </div>
+  <div class="team-container">
+    <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
+    <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
+    <p>{{ match.awayTeam.shortName }}</p>
+    <p>{{ match.homeTeam.shortName }}</p>
+  </div>
+  <div class="odds-container">
+    <button>
+      <span class="odds-symbol">1</span>
+      {{ parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1))}}
+    </button>
+    <button>
+      <span class="odds-symbol">X</span>
+      {{ parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1))}}
+    </button>
+    <button>
+      <span class="odds-symbol">2</span>
+      {{ parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1))}}
+    </button>
+  </div>
+</div>

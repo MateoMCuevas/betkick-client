@@ -11,13 +11,17 @@ import {MatButtonModule} from "@angular/material/button";
 import { CompetitionsListComponent } from './competitions-list/competitions-list.component';
 import {MatListModule} from "@angular/material/list";
 import {HttpClientModule} from "@angular/common/http";
+import { MatchesListComponent } from './match/matches-list.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopMenuComponent,
     HomeComponent,
-    CompetitionsListComponent
+    CompetitionsListComponent,
+    MatchesListComponent
   ],
   imports: [
     HttpClientModule,
@@ -27,6 +31,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatIconModule,
     MatButtonModule,
     MatListModule,
+    MatCardModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
