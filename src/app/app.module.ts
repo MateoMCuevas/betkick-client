@@ -11,13 +11,23 @@ import {MatButtonModule} from "@angular/material/button";
 import { CompetitionsListComponent } from './competitions-list/competitions-list.component';
 import {MatListModule} from "@angular/material/list";
 import {HttpClientModule} from "@angular/common/http";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+import { CardBetComponent } from './card-bet/card-bet.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { CardMatchComponent } from './card-match/card-match.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TopMenuComponent,
     HomeComponent,
-    CompetitionsListComponent
+    CompetitionsListComponent,
+    CardBetComponent,
+    CardMatchComponent
   ],
   imports: [
     HttpClientModule,
@@ -27,6 +37,9 @@ import {HttpClientModule} from "@angular/common/http";
     MatIconModule,
     MatButtonModule,
     MatListModule,
+    MatCardModule,
+    MatChipsModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
