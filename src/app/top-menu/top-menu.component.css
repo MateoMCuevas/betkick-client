@@ -3,7 +3,9 @@ mat-toolbar {
   justify-content: space-between;
   background-color: #1a1919;
 }
-
+a{
+  text-decoration: none;
+}
 mat-icon {
   color: #08f905;
 }
