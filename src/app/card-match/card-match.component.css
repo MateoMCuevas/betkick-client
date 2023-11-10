@@ -1,0 +1,31 @@
+.infoMatch{
+    margin-bottom: 1rem;
+    
+}
+.priceBet{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+.cardMatch{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.amountInput{
+    margin-top: 2rem;
+    text-align: right;
+    margin-left: 4rem;
+    width: 50%;
+
+}
+.potProfits{
+    margin-left: 2rem;
+    font-weight: bold;
+    text-align: right;
+}
+.deleteBtn{
+    height: 100%;
+}

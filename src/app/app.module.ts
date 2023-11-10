@@ -10,14 +10,13 @@ import {MatButtonModule} from "@angular/material/button";
 import { CompetitionsListComponent } from './competitions-list/competitions-list.component';
 import {MatListModule} from "@angular/material/list";
 import {HttpClientModule} from "@angular/common/http";
-import {MatMenuModule} from '@angular/material/menu';
+
 @NgModule({
   declarations: [
     AppComponent,
     TopMenuComponent,
     HomeComponent,
-    CompetitionsListComponent,
-
+    CompetitionsListComponent
   ],
   imports: [
     HttpClientModule,
@@ -27,7 +26,6 @@ import {MatMenuModule} from '@angular/material/menu';
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
