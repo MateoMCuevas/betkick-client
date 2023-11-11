@@ -7,9 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./card-match.component.css']
 })
 export class CardMatchComponent {
-  chips: boolean = false;
-  showChips(){
-    this.chips=true
+  numero: number = 0;
+  cardDelete: boolean= false
+  
+  
+  calcular(): number {
+    return this.numero * 2; 
+  }
+  deleteCard()
+  {
+    this.cardDelete=true
   }
 }
 

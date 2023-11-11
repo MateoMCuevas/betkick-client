@@ -17,7 +17,7 @@ export class CardBetComponent {
   toggleButtonVisibility() {
     this.isButtonVisible = !this.isButtonVisible;
   }
-  toggleDeleteCard(){
+  deleteCard(){
     this.cardDelete = true;
   }
 }
