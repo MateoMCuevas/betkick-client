@@ -25,6 +25,11 @@
   border-radius: 20px;
 }
 
+.active {
+  background-color: #e1e1e1;
+  border-radius: 20px;
+}
+
 .comp-emblem {
   background-color: white;
   margin: 0 auto;

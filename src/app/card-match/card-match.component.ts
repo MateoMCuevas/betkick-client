@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 
 @Component({
@@ -7,12 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./card-match.component.css']
 })
 export class CardMatchComponent {
-  numero: number = 0;
+  number: number = 0;
   cardDelete: boolean= false
-  
-  
-  calcular(): number {
-    return this.numero * 2; 
+
+
+  calculate(): number {
+    return this.number * 2;
   }
   deleteCard()
   {

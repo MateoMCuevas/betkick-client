@@ -1,4 +1,4 @@
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 export const cardToggle = trigger('cardToggle', [
   state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
