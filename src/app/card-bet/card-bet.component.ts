@@ -32,6 +32,6 @@ export class CardBetComponent {
   }
 
   deleteAll() {
-    this.betService.deleteList
+    this.betService.deleteList()
   }
 }

@@ -4,7 +4,7 @@
         <mat-card-title>{{betData.get('homeTeam').value}}</mat-card-title>
         <mat-card-title>{{betData.get('awayTeam').value}}</mat-card-title>
         <mat-card-subtitle>Final de partido</mat-card-subtitle>
-        <mat-card-subtitle style="font-weight: bold;">{{betData.get('winner').value}}</mat-card-subtitle>
+        <mat-card-subtitle style="font-weight: bold;">{{betData.get('winner').value}} x{{betData.get('betOdds').value}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions class="priceBet">
         <button mat-mini-fab class="deleteBtn" (click)="deleteBet(betData)">
