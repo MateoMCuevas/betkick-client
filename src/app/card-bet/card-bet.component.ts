@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
-import {cardToggle} from './card-animations';
+import { Component } from '@angular/core';
+import { cardToggle } from './card-animations';
+import {BetService} from "../bet.service"
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-card-bet',
@@ -10,14 +12,26 @@ import {cardToggle} from './card-animations';
 export class CardBetComponent {
   cardDelete = false;
   isCardVisible = true;
-  isButtonVisible = true;
+  listBets: any=null
+
+  constructor(
+    private betService: BetService
+  ){}
+
+  ngOnInit() {
+    this.betService.listBets$.subscribe((datos) => {
+      this.listBets = datos;
+    });
+  }
+  sendData(){
+    this.listBets//enviarlo al back
+  }
+
   toggleCardVisibility() {
     this.isCardVisible = !this.isCardVisible;
   }
-  toggleButtonVisibility() {
-    this.isButtonVisible = !this.isButtonVisible;
-  }
-  deleteCard(){
-    this.cardDelete = true;
+
+  deleteAll() {
+    this.betService.deleteList
   }
 }

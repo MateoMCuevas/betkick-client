@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component,Input} from '@angular/core';
+import {BetService} from "../bet.service"
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -7,16 +9,27 @@ import {Component} from '@angular/core';
   styleUrls: ['./card-match.component.css']
 })
 export class CardMatchComponent {
-  number: number = 0;
-  cardDelete: boolean= false
+  @Input() listBets: any = null;
+  betAmount: number=0;
+  cardDelete: boolean= false;
 
+  constructor(
+    private betService: BetService
+  ){}
 
-  calculate(): number {
-    return this.number * 2;
+  setBetAmount(form: FormGroup,event:any){
+    const nuevoMonto=(parseFloat((event.target as HTMLInputElement).value));
+    this.betService.setBetAmount(form,nuevoMonto);
   }
-  deleteCard()
+
+  calculate( form: FormGroup): number {
+    const betAmount= parseFloat(form.get('betAmount')?.value ?? 0);
+    const betOdds= parseFloat(form.get('betOdds')?.value);
+    return Number((betAmount * betOdds).toFixed(2));
+  }
+  deleteBet(form: FormGroup)
   {
-    this.cardDelete=true
+    this.betService.deleteForm(form);
   }
 }
 

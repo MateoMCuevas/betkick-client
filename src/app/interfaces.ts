@@ -23,3 +23,4 @@ export interface Match {
   "homeTeam": Team;
   "awayTeam": Team;
 }
+
