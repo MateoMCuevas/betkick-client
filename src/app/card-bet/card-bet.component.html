@@ -9,18 +9,18 @@
     </div>
 
     <mat-card class="card-bet" *ngIf="isCardVisible" [@cardToggle]="isCardVisible ? 'expanded' : 'collapsed'">
-        <mat-card-header class="card-bet-header" (click)="toggleCardVisibility()">
-            <button mat-icon-button class="arrowBtn">
+        <mat-card-header class="card-bet-header" >
+            <button mat-icon-button class="arrowBtn" (click)="toggleCardVisibility()">
                 <mat-icon>arrow_downward</mat-icon>
             </button>
             <mat-card-title class="title">Ticket De Apuesta</mat-card-title>
-            <button mat-icon-button class="deleteBtn" (click)="toggleDeleteCard()">
+            <button mat-icon-button class="deleteBtn" (click)="deleteAll()">
                 <mat-icon>delete</mat-icon>
             </button>
         </mat-card-header>
         <mat-card-content class="card-bet-content">
-            <app-card-match></app-card-match>
+            <app-card-match [listBets]="listBets"></app-card-match>
         </mat-card-content>
-        <button mat-button class="betBtn" type="submit"><h3>Apostar</h3></button>
+        <button mat-button class="betBtn" type="submit" (submit)="sendData()"><h3>Apostar</h3></button>
     </mat-card>
 </div>

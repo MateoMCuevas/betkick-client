@@ -8,28 +8,30 @@
  -->
 
 <div *ngFor="let match of matches" class="match-container">
+  <form [formGroup]="form">
   <div class="match-header">
     <p>{{ match.utcDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
     <h3>{{ match.competition.name }}</h3>
   </div>
   <div class="team-container">
-    <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
     <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
-    <p>{{ match.awayTeam.shortName }}</p>
-    <p>{{ match.homeTeam.shortName }}</p>
+    <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
+    <p >{{ match.homeTeam.shortName }}</p>
+    <p >{{ match.awayTeam.shortName }}</p>
   </div>
   <div class="odds-container">
-    <button>
+    <button id="localWin" (click)="handleButtonClick(match,bet1,$event)">
       <span class="odds-symbol">1</span>
-      {{ parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1))}}
+      {{ bet1}}
     </button>
-    <button>
+    <button id="draw" (click)="handleButtonClick(match,betX,$event)">
       <span class="odds-symbol">X</span>
-      {{ parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1))}}
+      {{betX}}
     </button>
-    <button>
+    <button id="awayWin" (click)="handleButtonClick(match,bet2,$event)">
       <span class="odds-symbol">2</span>
-      {{ parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1))}}
+      {{bet2}}
     </button>
   </div>
+</form>
 </div>

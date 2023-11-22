@@ -1,0 +1,19 @@
+<div class="competitions">
+  <div class="competition" *ngFor="let competition of competitions"
+       routerLink="home/competitions/{{competition.id}}">
+      <img src="{{competition.emblem}}" class="comp-emblem" alt="">
+    <p class="comp-name">{{competition.name}}</p>
+  </div>
+</div>
+
+<!-- HIGHLIGHT SELECTED COMPETITION
+<div class="competitions">
+  <div class="competition" *ngFor="let competition of competitions; let i = index"
+       [ngClass]="{ 'active': i === activeCompetition }"
+       (click)="setActive(i)"
+       routerLink="home/competitions/{{competition.id}}">
+      <img src="{{competition.emblem}}" class="comp-emblem" alt="">
+    <p class="comp-name">{{competition.name}}</p>
+  </div>
+</div>
+ -->

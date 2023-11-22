@@ -44,11 +44,14 @@
 }
 .betBtn{
     height: 3rem;
+    width: 100%;
     cursor: pointer;
     background-color: black;
 }
 h3{
+    margin-top: 1rem;
     color: #08f905;
+    font-size: large;
 }
 @media(max-width: 768px){
     .card-bet-container{

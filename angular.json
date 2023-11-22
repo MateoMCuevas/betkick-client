@@ -64,7 +64,8 @@
               "browserTarget": "BetKick:build:production"
             },
             "development": {
-              "browserTarget": "BetKick:build:development"
+              "browserTarget": "BetKick:build:development",
+              "proxyConfig": "src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
