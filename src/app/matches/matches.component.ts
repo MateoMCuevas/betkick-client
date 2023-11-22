@@ -1,7 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Match} from "../model";
-import {EventService} from "../event.service";
-import {ActivatedRoute} from "@angular/router";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Match } from "../interfaces";
+import { EventService } from "../event.service";
+import { BetService } from "../bet.service"
+import { ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-matches',
@@ -11,8 +15,23 @@ import {ActivatedRoute} from "@angular/router";
 export class MatchesComponent implements OnInit {
   matches: Match[] = [];
 
+  bet1 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
+  betX = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
+  bet2 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
+
+  form = this.fb.group({
+    homeTeam: [''],
+    awayTeam: [''],
+    placedAt: [''],
+    betOdds: [''],
+    betAmount: [''], // Puedes dejarlo vacío
+    winner: [''],
+  });
+
   constructor(
     private eventService: EventService,
+    private fb: FormBuilder,
+    private betService: BetService,
     private route: ActivatedRoute) {
     //private location: Location) {
   }
@@ -31,9 +50,37 @@ export class MatchesComponent implements OnInit {
         this.matches = matches;
       });
   }
+  handleButtonClick(match: Match, odds: number, event: MouseEvent): void {
+    const valores = {
+      homeTeam: match.homeTeam.shortName,
+      awayTeam: match.awayTeam.shortName,
+      placedAt: null,
+      betOdds: odds.toString(),
+      betAmount: null,
+      winner: this.whoWin(match,event),
+    };
+    this.form.patchValue(valores);
+    this.betService.addData(this.form.value);
+    this.form.reset();
+  }
+
+  whoWin(match: Match, event: MouseEvent): any {
+    const buttonId = (event.target as HTMLButtonElement)?.id;
+    switch (buttonId) {
+      case 'localWin':
+        return match.homeTeam.shortName
+        break;
+      case 'draw':
+        return 'draw'
+        break;
+      case 'awayWin':
+        return match.awayTeam.shortName
+        break;
+    }
+  }
 
   //goBack(): void {
-   // this.location.back();
+  // this.location.back();
   //}
 
   protected readonly Math = Math;

@@ -44,6 +44,7 @@
 }
 .betBtn{
     height: 3rem;
+    width: 100%;
     cursor: pointer;
     background-color: black;
 }

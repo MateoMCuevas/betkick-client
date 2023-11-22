@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TopMenuComponent} from './top-menu/top-menu.component';
@@ -36,6 +37,7 @@ import {AppRoutingModule} from "./app-routing.module";
   imports: [
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
