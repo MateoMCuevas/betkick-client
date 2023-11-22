@@ -3,12 +3,58 @@ mat-toolbar {
   justify-content: space-between;
   background-color: #1a1919;
 }
-a{
+
+a {
   text-decoration: none;
 }
+
 mat-icon {
   color: #08f905;
 }
-.title{
+
+.title {
+  color: #08f905;
+}
+
+#logo {
+  margin-left: 2.5rem;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+#player {
+  width: 2rem;
+  height: 2rem;
+  font-size: 2rem;
+}
+
+#ball {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.5rem;
+  font-size: 0.8rem;
+}
+
+#login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  background-color: #1f1f21;
+  border-radius: 1.1rem;
+  padding: 1rem;
+  color: #08d506;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: solid 0.1rem;
+}
+
+#lock {
+  color: #08ce06;
+  font-size: 1rem;
+}
+
+#login:hover {
+  background-color: #2a2828;
   color: #08f905;
 }

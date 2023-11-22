@@ -5,8 +5,14 @@ import {MatchesComponent} from "./matches/matches.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'home/competitions/:id', component: MatchesComponent},
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      {path: '', component: MatchesComponent},
+      {path: 'home/competitions/:id', component: MatchesComponent}
+    ]
+  },
 ];
 
 @NgModule({

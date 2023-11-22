@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Competition} from "../interfaces";
+import {Competition} from "../model";
 import {EventService} from "../event.service";
 
 @Component({
@@ -9,11 +9,12 @@ import {EventService} from "../event.service";
 })
 export class CompetitionsComponent implements OnInit {
   competitions: Competition[] = [];
-  activeCompetition: number | null = null;
 
-  setActive(index: number): void {
+  // HIGHLIGHT SELECTED COMPETITION
+  //activeCompetition: number | null = null;
+  /*setActive(index: number): void {
     this.activeCompetition = index === this.activeCompetition ? null : index;
-  }
+  } */
 
   constructor(private eventService: EventService) {
   }

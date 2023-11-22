@@ -2,43 +2,54 @@
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <a href="/">  
-    <mat-icon>directions_run</mat-icon>
+  <a href="/" id="logo">
+    <mat-icon id="player">directions_run</mat-icon>
+    <mat-icon id="ball">sports_soccer</mat-icon>
   </a>
-  <button mat-icon-button class="example-icon favorite-icon"  [matMenuTriggerFor]="menu" aria-label="Example icon-button with heart icon">
-    <mat-icon>account_box</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <a href="/deposit">
-    <button mat-menu-item>
-      <mat-icon>payment</mat-icon>
-    Deposit
+  <div *ngIf="user; else login">
+    <button mat-icon-button class="example-icon favorite-icon"  [matMenuTriggerFor]="menu" aria-label="Example icon-button with heart icon">
+      <mat-icon>account_box</mat-icon>
     </button>
-  </a>
-  <a href="/withdraw">
-    <button mat-menu-item>
-      <mat-icon>account_balance</mat-icon>
-      Withdraw
+    <mat-menu #menu="matMenu">
+      <a href="/deposit">
+        <button mat-menu-item>
+          <mat-icon>payment</mat-icon>
+          Deposit
+        </button>
+      </a>
+      <a href="/withdraw">
+        <button mat-menu-item>
+          <mat-icon>account_balance</mat-icon>
+          Withdraw
+        </button>
+      </a>
+      <a href="">
+        <button mat-menu-item>
+          <mat-icon>subject</mat-icon>
+          My Bets
+        </button>
+      </a>
+      <a href="">
+        <button mat-menu-item>
+          <mat-icon>help_outline</mat-icon>
+          <span>Help</span>
+        </button>
+      </a>
+
+      <a href="">
+        <button mat-menu-item (click)="auth.logout()" id="logout">
+          <mat-icon>highlight_off</mat-icon>
+          Logout
+        </button>
+      </a>
+    </mat-menu>
+  </div>
+  <ng-template #login>
+    <button mat-raised-button (click)="auth.login()" id="login">
+      <mat-icon id="lock">lock</mat-icon>
+      Login
     </button>
-  </a>
-  <a href="">
-    <button mat-menu-item>
-      <mat-icon>subject</mat-icon>
-      My Bets
-    </button>
-  </a>
-  <a href="">
-    <button mat-menu-item>
-      <mat-icon>help_outline</mat-icon>
-      <span>Help</span>
-    </button>
-  </a>
- 
-  <a href="">
-    <button mat-menu-item>
-      <mat-icon>highlight_off</mat-icon>
-      Close Account
-    </button>
-  </a>
-  </mat-menu>
+  </ng-template>
+
+
 </mat-toolbar>

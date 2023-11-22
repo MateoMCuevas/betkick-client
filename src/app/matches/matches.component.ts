@@ -1,9 +1,7 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {Match} from "../interfaces";
+import {Component, OnInit} from '@angular/core';
+import {Match} from "../model";
 import {EventService} from "../event.service";
 import {ActivatedRoute} from "@angular/router";
-import {Location} from "@angular/common";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-matches',
