@@ -50,6 +50,8 @@ export class MatchesComponent implements OnInit {
         this.matches = matches;
       });
   }
+
+  //Function that fill out bet details
   handleButtonClick(match: Match, odds: number, event: MouseEvent): void {
     const valores = {
       homeTeam: match.homeTeam.shortName,
@@ -57,13 +59,17 @@ export class MatchesComponent implements OnInit {
       placedAt: null,
       betOdds: odds.toString(),
       betAmount: null,
-      winner: this.whoWin(match,event),
+      winner: this.whoWin(match, event),
     };
-    this.form.patchValue(valores);
-    this.betService.addData(this.form.value);
+    if (valores.winner) {
+      console.log(valores.winner);
+      this.form.patchValue(valores);
+      this.betService.addData(this.form.value);
+    }
     this.form.reset();
   }
 
+  //Function that get the winner team
   whoWin(match: Match, event: MouseEvent): any {
     const buttonId = (event.target as HTMLButtonElement)?.id;
     switch (buttonId) {
@@ -71,11 +77,14 @@ export class MatchesComponent implements OnInit {
         return match.homeTeam.shortName
         break;
       case 'draw':
-        return 'draw'
+        return 'Draw'
         break;
       case 'awayWin':
         return match.awayTeam.shortName
         break;
+      default:
+        return null;
+
     }
   }
 

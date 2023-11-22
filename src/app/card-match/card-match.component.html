@@ -4,14 +4,15 @@
         <mat-card-title>{{betData.get('homeTeam').value}}</mat-card-title>
         <mat-card-title>{{betData.get('awayTeam').value}}</mat-card-title>
         <mat-card-subtitle>Final de partido</mat-card-subtitle>
-        <mat-card-subtitle style="font-weight: bold;">{{betData.get('winner').value}} x{{betData.get('betOdds').value}}</mat-card-subtitle>
+        <mat-card-subtitle style="font-weight: bold;">{{betData.get('winner').value}}</mat-card-subtitle>
+        <mat-card-subtitle>x{{betData.get('betOdds').value}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions class="priceBet">
         <button mat-mini-fab class="deleteBtn" (click)="deleteBet(betData)">
           <mat-icon>close</mat-icon>
         </button>
-        <input class="amountInput" type="number" placeholder="0" (input)="setBetAmount(betData,$event)" required>
-        <mat-card-subtitle class="potProfits">Ganancia potencial ${{calculate(betData)}} </mat-card-subtitle>
+        <input class="amountInput" type="number" placeholder="0" (input)="setBetAmount(betData,$event)" >
+        <mat-card-subtitle class="potProfits">Ganancia potencial ${{calculatePotProfits(betData)}} </mat-card-subtitle>
 
       </mat-card-actions>
     </mat-card>

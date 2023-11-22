@@ -6,11 +6,12 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   providedIn: 'root'
 })
 export class BetService {
-  private listBets = new BehaviorSubject<FormGroup[]>([]);
+  private listBets = new BehaviorSubject<FormGroup[]>([]);// List of FormGroup==Bet
   listBets$ = this.listBets.asObservable();
 
   constructor(private fb: FormBuilder) {}
 
+  //Function that add a new bet to the list
   addData(datos: any) {
     const nuevoFormGroup = this.fb.group({
       homeTeam: [datos.homeTeam],
@@ -28,6 +29,8 @@ export class BetService {
   setBetAmount(form: FormGroup, nuevoMonto: number) {
     form.get('betAmount')?.setValue(nuevoMonto)
   }
+
+  //Function that delete a especific bet
   deleteForm(form: FormGroup){
     const listaActualizada = this.listBets.value.slice();
     const index = listaActualizada.findIndex((formulario) => formulario === form);
@@ -37,6 +40,8 @@ export class BetService {
       this.listBets.next(listaActualizada);
     }
   }
+
+  //Function that clear the list of bets
   deleteList()
   {
     this.listBets.next([])
