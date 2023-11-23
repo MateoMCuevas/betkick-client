@@ -17,6 +17,9 @@ export class CardBetComponent implements OnInit {
   listBets: any = null
   listBetsLength: any = null
   alertMsj = false
+  listBetsLenght: any = null
+  alertBetAmount = false
+  alertUserMoney = false
   money: number;
 
   constructor(
@@ -26,8 +29,8 @@ export class CardBetComponent implements OnInit {
   ngOnInit() {
     this.betService.listBets$.subscribe((datos) => {
       this.listBets = datos;
-      this.listBetsLength = (this.listBets as FormArray).length;
-      if (this.listBetsLength<=0){this.alertMsj=false}
+      this.listBetsLenght = (this.listBets as FormArray).length;
+      if (this.listBetsLenght<=0){this.alertBetAmount=false}
     });
   }
 
@@ -44,11 +47,11 @@ export class CardBetComponent implements OnInit {
    });
   return totalBetAmount;
   }
-  shouldDisableButton(): boolean{
+  checkUserMoney(): boolean{
     this.getUserMoney()
-    let boolean: boolean = false;
+    let boolean: boolean = true;
     if(this.totalBetAmount() > this.money){
-      boolean = true;
+      boolean = false;
     }
     return boolean
   }
@@ -67,8 +70,9 @@ export class CardBetComponent implements OnInit {
 
   //Function that sends the bets made to the backend
   sendData() {
-    if (this.checkBetAmounts()&&this.listBetsLength>0) {
-      this.alertMsj=false
+    if (this.checkUserMoney()&& this.checkBetAmounts()&& this.listBetsLenght>0) {
+      this.alertBetAmount=false
+      this.alertUserMoney=false
       this.betService.sendDataToBackend().subscribe(
         (response) => {
           console.log("Backend's response: ", response);
@@ -80,9 +84,13 @@ export class CardBetComponent implements OnInit {
       );
       this.deleteAll()
     }else if(!this.checkBetAmounts()){
-      this.alertMsj=true
-    }else{
-      this.alertMsj=false
+      this.alertBetAmount=true
+    }else if(!this.checkUserMoney()){
+      this.alertUserMoney=true
+    }
+    else{
+      this.alertBetAmount=false
+      this.alertUserMoney=false
     }
   }
 
