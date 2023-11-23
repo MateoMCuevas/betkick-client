@@ -31,9 +31,13 @@ export class CardBetComponent {
    });
   return totalBetAmount;
   }
-  shouldDisableButton(): boolean {
-    this.getUserMoney();
-    return this.totalBetAmount() > this.money;
+  shouldDisableButton(): boolean{
+    this.getUserMoney()
+    let boolean: boolean = false;
+    if(this.totalBetAmount() > this.money){
+      boolean = true;
+    }
+    return boolean
   }
   ngOnInit() {
     this.betService.listBets$.subscribe((datos) => {

@@ -23,6 +23,7 @@ import {MatchesComponent} from './matches/matches.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {MatDividerModule} from '@angular/material/divider';
 import { DepositComponent } from './deposit/deposit.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { DepositComponent } from './deposit/deposit.component';
     CardBetComponent,
     CardMatchComponent,
     MatchesComponent,
-    DepositComponent
+    DepositComponent,
+    WithdrawComponent
   ],
   imports: [
     AppRoutingModule,
