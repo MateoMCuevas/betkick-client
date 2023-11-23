@@ -3,9 +3,9 @@ import { EventService } from "../event.service";
 import { BetService } from "../bet.service"
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from "rxjs";
-import {Match} from "../model";
+import { Match } from "../model";
 
 @Component({
   selector: 'app-matches',
@@ -53,20 +53,29 @@ export class MatchesComponent implements OnInit {
 
   //Function that fill out bet details
   handleButtonClick(match: Match, odds: number, event: MouseEvent): void {
-    const valores = {
-      homeTeam: match.homeTeam.shortName,
-      awayTeam: match.awayTeam.shortName,
-      placedAt: null,
-      betOdds: odds.toString(),
-      betAmount: null,
-      winner: this.whoWin(match, event),
-    };
-    if (valores.winner) {
-      console.log(valores.winner);
-      this.form.patchValue(valores);
-      this.betService.addData(this.form.value);
+    let listBetsLenght: number = 0
+    this.betService.listBets$.subscribe((datos) => {
+      let listBets: any = datos;
+      listBetsLenght = (listBets as FormArray).length;
+    });
+    if (listBetsLenght < 10) {
+      const valores = {
+        homeTeam: match.homeTeam.shortName,
+        awayTeam: match.awayTeam.shortName,
+        placedAt: null,
+        betOdds: odds.toString(),
+        betAmount: null,
+        winner: this.whoWin(match, event),
+      };
+      if (valores.winner) {
+        console.log(valores.winner);
+        this.form.patchValue(valores);
+        this.betService.addData(this.form.value);
+      }
+      this.form.reset();
+    }else{
+      //mandar alerta
     }
-    this.form.reset();
   }
 
   //Function that get the winner team
