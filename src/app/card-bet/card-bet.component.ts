@@ -16,7 +16,8 @@ export class CardBetComponent {
   isCardVisible = true;
   listBets: any = null
   listBetsLenght: any = null
-  alertMsj = false
+  alertBetAmount = false
+  alertUserMoney = false
   money: number;
 
   constructor(
@@ -27,7 +28,7 @@ export class CardBetComponent {
     this.betService.listBets$.subscribe((datos) => {
       this.listBets = datos;
       this.listBetsLenght = (this.listBets as FormArray).length;
-      if (this.listBetsLenght<=0){this.alertMsj=false}
+      if (this.listBetsLenght<=0){this.alertBetAmount=false}
     });
   }
 
@@ -44,11 +45,11 @@ export class CardBetComponent {
    });
   return totalBetAmount;
   }
-  shouldDisableButton(): boolean{
+  checkUserMoney(): boolean{
     this.getUserMoney()
-    let boolean: boolean = false;
+    let boolean: boolean = true;
     if(this.totalBetAmount() > this.money){
-      boolean = true;
+      boolean = false;
     }
     return boolean
   }
@@ -67,15 +68,20 @@ export class CardBetComponent {
 
   //Function that sends the bets made to the backend
   sendData() {
-    if (this.checkBetAmounts()&&this.listBetsLenght>0) {
-      this.alertMsj=false
+    if (this.checkUserMoney()&& this.checkBetAmounts()&& this.listBetsLenght>0) {
+      this.alertBetAmount=false
+      this.alertUserMoney=false
       this.listBets//enviarlo al back
       console.log('mandando al back');
       this.deleteAll()
     }else if(!this.checkBetAmounts()){
-      this.alertMsj=true
-    }else{
-      this.alertMsj=false
+      this.alertBetAmount=true
+    }else if(!this.checkUserMoney()){
+      this.alertUserMoney=true
+    }
+    else{
+      this.alertBetAmount=false
+      this.alertUserMoney=false
     }
   }
 
