@@ -13,7 +13,7 @@
             <button mat-icon-button class="arrowBtn" >
                 <mat-icon>arrow_downward</mat-icon>
             </button>
-            <mat-card-title class="title">Ticket De Apuesta</mat-card-title>
+            <mat-card-title class="title">Ticket De Apuesta({{listBetsLenght}})</mat-card-title>
             <button mat-icon-button class="deleteBtn" (click)="deleteAll()">
                 <mat-icon>delete</mat-icon>
             </button>
@@ -22,6 +22,7 @@
             <app-card-match *ngIf="listBets && listBets.length > 0" [listBets]="listBets"></app-card-match>
             <h2 *ngIf="!(listBets && listBets.length > 0)">No hay apuestas disponibles.</h2>
         </mat-card-content>
+        <div class="alertMsj" *ngIf="alertMsj">*ASEGURATE QUE TODAS LAS APUESTAS TENGAN UN MONTO*</div>
         <button mat-button class="betBtn" type="submit"  *ngIf="!shouldDisableButton()" (click)="sendData()"><h3>Apostar</h3></button>
     </mat-card>
 </div>

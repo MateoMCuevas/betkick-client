@@ -26,6 +26,8 @@
 .card-bet-content {
     border: 1px solid #ccc;
     background-color: #ccc;
+    max-height: 400px; 
+    overflow-y: auto;
 }
 .title{
     justify-content: center;
@@ -47,6 +49,17 @@
     width: 100%;
     cursor: pointer;
     background-color: black;
+    z-index: 1001;
+}
+.alertMsj{
+    font-size:small;
+    text-align: center;
+    background-color: #eb8e8e;
+    color: #e70404;
+    height: 2rem;
+    width: 100%;
+    z-index: 1002;
+
 }
 h3{
     margin-top: 1rem;
@@ -59,5 +72,8 @@ h3{
     }
     .floating-icon{
         width: 100%;
+    }
+    .card-bet-content {
+        max-height: 300px; 
     }
 }

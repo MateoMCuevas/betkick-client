@@ -3,7 +3,7 @@ import {EventService} from "../service/event.service";
 import {BetService} from "../service/bet.service"
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from "rxjs";
 import {Match, Winner} from "../model";
 
@@ -23,7 +23,6 @@ export class MatchesComponent implements OnInit {
     matchId: [''],
     homeTeam: [''],
     awayTeam: [''],
-    placedAt: [''],
     betOdds: [''],
     betAmount: [''],
     winner: [''],
@@ -51,20 +50,31 @@ export class MatchesComponent implements OnInit {
         this.matches = matches;
       });
   }
-
   handleButtonClick(match: Match, odds: number, event: MouseEvent): void {
-    const values = {
-      matchId: match.id.toString(),
-      homeTeam: match.homeTeam.shortName,
-      awayTeam: match.awayTeam.shortName,
-      placedAt: null,
-      betOdds: odds.toString(),
-      betAmount: null,
-      winner: this.whoWins(match, event),
-    };
-    this.form.patchValue(values);
-    this.betService.addData(this.form.value);
-    this.form.reset();
+    let listBetsLenght: number = 0
+    this.betService.listBets$.subscribe((datos) => {
+      let listBets: any = datos;
+      listBetsLenght = (listBets as FormArray).length;
+    });
+    if (listBetsLenght < 10) {
+      const valores = {
+        matchId: match.id.toString(),
+        homeTeam: match.homeTeam.shortName,
+        awayTeam: match.awayTeam.shortName,
+        placedAt: null,
+        betOdds: odds.toString(),
+        betAmount: null,
+        winner: this.whoWins(match, event),
+      };
+      if (valores.winner) {
+        console.log(valores.winner);
+        this.form.patchValue(valores);
+        this.betService.addData(this.form.value);
+      }
+      this.form.reset();
+    }else{
+      //mandar alerta
+    }
   }
 
   whoWins(match: Match, event: MouseEvent): any {

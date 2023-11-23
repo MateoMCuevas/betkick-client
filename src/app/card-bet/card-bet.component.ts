@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { cardToggle } from './card-animations';
-import {BetService} from "../service/bet.service"
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
+import { CardMatchComponent } from '../card-match/card-match.component';
 import { MoneyUserService } from '../money-user.service';
+import {BetService} from "../bet.service"
 
 @Component({
   selector: 'app-card-bet',
@@ -13,13 +14,25 @@ import { MoneyUserService } from '../money-user.service';
 export class CardBetComponent implements OnInit {
   cardDelete = false;
   isCardVisible = true;
-  listBets: any=null
+  listBets: any = null
+  listBetsLenght: any = null
+  alertMsj = false
   money: number;
+
   constructor(
     private betService: BetService, private moneyUser: MoneyUserService
-  ){}
+  ) { }
+
+  ngOnInit() {
+    this.betService.listBets$.subscribe((datos) => {
+      this.listBets = datos;
+      this.listBetsLenght = (this.listBets as FormArray).length;
+      if (this.listBetsLenght<=0){this.alertMsj=false}
+    });
+  }
+
   getUserMoney(){
-    this.moneyUser.getMoney().subscribe((number) => {
+    this.moneyUser.getMoney().subscribe((number: number) => {
       this.money = number;
     });
 
@@ -39,23 +52,38 @@ export class CardBetComponent implements OnInit {
     }
     return boolean
   }
-  ngOnInit() {
-    this.betService.listBets$.subscribe((datos) => {
-      this.listBets = datos;
-    });
-  }
-  sendData() {
-      if (this.listBets !== null) {
-        this.betService.sendDataToBackend().subscribe(
-          (response) => {
-            console.log("Backend's response: ", response);
-          },
-          (error) => {
-            alert(error.error.apierror.message)
-            console.error('An error occurred: ', error.error.apierror.message);
-          }
-        );
+
+  //Function that loops through the listBets and calls the child component's function
+  checkBetAmounts(): boolean{
+    let flag:boolean=true
+    this.listBets.forEach((betData: FormGroup) => {
+      const betAmount = betData.get('betAmount')?.value;
+      if (betAmount === 0 || !betAmount) {
+      flag= false;
       }
+    })
+    return flag;
+  }
+
+  //Function that sends the bets made to the backend
+  sendData() {
+    if (this.checkBetAmounts()&&this.listBetsLenght>0) {
+      this.alertMsj=false
+      this.betService.sendDataToBackend().subscribe(
+        (response) => {
+          console.log("Backend's response: ", response);
+        },
+        (error) => {
+          alert(error.error.apierror.message)
+          console.error('An error occurred: ', error.error.apierror.message);
+        }
+      );
+      this.deleteAll()
+    }else if(!this.checkBetAmounts()){
+      this.alertMsj=true
+    }else{
+      this.alertMsj=false
+    }
   }
 
   toggleCardVisibility() {
