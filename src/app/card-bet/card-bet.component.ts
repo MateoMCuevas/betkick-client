@@ -45,7 +45,7 @@ export class CardBetComponent implements OnInit {
     });
   }
   sendData() {
-      if (this.betList !== null) {
+      if (this.listBets !== null) {
         this.betService.sendDataToBackend().subscribe(
           (response) => {
             console.log("Backend's response: ", response);
