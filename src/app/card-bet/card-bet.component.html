@@ -19,8 +19,8 @@
             </button>
         </mat-card-header>
         <mat-card-content class="card-bet-content">
-            <app-card-match [listBets]="listBets"></app-card-match>
+            <app-card-match [listBets]="betList"></app-card-match>
         </mat-card-content>
-        <button mat-button class="betBtn" type="submit" (submit)="sendData()"><h3>Apostar</h3></button>
+        <button mat-button class="betBtn" type="submit" (click)="sendData()"><h3>Apostar</h3></button>
     </mat-card>
 </div>

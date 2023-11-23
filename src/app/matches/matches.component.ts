@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { EventService } from "../event.service";
-import { BetService } from "../bet.service"
-import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from "rxjs";
-import {Match} from "../model";
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {EventService} from "../service/event.service";
+import {BetService} from "../service/bet.service"
+import {ActivatedRoute} from "@angular/router";
+import {Location} from "@angular/common";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Subscription} from "rxjs";
+import {Match, Winner} from "../model";
 
 @Component({
   selector: 'app-matches',
@@ -20,11 +20,12 @@ export class MatchesComponent implements OnInit {
   bet2 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
 
   form = this.fb.group({
+    matchId: [''],
     homeTeam: [''],
     awayTeam: [''],
     placedAt: [''],
     betOdds: [''],
-    betAmount: [''], // Puedes dejarlo vacío
+    betAmount: [''],
     winner: [''],
   });
 
@@ -50,32 +51,34 @@ export class MatchesComponent implements OnInit {
         this.matches = matches;
       });
   }
+
   handleButtonClick(match: Match, odds: number, event: MouseEvent): void {
-    const valores = {
+    const values = {
+      matchId: match.id.toString(),
       homeTeam: match.homeTeam.shortName,
       awayTeam: match.awayTeam.shortName,
       placedAt: null,
       betOdds: odds.toString(),
       betAmount: null,
-      winner: this.whoWin(match,event),
+      winner: this.whoWins(match, event),
     };
-    this.form.patchValue(valores);
+    this.form.patchValue(values);
     this.betService.addData(this.form.value);
     this.form.reset();
   }
 
-  whoWin(match: Match, event: MouseEvent): any {
+  whoWins(match: Match, event: MouseEvent): any {
     const buttonId = (event.target as HTMLButtonElement)?.id;
     switch (buttonId) {
+      case 'localWinSpan':
       case 'localWin':
-        return match.homeTeam.shortName
-        break;
+        return Winner.HOME_TEAM.toString();
+      case 'drawSpan':
       case 'draw':
-        return 'draw'
-        break;
+        return Winner.DRAW.toString();
+      case 'awayWinSpan':
       case 'awayWin':
-        return match.awayTeam.shortName
-        break;
+        return Winner.AWAY_TEAM.toString();
     }
   }
 

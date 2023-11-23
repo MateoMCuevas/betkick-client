@@ -23,12 +23,10 @@
           Withdraw
         </button>
       </a>
-      <a href="">
-        <button mat-menu-item>
+        <button (click)="getBetHistory()" mat-menu-item>
           <mat-icon>subject</mat-icon>
           My Bets
         </button>
-      </a>
       <a href="">
         <button mat-menu-item>
           <mat-icon>help_outline</mat-icon>
@@ -36,7 +34,7 @@
         </button>
       </a>
 
-      <a href="">
+      <a href="/home">
         <button mat-menu-item (click)="auth.logout()" id="logout">
           <mat-icon>highlight_off</mat-icon>
           Logout

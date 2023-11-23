@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Competition} from "../model";
-import {EventService} from "../event.service";
+import {EventService} from "../service/event.service";
 
 @Component({
   selector: 'app-competitions',

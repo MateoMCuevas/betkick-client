@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, lastValueFrom, map, Observable} from "rxjs";
-import {User} from "./model";
+import {User} from "../model";
 import {Location} from '@angular/common';
 
 const headers = new HttpHeaders().set('Accept', 'application/json');
@@ -11,6 +11,7 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
 })
 export class AuthService {
   $authenticationState = new BehaviorSubject<boolean>(false);
+  userId: string | undefined;
 
   constructor(private http: HttpClient, private location: Location) {
   }
@@ -20,6 +21,7 @@ export class AuthService {
       .pipe(map((response: User) => {
           if (response !== null) {
             this.$authenticationState.next(true);
+            this.userId = response.sub;
           }
           return response;
         })

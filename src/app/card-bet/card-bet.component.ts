@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { cardToggle } from './card-animations';
-import {BetService} from "../bet.service"
+import {BetService} from "../service/bet.service"
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,10 +9,10 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./card-bet.component.css'],
   animations: [cardToggle]
 })
-export class CardBetComponent {
+export class CardBetComponent implements OnInit {
   cardDelete = false;
   isCardVisible = true;
-  listBets: any=null
+  betList: any = null
 
   constructor(
     private betService: BetService
@@ -20,11 +20,21 @@ export class CardBetComponent {
 
   ngOnInit() {
     this.betService.listBets$.subscribe((datos) => {
-      this.listBets = datos;
+      this.betList = datos;
     });
   }
-  sendData(){
-    this.listBets//enviarlo al back
+  sendData() {
+      if (this.betList !== null) {
+        this.betService.sendDataToBackend().subscribe(
+          (response) => {
+            console.log("Backend's response: ", response);
+          },
+          (error) => {
+            alert(error.error.apierror.message)
+            console.error('An error occurred: ', error.error.apierror.message);
+          }
+        );
+      }
   }
 
   toggleCardVisibility() {
