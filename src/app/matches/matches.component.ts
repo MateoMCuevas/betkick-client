@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Match } from "../interfaces";
 import { EventService } from "../event.service";
 import { BetService } from "../bet.service"
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from "rxjs";
+import {Match} from "../model";
 
 @Component({
   selector: 'app-matches',

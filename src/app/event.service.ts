@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {catchError, Observable, of} from "rxjs";
-import {Competition, Match} from "./interfaces";
+import {Competition, Match} from "./model";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  competitionsUrl: string = 'http://localhost:8080/api/competitions';
-  matchesUrl: string = 'http://localhost:8080/api/matches';
+  competitionsUrl: string = 'api/competitions';
+  matchesUrl: string = 'api/matches';
 
   constructor(private http: HttpClient) {
   }

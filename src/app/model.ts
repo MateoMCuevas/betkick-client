@@ -24,3 +24,7 @@ export interface Match {
   "awayTeam": Team;
 }
 
+export class User {
+  email!: number;
+  name!: string;
+}
