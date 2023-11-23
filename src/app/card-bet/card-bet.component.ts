@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { cardToggle } from './card-animations';
-import { BetService } from "../bet.service"
 import { FormArray, FormGroup } from '@angular/forms';
 import { CardMatchComponent } from '../card-match/card-match.component';
+import { MoneyUserService } from '../money-user.service';
+import {BetService} from "../bet.service"
 
 @Component({
   selector: 'app-card-bet',
@@ -16,9 +17,10 @@ export class CardBetComponent {
   listBets: any = null
   listBetsLenght: any = null
   alertMsj = false
+  money: number;
 
   constructor(
-    private betService: BetService
+    private betService: BetService, private moneyUser: MoneyUserService
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,28 @@ export class CardBetComponent {
       this.listBetsLenght = (this.listBets as FormArray).length;
       if (this.listBetsLenght<=0){this.alertMsj=false}
     });
+  }
+
+  getUserMoney(){
+    this.moneyUser.getMoney().subscribe((number: number) => {
+      this.money = number;
+    });
+     
+  }
+  totalBetAmount(){
+    let totalBetAmount: number = 0;
+   this.listBets.forEach((form:FormGroup) => {
+    totalBetAmount = totalBetAmount + parseFloat(form.get('betAmount')?.value)
+   });
+  return totalBetAmount;
+  }
+  shouldDisableButton(): boolean{
+    this.getUserMoney()
+    let boolean: boolean = false;
+    if(this.totalBetAmount() > this.money){
+      boolean = true;
+    }
+    return boolean
   }
 
   //function that get the exact time the bet is placed

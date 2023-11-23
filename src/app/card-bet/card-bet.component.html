@@ -23,6 +23,6 @@
             <h2 *ngIf="!(listBets && listBets.length > 0)">No hay apuestas disponibles.</h2>
         </mat-card-content>
         <div class="alertMsj" *ngIf="alertMsj">*ASEGURATE QUE TODAS LAS APUESTAS TENGAN UN MONTO*</div>
-        <button mat-button class="betBtn" type="submit" (click)="sendData()"><h3>Apostar</h3></button>
+        <button mat-button class="betBtn" type="submit"  *ngIf="!shouldDisableButton()" (click)="sendData()"><h3>Apostar</h3></button>
     </mat-card>
 </div>

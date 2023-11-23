@@ -1,6 +1,6 @@
 <div class="competitions">
-  <div class="competition" *ngFor="let competition of competitions"
-       routerLink="home/competitions/{{competition.id}}">
+  <div class="competition" *ngFor="let competition of competitionsToShow"
+       routerLink="home/competitions/{{competition.id}}"  routerLinkActive="active">
       <img src="{{competition.emblem}}" class="comp-emblem" alt="">
     <p class="comp-name">{{competition.name}}</p>
   </div>

@@ -3,26 +3,38 @@ p {
 }
 
 .match-container {
-  margin: 3rem auto;
+  margin: 2rem auto;
   width: 100%;
-  max-width: 18rem;
-  max-height: 18rem;
+  box-sizing: border-box;
+  max-width: 15rem;
+  max-height: 15rem;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   background-color: white;
   border-radius: 1rem;
-}
 
+}
+.match-container .match-details {
+  box-sizing: border-box;
+}
+.conteiner{
+  position: absolute;
+  max-width: 60%;
+  left: 21.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Crea columnas automáticas con un ancho mínimo y máximo */
+  gap: 5px; /* Espaciado entre los elementos */
+}
 .match-container:first-of-type {
   margin-top: 2rem;
 }
 
 .match-header {
-  padding: 1rem;
+  padding:1rem;
   background-color: #1a1919;
   color: white;
   font-family: 'Oswald';
   width: auto;
-  max-height: 20%;
+  max-height: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,8 +76,8 @@ p {
 }
 
 .team-container img {
-  max-width: 80%;
-  height: 80%;
+  width: 50%;
+  max-height: 80%;
 }
 
 .odds-container {
