@@ -7,6 +7,9 @@
     <mat-icon id="ball">sports_soccer</mat-icon>
   </a>
   <div *ngIf="user; else login">
+    <div>
+    <p  mat-icon-button class="money">${{money}}</p>
+  </div>
     <button mat-icon-button class="example-icon favorite-icon"  [matMenuTriggerFor]="menu" aria-label="Example icon-button with heart icon">
       <mat-icon>account_box</mat-icon>
     </button>
