@@ -22,7 +22,6 @@ export class MatchesComponent implements OnInit {
   form = this.fb.group({
     homeTeam: [''],
     awayTeam: [''],
-    placedAt: [''],
     betOdds: [''],
     betAmount: [''], // Puedes dejarlo vacío
     winner: [''],
@@ -62,7 +61,6 @@ export class MatchesComponent implements OnInit {
       const valores = {
         homeTeam: match.homeTeam.shortName,
         awayTeam: match.awayTeam.shortName,
-        placedAt: null,
         betOdds: odds.toString(),
         betAmount: null,
         winner: this.whoWin(match, event),

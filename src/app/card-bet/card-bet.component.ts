@@ -53,15 +53,6 @@ export class CardBetComponent {
     return boolean
   }
 
-  //function that get the exact time the bet is placed
-  setPlacedAt() {
-    const fecha = new Date();
-    const placedAt = `${fecha.getFullYear().toString()}/${('0' + (fecha.getMonth() + 1)).slice(-2)}/ ${('0' + fecha.getDate()).slice(-2)} ${('0' + fecha.getHours()).slice(-2)}:${('0' + fecha.getMinutes()).slice(-2)}`
-    this.listBets.forEach((betData: FormGroup) => {
-      betData.get('placedAt')?.setValue(placedAt);
-    });
-  }
-
   //Function that loops through the listBets and calls the child component's function
   checkBetAmounts(): boolean{
     let flag:boolean=true
@@ -78,7 +69,6 @@ export class CardBetComponent {
   sendData() {
     if (this.checkBetAmounts()&&this.listBetsLenght>0) {
       this.alertMsj=false
-      this.setPlacedAt()
       this.listBets//enviarlo al back
       console.log('mandando al back');
       this.deleteAll()

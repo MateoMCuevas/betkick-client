@@ -16,7 +16,6 @@ export class BetService {
     const nuevoFormGroup = this.fb.group({
       homeTeam: [datos.homeTeam],
       awayTeam: [datos.awayTeam],
-      placedAt:[datos.placedAt],
       betOdds: [datos.betOdds],
       betAmount: [datos.betAmount],
       winner: [datos.winner],
