@@ -9,7 +9,7 @@ import {EventService} from "../service/event.service";
 })
 export class CompetitionsComponent implements OnInit {
   competitions: Competition[] = [];
-
+  competitionsToShow: Competition[] = [];
   // HIGHLIGHT SELECTED COMPETITION
   //activeCompetition: number | null = null;
   /*setActive(index: number): void {
@@ -22,11 +22,16 @@ export class CompetitionsComponent implements OnInit {
   ngOnInit(): void {
     this.getCompetitions();
   }
-
-  getCompetitions(): void {
-    this.eventService.getCompetitions()
-      .subscribe(competitions => this.competitions = competitions);
-  }
+ filterCompetitions():void{
+    this.competitionsToShow = this.competitions.filter(competition => competition.id !== 2000 && competition.id !==2018 && competition.id !==2152);
+ }
+ getCompetitions(): void {
+  this.eventService.getCompetitions()
+    .subscribe(competitions => {
+      this.competitions = competitions;
+      this.filterCompetitions();
+    });
+}
 
 
 }

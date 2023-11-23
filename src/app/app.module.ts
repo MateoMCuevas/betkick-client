@@ -21,6 +21,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatchesComponent} from './matches/matches.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {MatDividerModule} from '@angular/material/divider';
+import { DepositComponent } from './deposit/deposit.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import {AppRoutingModule} from "./app-routing.module";
     CardBetComponent,
     CardMatchComponent,
     MatchesComponent,
-
+    DepositComponent,
+    WithdrawComponent
   ],
   imports: [
     AppRoutingModule,
@@ -49,6 +53,7 @@ import {AppRoutingModule} from "./app-routing.module";
     MatChipsModule,
     MatFormFieldModule,
     MatMenuModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

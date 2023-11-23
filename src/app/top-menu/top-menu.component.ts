@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../model";
+import { MoneyUserService } from '../money-user.service';
 import {AuthService} from "../service/auth.service";
 import {BetService} from "../service/bet.service";
 
@@ -12,13 +13,17 @@ export class TopMenuComponent implements OnInit {
 
   isAuthenticated!: boolean;
   user!: User;
-
-  constructor(public auth: AuthService, private betService: BetService) {
-  }
+  money: number;
+  constructor(public auth: AuthService,
+              private moneyUser: MoneyUserService,
+              private betService: BetService) {}
 
   async ngOnInit() {
     this.isAuthenticated = await this.auth.isAuthenticated();
     await this.auth.getUser().subscribe(data => this.user = data);
+    this.moneyUser.getMoney().subscribe((number) => {
+      this.money = number;
+    });
   }
 
   getBetHistory() {
