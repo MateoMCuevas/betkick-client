@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { cardToggle } from './card-animations';
 import {BetService} from "../bet.service"
 import { FormGroup } from '@angular/forms';
+import { MoneyUserService } from '../money-user.service';
 
 @Component({
   selector: 'app-card-bet',
@@ -13,11 +14,27 @@ export class CardBetComponent {
   cardDelete = false;
   isCardVisible = true;
   listBets: any=null
-
+  money: number;
   constructor(
-    private betService: BetService
+    private betService: BetService, private moneyUser: MoneyUserService
   ){}
-
+  getUserMoney(){
+    this.moneyUser.getMoney().subscribe((number) => {
+      this.money = number;
+    });
+     
+  }
+  totalBetAmount(){
+    let totalBetAmount: number = 0;
+   this.listBets.forEach((form:FormGroup) => {
+    totalBetAmount = totalBetAmount + parseFloat(form.get('betAmount')?.value)
+   });
+  return totalBetAmount;
+  }
+  shouldDisableButton(): boolean {
+    this.getUserMoney();
+    return this.totalBetAmount() > this.money;
+  }
   ngOnInit() {
     this.betService.listBets$.subscribe((datos) => {
       this.listBets = datos;
