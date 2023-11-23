@@ -1,5 +1,5 @@
 import { Component, booleanAttribute } from '@angular/core';
-import { MoneyUserService } from '../money-user.service';
+import { MoneyUserService } from '../service/money-user.service';
 
 @Component({
   selector: 'app-withdraw',

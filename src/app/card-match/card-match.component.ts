@@ -1,6 +1,6 @@
 import {Component,Input} from '@angular/core';
-import {BetService} from "../bet.service"
 import { FormGroup } from '@angular/forms';
+import {BetService} from "../service/bet.service";
 
 
 @Component({

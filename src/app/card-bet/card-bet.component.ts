@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { cardToggle } from './card-animations';
 import { FormArray, FormGroup } from '@angular/forms';
 import { CardMatchComponent } from '../card-match/card-match.component';
-import { MoneyUserService } from '../money-user.service';
-import {BetService} from "../bet.service"
+import { MoneyUserService } from '../service/money-user.service';
+import {BetService} from "../service/bet.service";
 
 @Component({
   selector: 'app-card-bet',
@@ -15,7 +15,7 @@ export class CardBetComponent implements OnInit {
   cardDelete = false;
   isCardVisible = true;
   listBets: any = null
-  listBetsLenght: any = null
+  listBetsLength: any = null
   alertMsj = false
   money: number;
 
@@ -26,8 +26,8 @@ export class CardBetComponent implements OnInit {
   ngOnInit() {
     this.betService.listBets$.subscribe((datos) => {
       this.listBets = datos;
-      this.listBetsLenght = (this.listBets as FormArray).length;
-      if (this.listBetsLenght<=0){this.alertMsj=false}
+      this.listBetsLength = (this.listBets as FormArray).length;
+      if (this.listBetsLength<=0){this.alertMsj=false}
     });
   }
 
@@ -67,7 +67,7 @@ export class CardBetComponent implements OnInit {
 
   //Function that sends the bets made to the backend
   sendData() {
-    if (this.checkBetAmounts()&&this.listBetsLenght>0) {
+    if (this.checkBetAmounts()&&this.listBetsLength>0) {
       this.alertMsj=false
       this.betService.sendDataToBackend().subscribe(
         (response) => {

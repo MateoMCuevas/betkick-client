@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../model";
-import { MoneyUserService } from '../money-user.service';
+import { MoneyUserService } from '../service/money-user.service';
 import {AuthService} from "../service/auth.service";
 import {BetService} from "../service/bet.service";
 
