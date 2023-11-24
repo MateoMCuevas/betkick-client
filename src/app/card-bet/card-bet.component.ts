@@ -15,9 +15,8 @@ export class CardBetComponent implements OnInit {
   cardDelete = false;
   isCardVisible = true;
   listBets: any = null
-  listBetsLength: any = null
   alertMsj = false
-  listBetsLenght: any = null
+  listBetsLength: any = null
   alertBetAmount = false
   alertUserMoney = false
   money: number;
@@ -29,8 +28,8 @@ export class CardBetComponent implements OnInit {
   ngOnInit() {
     this.betService.listBets$.subscribe((datos) => {
       this.listBets = datos;
-      this.listBetsLenght = (this.listBets as FormArray).length;
-      if (this.listBetsLenght<=0){this.alertBetAmount=false}
+      this.listBetsLength = (this.listBets as FormArray).length;
+      if (this.listBetsLength<=0){this.alertBetAmount=false}
     });
   }
 
@@ -70,7 +69,7 @@ export class CardBetComponent implements OnInit {
 
   //Function that sends the bets made to the backend
   sendData() {
-    if (this.checkUserMoney()&& this.checkBetAmounts()&& this.listBetsLenght>0) {
+    if (this.checkUserMoney()&& this.checkBetAmounts()&& this.listBetsLength>0) {
       this.alertBetAmount=false
       this.alertUserMoney=false
       this.betService.sendDataToBackend().subscribe(

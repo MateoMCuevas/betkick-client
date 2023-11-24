@@ -5,8 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MoneyUserService {
-  
-  private money: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  private money: BehaviorSubject<number> = new BehaviorSubject<number>(1000);
   setMoney(moneyDeposit: number) {
 
     const actualMoney = this.money.value;
