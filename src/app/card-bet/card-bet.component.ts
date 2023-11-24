@@ -25,6 +25,9 @@ export class CardBetComponent implements OnInit {
     private betService: BetService, private moneyUser: MoneyUserService
   ) { }
 
+  updateMoney(){
+    this.moneyUser.setMoney(-this.totalBetAmount());
+  }
   ngOnInit() {
     this.betService.listBets$.subscribe((datos) => {
       this.listBets = datos;
@@ -34,10 +37,9 @@ export class CardBetComponent implements OnInit {
   }
 
   getUserMoney(){
-    this.moneyUser.getMoney().subscribe((number: number) => {
+    this.moneyUser.getUserBalance().subscribe((number: number) => {
       this.money = number;
     });
-
   }
   totalBetAmount(){
     let totalBetAmount: number = 0;
@@ -81,6 +83,7 @@ export class CardBetComponent implements OnInit {
           console.error('An error occurred: ', error.error.apierror.message);
         }
       );
+      this.updateMoney()
       this.deleteAll()
     }else if(!this.checkBetAmounts()){
       this.alertBetAmount=true

@@ -25,16 +25,6 @@ export class MoneyUserService {
     params = params.set('userId', userId);
 
     return this.http.get<any>('api/user/balance', {params})
-      .subscribe(
-        (response) => {
-          // Handle successful response
-          console.log('Balance retrieval successful', response);
-        },
-        (error) => {
-          // Handle error
-          console.error('Balance retrieval failed: ', error);
-        }
-      );
   }
 
   sendWithdrawRequest(withdrawAmount: number) {

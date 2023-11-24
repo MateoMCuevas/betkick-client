@@ -20,9 +20,10 @@ export class WithdrawComponent {
   }
   withdrawMoneyEvent(){
     this.user.sendWithdrawRequest(-this.withdrawMoney);
+    this.user.setMoney(-this.withdrawMoney);
   }
   getUserMoney(){
-    this.user.getMoney().subscribe((number) => {
+    this.user.getUserBalance().subscribe((number: number) => {
       this.moneyUser = number;
     });
   }
