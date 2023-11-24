@@ -1,5 +1,5 @@
 
-<form method="post">
+<!--form method="post">
     <label for="withdrawal_amount">Amount to Withdraw:</label>
     <input type="number" id="withdrawal_amount"  [(ngModel)]="withdrawMoney" name="withdrawal_amount" required>
 
@@ -11,5 +11,20 @@
 
     <label for="account_holder">Account Holder's Name:</label>
     <input type="text" id="account_holder" name="account_holder" required>
-    <button type="submit"  (click)="withdrawMoneyEvent()" value="Withdraw Funds">Withdraw</button>
-</form>
+    <button type="submit"  (submit)="withdrawMoneyEvent()" value="Withdraw Funds">Withdraw</button>
+</form-->
+<form [formGroup]="withdrawForm" (ngSubmit)="withdrawMoneyEvent()">
+    <label for="withdraw_amount">Amount to Withdraw:</label>
+    <input type="number" id="withdraw_amount" formControlName="withdrawAmount" [(ngModel)]="withdrawMoney"required>
+  
+    <label for="cbu">CBU Number:</label>
+    <input type="text" id="cbu" formControlName="cbu"required>
+  
+    <label for="bank_name">Bank Name:</label>
+    <input type="text" id="bank_name" formControlName="bankName"required>
+  
+    <label for="account_holder">Account Holder's Name:</label>
+    <input type="text" id="account_holder" formControlName="accountHolder"required>
+  
+    <button type="submit" (submit)="withdrawMoneyEvent()">Withdraw</button>
+  </form>

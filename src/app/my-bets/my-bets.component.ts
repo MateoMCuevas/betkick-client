@@ -50,6 +50,7 @@ export class MyBetsComponent implements OnInit{
         this.money = number;
       });
       this.moneyService.setMoney(this.money)
+      this.moneyService.mostrarMensajeEmergente('THE BET WAS SUCCESSFULLY CANCELED')
     }
 
 

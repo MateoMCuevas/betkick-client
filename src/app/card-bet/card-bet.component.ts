@@ -73,13 +73,6 @@ export class CardBetComponent implements OnInit {
     return flag;
   }
 
-  mostrarMensajeEmergente(msj: string): void {
-    const mensajeEmergente = this.snackBar.open(msj, 'Cerrar', {
-      duration: 5000,
-      verticalPosition: 'top',
-      horizontalPosition: 'center', 
-    });
-  }
 
   //Function that sends the bets made to the backend
   sendData() {
@@ -97,7 +90,7 @@ export class CardBetComponent implements OnInit {
       );
       this.updateMoney()
       this.deleteAll()
-      this.mostrarMensajeEmergente('APUESTA EXITOSA')
+      this.moneyUser.mostrarMensajeEmergente('SUCCESFUL BETS')
 
     }else if(!this.checkBetAmounts()){
       this.alertBetAmount=true

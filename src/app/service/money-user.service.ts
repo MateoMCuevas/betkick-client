@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {AuthService} from "./auth.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class MoneyUserService {
 
   private money: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService,  private snackBar: MatSnackBar) {
   }
 
   setMoney(moneyDeposit: number) {
@@ -63,5 +64,12 @@ export class MoneyUserService {
 
   getMoney(): Observable<number> {
     return this.money.asObservable();
+  }
+  mostrarMensajeEmergente(msj: string): void {
+    const mensajeEmergente = this.snackBar.open(msj, 'CLOSE', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center', 
+    });
   }
 }
