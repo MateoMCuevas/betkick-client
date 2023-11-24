@@ -4,6 +4,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { CardMatchComponent } from '../card-match/card-match.component';
 import { MoneyUserService } from '../service/money-user.service';
 import {BetService} from "../service/bet.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-card-bet',
@@ -22,7 +23,9 @@ export class CardBetComponent implements OnInit {
   money: number;
 
   constructor(
-    private betService: BetService, private moneyUser: MoneyUserService
+    private betService: BetService,
+    private moneyUser: MoneyUserService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -70,6 +73,16 @@ export class CardBetComponent implements OnInit {
     return flag;
   }
 
+  mostrarMensajeEmergente(msj: string): void {
+    // Configura el mensaje emergente
+    const mensajeEmergente = this.snackBar.open(msj, 'Cerrar', {
+      duration: 5000, // Duración en milisegundos (5 segundos en este caso)
+      verticalPosition: 'top', // Posición vertical del mensaje emergente
+      horizontalPosition: 'center', // Posición horizontal del mensaje emergente
+      panelClass: ['pop-out'],
+    });
+  }
+
   //Function that sends the bets made to the backend
   sendData() {
     if (this.checkUserMoney()&& this.checkBetAmounts()&& this.listBetsLength>0) {
@@ -86,6 +99,8 @@ export class CardBetComponent implements OnInit {
       );
       this.updateMoney()
       this.deleteAll()
+      this.mostrarMensajeEmergente('APUESTA EXITOSA')
+
     }else if(!this.checkBetAmounts()){
       this.alertBetAmount=true
     }else if(!this.checkUserMoney()){

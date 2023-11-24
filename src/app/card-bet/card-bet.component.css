@@ -61,6 +61,14 @@
     z-index: 1002;
 
 }
+.pop-out {
+    background-color: #b4b7b9; /* Color de fondo del mensaje emergente */
+    color: green; /* Color del texto del mensaje emergente */
+  }
+  
+  .mi-clase-botones {
+    color: #ffffff; /* Color del texto de los botones del mensaje emergente */
+  }
 h2{
     margin-top: 1rem;
     color: #08f905;

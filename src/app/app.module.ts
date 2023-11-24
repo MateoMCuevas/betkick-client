@@ -27,6 +27,7 @@ import { WithdrawComponent } from './withdraw/withdraw.component';
 import { MyBetsComponent } from './my-bets/my-bets.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatMenuModule,
     MatDividerModule,
     MatTabsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

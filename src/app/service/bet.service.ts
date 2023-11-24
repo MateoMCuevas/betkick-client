@@ -46,6 +46,23 @@ export class BetService {
     return this.http.post<any>('api/bet', modifiedData, { params });
   }
 
+  cancelBet(betId: number) {
+    let params = new HttpParams();
+    params = params.set('betId', betId);
+
+    return this.http.delete<any>('api/user/bet', { params })
+      .subscribe(
+        (response) => {
+          // Handle successful response
+          console.log('Delete request was successful!', response);
+        },
+        (error) => {
+          // Handle error
+          console.error('Error in delete request: ', error);
+        }
+      );
+  }
+
   getBetHistory() {
     const userId = this.authService.userId!;
     let params = new HttpParams();

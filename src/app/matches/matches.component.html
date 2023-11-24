@@ -7,7 +7,7 @@
 <mat-divider></mat-divider>
  -->
 <div class="container">
-  <div *ngFor="let match of todayMatches" class="match-container">
+  <div *ngFor="let match of matches" class="match-container">
     <form [formGroup]="form">
       <div class="match-header">
         <p>{{ match.utcDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
