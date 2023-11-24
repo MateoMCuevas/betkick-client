@@ -22,7 +22,9 @@
   .card-container:hover {
     transform: scale(1.05);
   }
-  .date{
+  .footer{
+    display: flex;
+    justify-content: space-between;
     background-color: #1a1919;
   }
   .card-header {

@@ -2,6 +2,7 @@ import { Component ,OnInit} from '@angular/core';
 import { BetService } from '../service/bet.service';
 import { AuthService } from '../service/auth.service';
 import { User } from '../model';
+import { MoneyUserService } from '../service/money-user.service';
 
 @Component({
   selector: 'app-my-bets',
@@ -16,7 +17,8 @@ export class MyBetsComponent implements OnInit{
   user!: User;
   money: number;
   constructor(public auth: AuthService,
-              private betService: BetService) {}
+              private betService: BetService,
+              private moneyService:MoneyUserService) {}
 
   async ngOnInit() {
     this.isAuthenticated = await this.auth.isAuthenticated();
@@ -41,6 +43,13 @@ export class MyBetsComponent implements OnInit{
           console.error('An error occurred: ', error);
         }
       );
+    }
+
+    cancelBet(bet: any){
+      this.betService.cancelBet(bet.id).subscribe((number: number) => {
+        this.money = number;
+      });
+      this.moneyService.setMoney(this.money)
     }
 
 

@@ -74,12 +74,10 @@ export class CardBetComponent implements OnInit {
   }
 
   mostrarMensajeEmergente(msj: string): void {
-    // Configura el mensaje emergente
     const mensajeEmergente = this.snackBar.open(msj, 'Cerrar', {
-      duration: 5000, // Duración en milisegundos (5 segundos en este caso)
-      verticalPosition: 'top', // Posición vertical del mensaje emergente
-      horizontalPosition: 'center', // Posición horizontal del mensaje emergente
-      panelClass: ['pop-out'],
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center', 
     });
   }
 
