@@ -73,7 +73,6 @@ export class CardBetComponent implements OnInit {
     return flag;
   }
 
-
   //Function that sends the bets made to the backend
   sendData() {
     if (this.checkUserMoney()&& this.checkBetAmounts()&& this.listBetsLength>0) {
@@ -90,7 +89,8 @@ export class CardBetComponent implements OnInit {
       );
       this.updateMoney()
       this.deleteAll()
-      this.moneyUser.mostrarMensajeEmergente('SUCCESFUL BETS')
+      this.moneyUser.showAlertMsj('SUCCESFUL BETS')
+
 
     }else if(!this.checkBetAmounts()){
       this.alertBetAmount=true

@@ -14,6 +14,7 @@ export class DepositComponent implements OnInit {
 
   constructor(private moneyUser: MoneyUserService,
     private fb: FormBuilder) { }
+
   ngOnInit(): void {
     this.depositForm = this.fb.group({
       cardNumber: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{4}-\d{4}$/)]],
@@ -29,11 +30,10 @@ export class DepositComponent implements OnInit {
     if (this.depositForm.valid) {
       this.moneyUser.sendDepositRequest(this.moneyDeposit)
       this.moneyUser.setMoney(this.moneyDeposit)
-      this.moneyUser.mostrarMensajeEmergente('SUCCESFUL DEPOSIT')
+      this.moneyUser.showAlertMsj('SUCCESFUL DEPOSIT')
     }
     else {
       alert('PLEASE FILL CORRECTLY ALL THE FIELDS OF THE FORM')
     }
   }
-
 }
