@@ -65,7 +65,7 @@ export class MoneyUserService {
   getMoney(): Observable<number> {
     return this.money.asObservable();
   }
-  mostrarMensajeEmergente(msj: string): void {
+  showAlertMsj(msj: string): void {
     const mensajeEmergente = this.snackBar.open(msj, 'CLOSE', {
       duration: 5000,
       verticalPosition: 'top',
