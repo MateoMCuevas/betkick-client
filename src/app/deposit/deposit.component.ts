@@ -33,7 +33,7 @@ export class DepositComponent implements OnInit {
       this.moneyUser.showAlertMsj('SUCCESFUL DEPOSIT')
     }
     else {
-      alert('PLEASE FILL CORRECTLY ALL THE FIELDS OF THE FORM')
+      this.moneyUser.showAlertMsj('PLEASE FILL CORRECTLY ALL THE FIELDS OF THE FORM')
     }
   }
 }

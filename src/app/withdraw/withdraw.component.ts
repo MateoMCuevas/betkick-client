@@ -24,12 +24,13 @@ export class WithdrawComponent implements OnInit {
   }
 
   withdrawMoneyEvent() {
-    if (this.withdrawForm.valid) {
+    this.getUserMoney()
+    if (this.withdrawForm.valid && this.withdrawMoney<=this.moneyUser) {
       this.user.sendWithdrawRequest(-this.withdrawMoney);
       this.user.setMoney(-this.withdrawMoney);
       this.user.showAlertMsj('SUCCESFUL WITHDRAWAL')
     } else {
-      alert('PLEASE FILL CORRECTLY ALL THE FIELDS OF THE FORM')
+      this.user.showAlertMsj('PLEASE FILL CORRECTLY ALL THE FIELDS OF THE FORM OR CHECK YOUR BALANCE')
     }
   }
 
