@@ -13,7 +13,7 @@ export class DepositComponent {
   constructor(private moneyUser: MoneyUserService) {}
 
   depositMoney() {
-    this.moneyUser.setMoney(this.moneyDeposit);
+    this.moneyUser.sendDepositRequest(this.moneyDeposit)
   }
 
 }
