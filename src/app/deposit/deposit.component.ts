@@ -14,6 +14,7 @@ export class DepositComponent {
 
   depositMoney() {
     this.moneyUser.sendDepositRequest(this.moneyDeposit)
+    this.moneyUser.setMoney(this.moneyDeposit)
   }
 
 }
