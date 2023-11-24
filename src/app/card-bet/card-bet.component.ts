@@ -32,6 +32,9 @@ export class CardBetComponent implements OnInit {
       if (this.listBetsLength<=0){this.alertBetAmount=false}
     });
   }
+  updateMoney(){
+    this.moneyUser.setMoney(-this.totalBetAmount());
+  }
 
   getUserMoney(){
     this.moneyUser.getMoney().subscribe((number: number) => {
@@ -81,6 +84,7 @@ export class CardBetComponent implements OnInit {
           console.error('An error occurred: ', error.error.apierror.message);
         }
       );
+      this.updateMoney()
       this.deleteAll()
     }else if(!this.checkBetAmounts()){
       this.alertBetAmount=true

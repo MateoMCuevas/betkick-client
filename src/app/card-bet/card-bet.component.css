@@ -61,12 +61,12 @@
     z-index: 1002;
 
 }
-h3{
+h2{
     margin-top: 1rem;
     color: #08f905;
     font-size: large;
 }
-@media(max-width: 468px){
+@media(max-width: 550px){
     .card-bet-container{
         width: 100%;
     }

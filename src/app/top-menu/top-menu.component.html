@@ -1,19 +1,22 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#08f905 ;background-color:#1a1919;">
+    BETKICKS
+  </h1>
   <a href="/" id="logo">
     <mat-icon id="player">directions_run</mat-icon>
     <mat-icon id="ball">sports_soccer</mat-icon>
   </a>
   <div *ngIf="user; else login">
-    <div>
-    <p  mat-icon-button class="money">${{money}}</p>
-  </div>
     <button mat-icon-button class="example-icon favorite-icon"  [matMenuTriggerFor]="menu" aria-label="Example icon-button with heart icon">
       <mat-icon>account_box</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <a >
+        <p mat-menu-item>
+          <mat-icon>money</mat-icon>
+          Balance: ${{money}}
+        </p>
+      </a>
       <a href="/deposit">
         <button mat-menu-item>
           <mat-icon>payment</mat-icon>
@@ -26,10 +29,12 @@
           Withdraw
         </button>
       </a>
+      <a href="/my-bets">
         <button (click)="getBetHistory()" mat-menu-item>
           <mat-icon>subject</mat-icon>
           My Bets
         </button>
+      </a>
       <a href="">
         <button mat-menu-item>
           <mat-icon>help_outline</mat-icon>

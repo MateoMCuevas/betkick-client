@@ -1,0 +1,26 @@
+.container{
+    margin-top: 1rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+.card-container {
+    max-width: 31%;
+  
+    margin: 20px;
+  
+}
+.card-header{
+    background-color: #ccc;
+}
+.card-content{
+    height: 20%;
+    text-align: right;
+}
+@media(max-width:500px){
+    .card-container {
+        max-width: 100%;
+      
+        margin: 20px;
+      
+    }
+}

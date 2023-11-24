@@ -9,7 +9,6 @@ a {
 }
 .money{
   color: white;
-  position: absolute;
   left: 95rem;
   top: 0.85rem;
   max-width: 100px;
@@ -30,8 +29,8 @@ mat-icon {
 }
 
 #logo {
-  margin-left: 2.5rem;
   position: relative;
+  margin-right: 2.5rem;
   width: 2.5rem;
   height: 2.5rem;
 }
