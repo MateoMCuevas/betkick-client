@@ -19,7 +19,7 @@ export class WithdrawComponent {
     return boolean
   }
   withdrawMoneyEvent(){
-    this.user.setMoney( -this.withdrawMoney);
+    this.user.sendWithdrawRequest(-this.withdrawMoney);
   }
   getUserMoney(){
     this.user.getMoney().subscribe((number) => {
