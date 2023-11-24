@@ -5,6 +5,7 @@ import {MatchesComponent} from "./matches/matches.component";
 import { DepositComponent } from './deposit/deposit.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { MyBetsComponent } from './my-bets/my-bets.component';
+import { AuthGuard } from './auth-guard.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,9 +17,10 @@ const routes: Routes = [
       {path: 'home/competitions/:id', component: MatchesComponent}
     ]
   },
-  {path: 'deposit', component: DepositComponent},
-  {path: 'withdraw', component: WithdrawComponent},
-  {path: 'my-bets', component: MyBetsComponent}
+
+  {path: 'deposit', component: DepositComponent,canActivate:[AuthGuard]},
+  {path: 'withdraw', component: WithdrawComponent,canActivate:[AuthGuard]},
+  {path: 'my-bets', component: MyBetsComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({
