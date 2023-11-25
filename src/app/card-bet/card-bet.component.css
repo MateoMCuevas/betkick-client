@@ -26,6 +26,8 @@
 .card-bet-content {
     border: 1px solid #ccc;
     background-color: #ccc;
+    max-height: 400px; 
+    overflow-y: auto;
 }
 .title{
     justify-content: center;
@@ -47,17 +49,31 @@
     width: 100%;
     cursor: pointer;
     background-color: black;
+    z-index: 1001;
 }
-h3{
+.alertMsj{
+    font-size:small;
+    text-align: center;
+    background-color: #ccc;
+    color: #e70404;
+    height: 2rem;
+    width: 100%;
+    z-index: 1002;
+
+}
+h2{
     margin-top: 1rem;
     color: #08f905;
     font-size: large;
 }
-@media(max-width: 768px){
+@media(max-width: 550px){
     .card-bet-container{
         width: 100%;
     }
     .floating-icon{
         width: 100%;
+    }
+    .card-bet-content {
+        max-height: 300px; 
     }
 }

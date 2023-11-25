@@ -1,26 +1,29 @@
-<div class="card-bet-container" *ngIf="!cardDelete">
-    <div class="floating-icon" (click)="toggleCardVisibility()" >
+<div class="card-bet-container">
+    <div class="floating-icon" (click)="toggleCardVisibility()">
         <mat-card-header class="card-bet-header">
             <button mat-icon-button class="arrowBtn">
                 <mat-icon>arrow_upward</mat-icon>
             </button>
-            <h2 class="title" >Ticket De Apuesta</h2>
+            <h2 class="title" >BET  TICKET</h2>
         </mat-card-header>
     </div>
 
     <mat-card class="card-bet" *ngIf="isCardVisible" [@cardToggle]="isCardVisible ? 'expanded' : 'collapsed'">
-        <mat-card-header class="card-bet-header" >
-            <button mat-icon-button class="arrowBtn" (click)="toggleCardVisibility()">
+        <mat-card-header class="card-bet-header" (click)="toggleCardVisibility()">
+            <button mat-icon-button class="arrowBtn" >
                 <mat-icon>arrow_downward</mat-icon>
             </button>
-            <mat-card-title class="title">Ticket De Apuesta</mat-card-title>
+            <mat-card-title class="title">BET  TICKET({{listBetsLength}})</mat-card-title>
             <button mat-icon-button class="deleteBtn" (click)="deleteAll()">
                 <mat-icon>delete</mat-icon>
             </button>
         </mat-card-header>
         <mat-card-content class="card-bet-content">
-            <app-card-match [listBets]="listBets"></app-card-match>
+            <app-card-match *ngIf="listBets && listBets.length > 0" [listBets]="listBets"></app-card-match>
+            <h3 *ngIf="!(listBets && listBets.length > 0)" style="text-align: center;">there are no bets available</h3>
         </mat-card-content>
-        <button mat-button class="betBtn" type="submit" (submit)="sendData()"><h3>Apostar</h3></button>
+        <div class="alertMsj" *ngIf="alertUserMoney">*MAKE SURE YOU HAVE ENOUGH BALANCE*</div>
+        <div class="alertMsj" *ngIf="alertBetAmount">*MAKE SURE ALL BETS HAVE AN AMOUNT*</div>
+        <button mat-button class="betBtn" type="submit"  (click)="sendData() "><h2>CONFIRM BET</h2></button>
     </mat-card>
 </div>

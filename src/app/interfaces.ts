@@ -16,14 +16,7 @@ export interface Score {
   away: number;
 }
 
- export enum Winner {
-  HOME_TEAM = 'HOME_TEAM',
-  AWAY_TEAM = 'AWAY_TEAM',
-  DRAW = 'DRAW'
-}
-
 export interface Match {
-  "id": number;
   "score": Score;
   "utcDate": string;
   "competition": Competition;
@@ -31,8 +24,3 @@ export interface Match {
   "awayTeam": Team;
 }
 
-export class User {
-  sub!: string;
-  email!: number;
-  name!: string;
-}

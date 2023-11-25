@@ -7,7 +7,19 @@ mat-toolbar {
 a {
   text-decoration: none;
 }
-
+.money{
+  color: white;
+  left: 95rem;
+  top: 0.85rem;
+  max-width: 100px;
+  overflow: auto;
+}
+.money::-webkit-scrollbar {
+  width: 0.5px;
+}
+.money::-webkit-scrollbar-thumb {
+  background: #08f905;
+}
 mat-icon {
   color: #08f905;
 }
@@ -17,8 +29,8 @@ mat-icon {
 }
 
 #logo {
-  margin-left: 2.5rem;
   position: relative;
+  margin-right: 2.5rem;
   width: 2.5rem;
   height: 2.5rem;
 }

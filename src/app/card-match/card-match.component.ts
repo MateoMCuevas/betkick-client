@@ -1,6 +1,6 @@
 import {Component,Input} from '@angular/core';
-import {BetService} from "../bet.service"
 import { FormGroup } from '@angular/forms';
+import {BetService} from "../service/bet.service";
 
 
 @Component({
@@ -22,11 +22,12 @@ export class CardMatchComponent {
     this.betService.setBetAmount(form,nuevoMonto);
   }
 
-  calculate( form: FormGroup): number {
+  calculatePotProfits( form: FormGroup): number {
     const betAmount= parseFloat(form.get('betAmount')?.value ?? 0);
     const betOdds= parseFloat(form.get('betOdds')?.value);
     return Number((betAmount * betOdds).toFixed(2));
   }
+
   deleteBet(form: FormGroup)
   {
     this.betService.deleteForm(form);

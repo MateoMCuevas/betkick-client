@@ -21,6 +21,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatchesComponent} from './matches/matches.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {MatDividerModule} from '@angular/material/divider';
+import { DepositComponent } from './deposit/deposit.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
+import { MyBetsComponent } from './my-bets/my-bets.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -32,7 +39,9 @@ import {AppRoutingModule} from "./app-routing.module";
     CardBetComponent,
     CardMatchComponent,
     MatchesComponent,
-
+    DepositComponent,
+    WithdrawComponent,
+    MyBetsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -49,6 +58,10 @@ import {AppRoutingModule} from "./app-routing.module";
     MatChipsModule,
     MatFormFieldModule,
     MatMenuModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

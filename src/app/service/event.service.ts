@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {catchError, Observable, of} from "rxjs";
-import {Competition, Match} from "./model";
+import {Competition, Match} from "../model";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
