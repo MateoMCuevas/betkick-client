@@ -18,7 +18,7 @@
           <mat-divider></mat-divider>
         </mat-card-content>
         <mat-card-actions class="footer">
-            <mat-card-subtitle style="color:#08f905;">DATE: {{ bet.match.utcDate| date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
+            <mat-card-subtitle style="color:#08f905;">DATE: {{adjustedDate( bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
             <button mat-raised-button style="margin-left: auto; background-color: rgb(154, 2, 2); color: antiquewhite;" (click)="cancelBet(bet)">CANCEL BET</button>
         </mat-card-actions>
       </mat-card>
@@ -43,7 +43,7 @@
               <mat-divider></mat-divider>
             </mat-card-content>
             <mat-card-actions class="date">
-                <mat-card-subtitle style="color:#08f905;">DATE: {{ bet.match.utcDate| date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
+                <mat-card-subtitle style="color:#08f905;">DATE:{{adjustedDate( bet.match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
             </mat-card-actions>
             <mat-card-footer>
               <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -69,7 +69,7 @@
               <mat-divider></mat-divider>
             </mat-card-content>
             <mat-card-actions class="date">
-                <mat-card-subtitle style="color: #08f905;">DATE: {{bet.match.utcDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
+                <mat-card-subtitle style="color: #08f905;">DATE: {{adjustedDate( bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
             </mat-card-actions>
           </mat-card>
     </mat-tab>

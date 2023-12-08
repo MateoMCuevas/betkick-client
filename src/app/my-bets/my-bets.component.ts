@@ -53,5 +53,9 @@ export class MyBetsComponent implements OnInit{
       this.moneyService.showAlertMsj('THE BET WAS SUCCESSFULLY CANCELED')
     }
 
-
+    adjustedDate(utcDateString: string): Date {
+      const utcDate = new Date(utcDateString);
+      utcDate.setHours(utcDate.getHours() - 3);
+      return utcDate;
+    }
 }

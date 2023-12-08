@@ -16,7 +16,10 @@ import {Match, Winner} from "../model";
 export class MatchesComponent implements OnInit {
   matches: Match[] = [];
   todayMatches: Match[]=[];
-
+  searchMatches: Match[] = [];
+  competition:string = "";
+  inputMatch:string = "";
+  urlActual = window.location.href;
   bet1 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
   betX = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
   bet2 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
@@ -35,7 +38,8 @@ export class MatchesComponent implements OnInit {
     private fb: FormBuilder,
     private betService: BetService,
     private route: ActivatedRoute,
-    private datePipe: DatePipe) {
+    private datePipe: DatePipe,
+   ) {
     //private location: Location) {
   }
 
@@ -47,10 +51,29 @@ export class MatchesComponent implements OnInit {
     });
   }
 
+  search(){
+    this.searchResults(this.inputMatch);
+  }
+  searchResults(team: string) {
+    this.searchMatches.length = 0;
+    let homeTeam:string = "";
+    let awayTeam:string = "";
+    team = team.toLowerCase();
+    console.log(team);
+    this.matches.forEach(element => {
+      homeTeam = element.awayTeam.name.toLowerCase();
+      awayTeam = element.homeTeam.name.toLowerCase();
+      if(homeTeam.includes(team) || awayTeam.includes(team)){
+        this.searchMatches.push(element);
+      }
+    });
+  
+  }
   getMatches(competitionId?: number): void {
     this.eventService.getMatches(competitionId)
       .subscribe(matches => {
         this.matches = matches;
+        this.competition = matches[1].competition.name;
         console.log(this.matches);
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
         console.log(this.matches);
@@ -104,7 +127,11 @@ export class MatchesComponent implements OnInit {
     }
   }
   
-
+  adjustedDate(utcDateString: string): Date {
+    const utcDate = new Date(utcDateString);
+    utcDate.setHours(utcDate.getHours() - 3);
+    return utcDate;
+  }
   /*goBack(): void {
   this.location.back();
   getTodayMatches(){
