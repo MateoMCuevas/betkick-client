@@ -12,7 +12,8 @@ import { MoneyUserService } from '../service/money-user.service';
 export class MyBetsComponent implements OnInit{
   myFinishedBets: any[]
   myActiveBets: any[]
-  myLivedBets: any[]
+  myLiveBets: any[]
+  MyBets: any[]
   isAuthenticated!: boolean;
   user!: User;
   money: number;
@@ -25,7 +26,16 @@ export class MyBetsComponent implements OnInit{
     await this.auth.getUser().subscribe(data => this.user = data);
     this.getBetHistory()
   }
-
+  getMyBets(){
+    this.betService.getBetHistory().subscribe(
+      (response)=>{
+        this.MyBets=response;
+      },
+      (error) => {
+        console.error('An error occurred: ', error);
+      }
+    );
+  }
   getBetHistory() {
       this.betService.getBetHistory().subscribe(
         (response) => {
@@ -35,9 +45,10 @@ export class MyBetsComponent implements OnInit{
           this.myFinishedBets=response.filter(function(bet: any ){
             return bet.match.status =='FINISHED' ||bet.match.status =='AWARED'
           })
-          this.myLivedBets=response.filter(function(bet: any ){
+          this.myLiveBets=response.filter(function(bet: any ){
             return bet.match.status =='IN_PLAY' ||bet.match.status =='PAUSED'
           })
+          
         },
         (error) => {
           console.error('An error occurred: ', error);
@@ -52,7 +63,6 @@ export class MyBetsComponent implements OnInit{
       this.moneyService.setMoney(this.money)
       this.moneyService.showAlertMsj('THE BET WAS SUCCESSFULLY CANCELED')
     }
-
     adjustedDate(utcDateString: string): Date {
       const utcDate = new Date(utcDateString);
       utcDate.setHours(utcDate.getHours() - 3);

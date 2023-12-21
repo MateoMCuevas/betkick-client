@@ -1,11 +1,11 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {EventService} from "../service/event.service";
-import {BetService} from "../service/bet.service"
-import {ActivatedRoute} from "@angular/router";
-import {DatePipe, Location} from "@angular/common";
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from "rxjs";
-import {Match, Winner} from "../model";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { EventService } from "../service/event.service";
+import { BetService } from "../service/bet.service"
+import { ActivatedRoute } from "@angular/router";
+import { DatePipe, Location } from "@angular/common";
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Match, Winner } from "../model";
+import {  isSameWeek } from 'date-fns';
 
 @Component({
   selector: 'app-matches',
@@ -15,10 +15,13 @@ import {Match, Winner} from "../model";
 })
 export class MatchesComponent implements OnInit {
   matches: Match[] = [];
-  todayMatches: Match[]=[];
+  liveMatches: Match[]=[];
+  todayMatches: Match[] = [];
+  weekMatches: Match[] = []
+  monthMatches: Match[]=[]
   searchMatches: Match[] = [];
-  competition:string = "";
-  inputMatch:string = "";
+  competition: string = "";
+  inputMatch: string = "";
   urlActual = window.location.href;
   bet1 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
   betX = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
@@ -38,8 +41,7 @@ export class MatchesComponent implements OnInit {
     private fb: FormBuilder,
     private betService: BetService,
     private route: ActivatedRoute,
-    private datePipe: DatePipe,
-   ) {
+  ) {
     //private location: Location) {
   }
 
@@ -51,33 +53,34 @@ export class MatchesComponent implements OnInit {
     });
   }
 
-  search(){
+  search() {
     this.searchResults(this.inputMatch);
   }
   searchResults(team: string) {
     this.searchMatches.length = 0;
-    let homeTeam:string = "";
-    let awayTeam:string = "";
+    let homeTeam: string = "";
+    let awayTeam: string = "";
     team = team.toLowerCase();
     console.log(team);
     this.matches.forEach(element => {
       homeTeam = element.awayTeam.name.toLowerCase();
       awayTeam = element.homeTeam.name.toLowerCase();
-      if(homeTeam.includes(team) || awayTeam.includes(team)){
+      if (homeTeam.includes(team) || awayTeam.includes(team)) {
         this.searchMatches.push(element);
       }
     });
-  
+
   }
   getMatches(competitionId?: number): void {
     this.eventService.getMatches(competitionId)
       .subscribe(matches => {
         this.matches = matches;
         this.competition = matches[1].competition.name;
-        console.log(this.matches);
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
-        console.log(this.matches);
-
+        this.matches=this.matches.filter(function(match: any ){
+          return match.status !='FINISHED' && match.status !='AWARED'
+        })
+        this.matchFilter()
       });
   }
   compareDates(date1: string, date2: string): number {
@@ -107,7 +110,7 @@ export class MatchesComponent implements OnInit {
         this.betService.addData(this.form.value);
       }
       this.form.reset();
-    }else{
+    } else {
       //mandar alerta
     }
   }
@@ -126,11 +129,51 @@ export class MatchesComponent implements OnInit {
         return Winner.AWAY_TEAM.toString();
     }
   }
-  
+
   adjustedDate(utcDateString: string): Date {
     const utcDate = new Date(utcDateString);
     utcDate.setHours(utcDate.getHours() - 3);
     return utcDate;
+  }
+
+  matchFilter() {
+    this.liveMatches=[]
+    this.todayMatches = []
+    this.weekMatches = []
+    this.monthMatches=[]
+    this.matches.forEach((match: any) => {
+      if(match.status=='IN_PLAY' || match.status =='PAUSED'){
+        this.liveMatches.push(match)
+      }
+      else if (this.isTodayMatch(match)) {
+        this.todayMatches.push(match)
+      }
+      else if(this.isThisWeekMatch(match)){
+        console.log("aca");
+        
+        this.weekMatches.push(match)
+      }else{
+        this.monthMatches.push(match)
+      }
+    });
+    console.log(this.todayMatches);
+
+  }
+
+  isTodayMatch(match: Match): boolean {
+    const todayDate = new Date();
+    const matchDate = new Date(match.utcDate)
+    return (
+      todayDate.getUTCFullYear() === matchDate.getUTCFullYear() &&
+      todayDate.getUTCMonth() === matchDate.getUTCMonth() &&
+      todayDate.getUTCDate() === matchDate.getUTCDate()
+    );
+  }
+
+  isThisWeekMatch(match: Match): boolean {
+    const currentDate = new Date();
+    const matchDate = new Date(match.utcDate)
+    return isSameWeek(matchDate, currentDate);
   }
   /*goBack(): void {
   this.location.back();

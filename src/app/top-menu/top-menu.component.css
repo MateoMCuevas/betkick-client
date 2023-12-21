@@ -25,7 +25,7 @@ mat-icon {
 }
 
 .title {
-  color: #08f905;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#08f905 ;background-color:#1a1919;
 }
 
 #logo {
