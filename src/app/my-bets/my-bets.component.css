@@ -1,80 +1,50 @@
-.myBets {
+.container{
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.7rem;
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  justify-self: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1370px) {
-  .myBets {
-    justify-content: center;
-  }
-  }
-
-.bet {
-  flex: 0 0 auto;
+.buttons{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2rem;
+  color: #08f905;
+}
+.button{
+  font-family: 'Oswald';
+  font-size:1rem;
   text-align: center;
-  padding: 0.7rem;
-  width: 4.5rem;
-  height: 5.5rem;
+  padding: 0.5rem;
+  height: 4rem;
+  width: 7rem;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  color: #08f905;
+  background:black;
+  border-radius: 1rem;
 }
 
-.active {
-  background-color: #e1e1e1;
-  border-radius: 20px;
+.list{
+  width: 80%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.container {
+.card-container {
+  /* Color de borde más oscuro */
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
   margin-top: 1rem;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  width: 100%;
 }
 
-.inLive {
-  left: 33.2%;
+.card-container:hover {
+  transform: scale(1.05);
 }
 
-.finished {
-  left: 67%;
-}
 .bet-container{
   max-width: 31%;
   margin: 20px;
@@ -83,16 +53,6 @@
   overflow: hidden;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
-}
-.card-container {
-  /* Color de borde más oscuro */
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s;
-}
-
-.card-container:hover {
-  transform: scale(1.05);
 }
 
 .footer {
@@ -138,18 +98,18 @@
   background-color: rgb(154, 63, 63);
 }
 
+.emptyListMessage{
+  font-family: 'Oswald';
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  margin-top: 25%;
+}
+
+
 @media (max-width: 580px) {
   .card-container {
     max-width: 100%;
   }
 
-  .finished {
-    left: 0;
-    max-width: 100%;
-  }
-
-  .inLive {
-    left: 0;
-    max-width: 100%;
-  }
 }
