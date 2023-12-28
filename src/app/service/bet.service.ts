@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {AuthService} from "./auth.service";
+import { UserBetSummary } from '../model';
 
 @Injectable({
   providedIn: 'root'

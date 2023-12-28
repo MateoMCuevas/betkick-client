@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {catchError, Observable, of} from "rxjs";
-import {Competition, Match} from "../model";
+import {Competition, CompetitionStandings, Match, UserBetSummary} from "../model";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -9,6 +9,7 @@ import {HttpClient} from "@angular/common/http";
 export class EventService {
   competitionsUrl: string = 'api/competitions';
   matchesUrl: string = 'api/matches';
+  standingsUrl: string= 'api/standings'
 
   constructor(private http: HttpClient) {
   }
@@ -29,6 +30,20 @@ export class EventService {
       );
   }
 
+  getStandings(competitionId?: number): Observable<CompetitionStandings[]> {
+    const url = this.standingsUrl + `?competitionId=${competitionId}`;
+    return this.http.get<CompetitionStandings[]>(url)
+      .pipe(
+        catchError(this.handleError<CompetitionStandings[]>('getStandings', []))
+      );
+  }
+
+  getLeaderboard(competitionId?: number): Observable<UserBetSummary[]> {
+    return this.http.get<UserBetSummary[]>('api/leaderboard')
+      .pipe(
+        catchError(this.handleError<UserBetSummary[]>('getLeaderboard', []))
+      );
+  }
 
   /**
    * Handle Http operation that failed.

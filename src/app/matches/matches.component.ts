@@ -5,7 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { DatePipe, Location } from "@angular/common";
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Match, Winner } from "../model";
-import {  isSameWeek } from 'date-fns';
+import { isSameWeek } from 'date-fns';
 
 @Component({
   selector: 'app-matches',
@@ -15,17 +15,14 @@ import {  isSameWeek } from 'date-fns';
 })
 export class MatchesComponent implements OnInit {
   matches: Match[] = [];
-  liveMatches: Match[]=[];
+  liveMatches: Match[] = [];
   todayMatches: Match[] = [];
-  weekMatches: Match[] = []
-  monthMatches: Match[]=[]
+  weekMatches: Match[] = [];
+  monthMatches: Match[] = [];
   searchMatches: Match[] = [];
   competition: string = "";
   inputMatch: string = "";
   urlActual = window.location.href;
-  bet1 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
-  betX = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
-  bet2 = parseFloat((Math.random() * (4.0 - 1.0) + 1.0).toFixed(1));
 
   form = this.fb.group({
     matchId: [''],
@@ -77,17 +74,27 @@ export class MatchesComponent implements OnInit {
         this.matches = matches;
         this.competition = matches[1].competition.name;
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
-        this.matches=this.matches.filter(function(match: any ){
-          return match.status !='FINISHED' && match.status !='AWARED'
+        this.matches = this.matches.filter(function (match: any) {
+          return match.status != 'FINISHED' && match.status != 'AWARED'
+        })
+        this.matches.forEach(match => {
+          this.roundToOneDecimal(match);
         })
         this.matchFilter()
       });
+    this.eventService.getLeaderboard()
+    .subscribe(leaderboard =>{
+      console.log(leaderboard);
+      
+    })
   }
+
   compareDates(date1: string, date2: string): number {
     const dateA = new Date(date1);
     const dateB = new Date(date2);
     return dateA.getTime() - dateB.getTime();
   }
+
   handleButtonClick(match: Match, odds: number, event: MouseEvent): void {
     let listBetsLenght: number = 0
     this.betService.listBets$.subscribe((datos) => {
@@ -137,22 +144,20 @@ export class MatchesComponent implements OnInit {
   }
 
   matchFilter() {
-    this.liveMatches=[]
+    this.liveMatches = []
     this.todayMatches = []
     this.weekMatches = []
-    this.monthMatches=[]
+    this.monthMatches = []
     this.matches.forEach((match: any) => {
-      if(match.status=='IN_PLAY' || match.status =='PAUSED'){
+      if (match.status == 'IN_PLAY' || match.status == 'PAUSED') {
         this.liveMatches.push(match)
       }
       else if (this.isTodayMatch(match)) {
         this.todayMatches.push(match)
       }
-      else if(this.isThisWeekMatch(match)){
-        console.log("aca");
-        
+      else if (this.isThisWeekMatch(match)) {
         this.weekMatches.push(match)
-      }else{
+      } else {
         this.monthMatches.push(match)
       }
     });
@@ -174,6 +179,12 @@ export class MatchesComponent implements OnInit {
     const currentDate = new Date();
     const matchDate = new Date(match.utcDate)
     return isSameWeek(matchDate, currentDate);
+  }
+
+  roundToOneDecimal(match: Match): void {
+    match.odds.homeWinsOdds = Math.round(match.odds.homeWinsOdds * 10) / 10;
+    match.odds.awayWinsOdds = Math.round(match.odds.awayWinsOdds * 10) / 10;
+    match.odds.drawOdds = Math.round(match.odds.drawOdds * 10) / 10;
   }
   /*goBack(): void {
   this.location.back();
