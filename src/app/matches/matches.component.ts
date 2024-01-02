@@ -95,7 +95,8 @@ export class MatchesComponent implements OnInit {
     return dateA.getTime() - dateB.getTime();
   }
 
-  handleButtonClick(match: Match, odds: number, event: MouseEvent): void {
+  handleButtonClick(eventData: any): void {
+    const { match, odds, winnerTeam } = eventData;
     let listBetsLenght: number = 0
     this.betService.listBets$.subscribe((datos) => {
       let listBets: any = datos;
@@ -109,7 +110,7 @@ export class MatchesComponent implements OnInit {
         placedAt: null,
         betOdds: odds.toString(),
         betAmount: null,
-        winner: this.whoWins(match, event),
+        winner: winnerTeam,
       };
       if (valores.winner) {
         console.log(valores.winner);
@@ -120,27 +121,6 @@ export class MatchesComponent implements OnInit {
     } else {
       //mandar alerta
     }
-  }
-
-  whoWins(match: Match, event: MouseEvent): any {
-    const buttonId = (event.target as HTMLButtonElement)?.id;
-    switch (buttonId) {
-      case 'localWinSpan':
-      case 'localWin':
-        return Winner.HOME_TEAM.toString();
-      case 'drawSpan':
-      case 'draw':
-        return Winner.DRAW.toString();
-      case 'awayWinSpan':
-      case 'awayWin':
-        return Winner.AWAY_TEAM.toString();
-    }
-  }
-
-  adjustedDate(utcDateString: string): Date {
-    const utcDate = new Date(utcDateString);
-    utcDate.setHours(utcDate.getHours() - 3);
-    return utcDate;
   }
 
   matchFilter() {
@@ -186,17 +166,6 @@ export class MatchesComponent implements OnInit {
     match.odds.awayWinsOdds = Math.round(match.odds.awayWinsOdds * 10) / 10;
     match.odds.drawOdds = Math.round(match.odds.drawOdds * 10) / 10;
   }
-  /*goBack(): void {
-  this.location.back();
-  getTodayMatches(){
-    const fechaActual = new Date();
-    const fechaActualFormateada = this.datePipe.transform(fechaActual, 'yyyy-MM-dd');
-    this.todayMatches=this.matches.filter(function(match:Match){
-      const dia=match.utcDate.split('T')[0];
-      return dia===fechaActualFormateada
-    })
-  }*/
-
   protected readonly Math = Math;
   protected readonly parseFloat = parseFloat;
 }

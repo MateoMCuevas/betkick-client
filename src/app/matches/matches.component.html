@@ -1,11 +1,3 @@
-<!-- <div class="matches">
-  <div class="match" *ngFor="let match of matches">
-    <img src="{{match.awayTeam.crest}}" class="team-crest" alt="">
-    <img src="{{match.homeTeam.crest}}" class="team-crest" alt="">
-  </div>
-</div>
-<mat-divider></mat-divider>
- -->
 <span *ngIf="urlActual != 'http://localhost:4200/home'">
   <div class="search">
     <input class="minimalist-input" type="text" [(ngModel)]="inputMatch" (input)="search()"
@@ -19,163 +11,46 @@
   </span>
 </div>
 <div class="container">
-<div *ngIf="searchMatches.length>0">
-  <div *ngFor="let match of searchMatches" class="match-container">
-    <form [formGroup]="form">
-      <div class="match-header">
-        <p>{{adjustedDate( match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
-        <h3>{{ match.competition.name }}</h3>
-      </div>
-      <div class="team-container">
-        <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
-        <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
-        <p>{{ match.homeTeam.shortName }}</p>
-        <p>{{ match.awayTeam.shortName }}</p>
-      </div>
-      <div class="odds-container">
-        <button id="localWin" (click)="handleButtonClick(match,match.odds.homeWinsOdds,$event)">
-          <span id="localWinSpan" class="odds-symbol">1</span>
-          {{match.odds.homeWinsOdds}}
-        </button>
-        <button id="draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
-          <span id="drawSpan" class="odds-symbol">X</span>
-          {{match.odds.drawOdds}}
-        </button>
-        <button id="awayWin" (click)="handleButtonClick(match,match.odds.awayWinsOdds,$event)">
-          <span id="awayWinSpan" class="odds-symbol">2</span>
-          {{match.odds.awayWinsOdds}}
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-<div *ngIf="searchMatches.length==0">
-  <div *ngIf="liveMatches.length > 0"> 
-    <p class="label">Live Matches</p>
+  <div *ngIf="searchMatches.length>0">
     <form class="listMatchesContainer" [formGroup]="form">
-      <div *ngFor="let match of liveMatches" class="match-container">
-        <div class="match-header">
-          <p>{{adjustedDate( match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
-          <h3>{{ match.competition.name }}</h3>
-        </div>
-        <mat-card-footer>
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        </mat-card-footer>
-        <div class="team-container">
-          <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
-          <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
-          <p>{{ match.homeTeam.shortName }}</p>
-          <p>{{ match.awayTeam.shortName }}</p>
-        </div>
-        <div class="odds-container">
-          <button id="localWin" (click)="handleButtonClick(match,match.odds.homeWinsOdds,$event)">
-            <span id="localWinSpan" class="odds-symbol">1</span>
-            {{match.odds.homeWinsOdds}}
-          </button>
-          <button id="draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
-            <span id="drawSpan" class="odds-symbol">X</span>
-            {{match.odds.drawOdds}}
-          </button>
-          <button id="awayWin" (click)="handleButtonClick(match,match.odds.awayWinsOdds,$event)">
-            <span id="awayWinSpan" class="odds-symbol">2</span>
-            {{match.odds.awayWinsOdds}}
-          </button>
-        </div>
+      <p class="label">Search Results</p>
+      <div *ngFor="let match of searchMatches" class="match-container">
+        <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
       </div>
     </form>
   </div>
-  <div *ngIf="todayMatches.length > 0"> 
-    <p class="label">Today Matches</p>
-    <form class="listMatchesContainer" [formGroup]="form">
-      <div *ngFor="let match of todayMatches" class="match-container">
-        <div class="match-header">
-          <p>{{adjustedDate( match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
-          <h3>{{ match.competition.name }}</h3>
+  <div *ngIf="searchMatches.length==0">
+    <div *ngIf="liveMatches.length > 0">
+      <p class="label">Live Matches</p>
+      <form class="listMatchesContainer" [formGroup]="form">
+        <div *ngFor="let match of liveMatches" class="match-container">
+          <app-live-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-live-match>
         </div>
-        <div class="team-container">
-          <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
-          <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
-          <p>{{ match.homeTeam.shortName }}</p>
-          <p>{{ match.awayTeam.shortName }}</p>
+      </form>
+    </div>
+    <div *ngIf="todayMatches.length > 0">
+      <p class="label">Today Matches</p>
+      <form class="listMatchesContainer" [formGroup]="form">
+        <div *ngFor="let match of todayMatches" class="match-container">
+          <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
-        <div class="odds-container">
-          <button id="localWin" (click)="handleButtonClick(match,match.odds.homeWinsOdds,$event)">
-            <span id="localWinSpan" class="odds-symbol">1</span>
-            {{match.odds.homeWinsOdds}}
-          </button>
-          <button id="draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
-            <span id="drawSpan" class="odds-symbol">X</span>
-            {{match.odds.drawOdds}}
-          </button>
-          <button id="awayWin" (click)="handleButtonClick(match,match.odds.awayWinsOdds,$event)">
-            <span id="awayWinSpan" class="odds-symbol">2</span>
-            {{match.odds.awayWinsOdds}}
-          </button>
+      </form>
+    </div>
+    <div *ngIf="weekMatches.length > 0">
+      <p class="label">Matches Of This Week</p>
+      <form class="listMatchesContainer" [formGroup]="form">
+        <div *ngFor="let match of weekMatches" class="match-container">
+          <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+    <div *ngIf="monthMatches.length > 0">
+      <p class="label">Others Matches</p>
+      <form class="listMatchesContainer" [formGroup]="form">
+        <div *ngFor="let match of monthMatches" class="match-container">
+          <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
+        </div>
+      </form>
+    </div>
   </div>
-  <div *ngIf="weekMatches.length > 0">
-    <p class="label">Matches Of This Week</p>
-    <form class="listMatchesContainer" [formGroup]="form">
-      <div *ngFor="let match of weekMatches" class="match-container">
-        <div class="match-header">
-          <p>{{adjustedDate( match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
-          <h3>{{ match.competition.name }}</h3>
-        </div>
-        <div class="team-container">
-          <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
-          <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
-          <p>{{ match.homeTeam.shortName }}</p>
-          <p>{{ match.awayTeam.shortName }}</p>
-        </div>
-        <div class="odds-container">
-          <button id="localWin" (click)="handleButtonClick(match,match.odds.homeWinsOdds,$event)">
-            <span id="localWinSpan" class="odds-symbol">1</span>
-            {{match.odds.homeWinsOdds}}
-          </button>
-          <button id="draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
-            <span id="drawSpan" class="odds-symbol">X</span>
-            {{match.odds.drawOdds}}
-          </button>
-          <button id="awayWin" (click)="handleButtonClick(match,match.odds.awayWinsOdds,$event)">
-            <span id="awayWinSpan" class="odds-symbol">2</span>
-            {{match.odds.awayWinsOdds}}
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div *ngIf="monthMatches.length > 0"> 
-    <p class="label">Others Matches</p>
-    <form class="listMatchesContainer" [formGroup]="form">
-      <div *ngFor="let match of monthMatches" class="match-container">
-        <div class="match-header">
-          <p>{{adjustedDate( match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
-          <h3>{{ match.competition.name }}</h3>
-        </div>
-        <div class="team-container">
-          <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
-          <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
-          <p>{{ match.homeTeam.shortName }}</p>
-          <p>{{ match.awayTeam.shortName }}</p>
-        </div>
-        <div class="odds-container">
-          <button id="localWin" (click)="handleButtonClick(match,match.odds.homeWinsOdds,$event)">
-            <span id="localWinSpan" class="odds-symbol">1</span>
-            {{match.odds.homeWinsOdds}}
-          </button>
-          <button id="draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
-            <span id="drawSpan" class="odds-symbol">X</span>
-            {{match.odds.drawOdds}}
-          </button>
-          <button id="awayWin" (click)="handleButtonClick(match,match.odds.awayWinsOdds,$event)">
-            <span id="awayWinSpan" class="odds-symbol">2</span>
-            {{match.odds.awayWinsOdds}}
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
 </div>

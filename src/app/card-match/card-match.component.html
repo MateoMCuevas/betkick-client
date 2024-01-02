@@ -3,8 +3,8 @@
       <mat-card-header class="infoMatch">
         <mat-card-title>{{betData.get('homeTeam').value}}</mat-card-title>
         <mat-card-title>{{betData.get('awayTeam').value}}</mat-card-title>
-        <mat-card-subtitle style="font-weight: bold;"*ngIf="betData.get('winner').value ==='AWAY_TEAM'">{{betData.get('homeTeam').value}} WINS</mat-card-subtitle>
-        <mat-card-subtitle style="font-weight: bold;"*ngIf="betData.get('winner').value ==='HOME_TEAM'">{{betData.get('awayTeam').value}} WINS</mat-card-subtitle>
+        <mat-card-subtitle style="font-weight: bold;"*ngIf="betData.get('winner').value ==='AWAY_TEAM'">{{betData.get('awayTeam').value}} WINS</mat-card-subtitle>
+        <mat-card-subtitle style="font-weight: bold;"*ngIf="betData.get('winner').value ==='HOME_TEAM'">{{betData.get('homeTeam').value}} WINS</mat-card-subtitle>
         <mat-card-subtitle style="font-weight: bold;"*ngIf="betData.get('winner').value ==='DRAW'">DRAW</mat-card-subtitle>
         <mat-card-subtitle>x{{betData.get('betOdds').value}}</mat-card-subtitle>
       </mat-card-header>
