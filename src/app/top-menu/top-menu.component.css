@@ -25,12 +25,11 @@ mat-icon {
 }
 
 .title {
-  color: #08f905;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#08f905 ;background-color:#1a1919;
 }
 
 #logo {
   position: relative;
-  margin-right: 2.5rem;
   width: 2.5rem;
   height: 2.5rem;
 }

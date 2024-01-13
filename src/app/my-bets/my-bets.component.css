@@ -1,56 +1,115 @@
-.container {
-    margin-top: 1rem;
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-  .inLive{
-   left: 33.2%;
-  }
-  .finished{
-    left: 67%;
-  }
+.container{
+  display: flex;
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  justify-self: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.buttons{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2rem;
+  color: #08f905;
+}
+.button{
+  font-family: 'Oswald';
+  font-size:1rem;
+  text-align: center;
+  padding: 0.5rem;
+  height: 4rem;
+  width: 7rem;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  color: #08f905;
+  background:black;
+  border-radius: 1rem;
+}
+
+.list{
+  width: 80%;
+}
+
+.card-container {
+  /* Color de borde más oscuro */
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.card-container:hover {
+  transform: scale(1.05);
+}
+
+.bet-container{
+  max-width: 31%;
+  margin: 20px;
+  /* Color de borde más oscuro */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.footer {
+  display: flex;
+  height: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: small;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  color: grey;
+}
+
+.card-header {
+  
+  background-color: black;
+  /* Fondo del encabezado más oscuro */
+  color: white;
+  padding: 1rem;
+}
+
+.card-content {
+  height: 20%;
+  background-color: white;
+  color: black;
+  padding: 0.5rem;
+}
+
+.numbersBet {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  line-height: 0.5;
+}
+
+.cancelBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 100%;
+  cursor: pointer;
+  background-color: rgb(154, 63, 63);
+}
+
+.emptyListMessage{
+  font-family: 'Oswald';
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  margin-top: 25%;
+}
+
+
+@media (max-width: 580px) {
   .card-container {
-    max-width: 31%;
-    margin: 20px;
-    border: 2px solid white; /* Color de borde más oscuro */
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
+    max-width: 100%;
   }
-  
-  .card-container:hover {
-    transform: scale(1.05);
-  }
-  .footer{
-    display: flex;
-    justify-content: space-between;
-    background-color: #1a1919;
-  }
-  .card-header {
-    background-color: black; /* Fondo del encabezado más oscuro */
-    color: white;
-    padding: 10px;
-  }
-  
-  .card-content {
-    height: 20%;
-    text-align: right;
-    background-color: white; /* Fondo del contenido más oscuro */
-    color: black;
-    padding: 10px;
-  }
-  
-  @media (max-width: 580px) {
-    .card-container {
-      max-width: 100%;
-    }
-    .finished{
-        left: 0;
-        max-width: 100%;
-      }
-      .inLive{
-        left: 0;
-        max-width: 100%;
-      }
-  }
+
+}

@@ -28,6 +28,8 @@ import { MyBetsComponent } from './my-bets/my-bets.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatchComponent } from './matches/match/match.component';
+import { LiveMatchComponent } from './matches/live-match/live-match.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatchesComponent,
     DepositComponent,
     WithdrawComponent,
-    MyBetsComponent
+    MyBetsComponent,
+    MatchComponent,
+    LiveMatchComponent,
   ],
   imports: [
     AppRoutingModule,

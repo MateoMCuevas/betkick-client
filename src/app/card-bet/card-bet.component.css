@@ -14,6 +14,7 @@
     align-items: center;
 }
 .card-bet-header {
+    padding: 0;
     height: 3rem;
     cursor: pointer;
     background-color: black;
@@ -32,17 +33,14 @@
 .title{
     justify-content: center;
     font-size: large;
-    margin-bottom: 1rem;
 }
 .arrowBtn{
     position: absolute;
     left:5%;
-    margin-bottom: 1rem;
 }
 .deleteBtn{
     position: absolute;
     right: 5%;
-    margin-bottom: 1rem;
 }
 .betBtn{
     height: 3rem;

@@ -1,0 +1,24 @@
+<div class="match-header">
+    <p>{{adjustedDate( match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</p>
+    <h3>{{ match.competition.name }}</h3>
+  </div>
+  <div class="team-container">
+    <img src="{{  match.homeTeam.crest }}" class="team-crest" alt="">
+    <img src="{{  match.awayTeam.crest }}" class="team-crest" alt="">
+    <p>{{ match.homeTeam.shortName }}</p>
+    <p>{{ match.awayTeam.shortName }}</p>
+  </div>
+  <div class="odds-container">
+    <button id="localWin" (click)="handleButtonClick(match,match.odds.homeWinsOdds,$event)">
+      <span id="localWinSpan" class="odds-symbol">1</span>
+      {{match.odds.homeWinsOdds}}
+    </button>
+    <button id="draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
+      <span id="drawSpan" class="odds-symbol">X</span>
+      {{match.odds.drawOdds}}
+    </button>
+    <button id="awayWin" (click)="handleButtonClick(match,match.odds.awayWinsOdds,$event)">
+      <span id="awayWinSpan" class="odds-symbol">2</span>
+      {{match.odds.awayWinsOdds}}
+    </button>
+  </div>

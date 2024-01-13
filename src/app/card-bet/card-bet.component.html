@@ -20,10 +20,10 @@
         </mat-card-header>
         <mat-card-content class="card-bet-content">
             <app-card-match *ngIf="listBets && listBets.length > 0" [listBets]="listBets"></app-card-match>
+            <div class="alertMsj" *ngIf="alertUserMoney">*MAKE SURE YOU HAVE ENOUGH BALANCE*</div>
+        <div class="alertMsj" *ngIf="alertBetAmount">*MAKE SURE ALL BETS HAVE AN AMOUNT*</div>
             <h3 *ngIf="!(listBets && listBets.length > 0)" style="text-align: center;">there are no bets available</h3>
         </mat-card-content>
-        <div class="alertMsj" *ngIf="alertUserMoney">*MAKE SURE YOU HAVE ENOUGH BALANCE*</div>
-        <div class="alertMsj" *ngIf="alertBetAmount">*MAKE SURE ALL BETS HAVE AN AMOUNT*</div>
         <button mat-button class="betBtn" type="submit"  (click)="sendData() "><h2>CONFIRM BET</h2></button>
     </mat-card>
 </div>

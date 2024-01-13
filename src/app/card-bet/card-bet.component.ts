@@ -96,8 +96,10 @@ export class CardBetComponent implements OnInit {
     }
      else if (!this.checkBetAmounts()) {
       this.alertBetAmount = true
+      this.alertUserMoney = false
     } else if (!this.checkUserMoney()) {
       this.alertUserMoney = true
+      this.alertBetAmount = false
     }
     else {
       this.alertBetAmount = false
