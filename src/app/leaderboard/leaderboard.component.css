@@ -1,0 +1,63 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Optional: Adjust as needed */
+  align-items: center; /* Optional: Adjust as needed */
+  overflow: scroll;
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+  max-width: 1350px;
+}
+
+table, mat-paginator {
+  width: 100%; /* Ensure the table takes 100% of its container */
+  font-size: 0.85rem;
+  min-width: 395px;
+  overflow: scroll;
+}
+
+th, td {
+  text-align: center; /* Center content horizontally in both headers and cells */
+  font-size: 0.95rem;
+  font-family: Roboto, serif;
+}
+
+th {
+  font-size: 1rem;
+}
+
+.star-icon-gold {
+  color: gold; /* Gold color for the first position */
+}
+
+.star-icon-silver {
+  color: silver; /* Silver color for the second position */
+}
+
+.star-icon-bronze {
+  color: #cd7f32; /* Bronze color for the third position (you can adjust the color code) */
+}
+
+.star-icon-bronze {
+  color: #cd7f32; /* Bronze color for the third position (you can adjust the color code) */
+}
+
+.no-star {
+  opacity: 0;
+}
+
+.position-cell-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.position-number {
+  flex: 1; /* Take remaining space */
+  text-align: center; /* Center the number */
+}

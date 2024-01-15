@@ -7,25 +7,38 @@ mat-toolbar {
 a {
   text-decoration: none;
 }
-.money{
+
+.money {
   color: white;
   left: 95rem;
   top: 0.85rem;
   max-width: 100px;
   overflow: auto;
 }
+
 .money::-webkit-scrollbar {
   width: 0.5px;
 }
+
 .money::-webkit-scrollbar-thumb {
   background: #08f905;
 }
-mat-icon {
-  color: #08f905;
-}
 
 .title {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#08f905 ;background-color:#1a1919;
+  font-family: Roboto;
+  font-size: 1.2rem;
+ color: #08f905;
+}
+
+.header, .menu-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+mat-icon {
+  color: #08f905;
 }
 
 #logo {
@@ -47,7 +60,7 @@ mat-icon {
   font-size: 0.8rem;
 }
 
-#login {
+#login, #leaderboard, #standings, #account-menu {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,17 +68,23 @@ mat-icon {
   background-color: #1f1f21;
   border-radius: 1.1rem;
   padding: 1rem;
-  color: #08d506;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border: solid 0.1rem;
-}
-
-#lock {
   color: #08ce06;
-  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 0.1rem solid #08ce06;
 }
 
-#login:hover {
+#lock, #leaderboard-icon, #standings-icon, #account-icon {
+  font-size: 1rem;
+  color: #08ce06;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#login:hover, #leaderboard:hover, #standings:hover, #account-menu:hover {
   background-color: #2a2828;
-  color: #08f905;
+  color: #09ef06;
+  border-color: #09ef06;
+}
+
+#login:hover mat-icon, #leaderboard:hover mat-icon, #standings:hover mat-icon {
+  color: #09ef06;
 }

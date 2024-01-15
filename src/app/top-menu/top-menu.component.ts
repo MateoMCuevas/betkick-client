@@ -18,7 +18,7 @@ export class TopMenuComponent implements OnInit {
               private moneyUser: MoneyUserService,
               private betService: BetService) {}
 
-  async ngOnInit() {
+   async ngOnInit() {
     this.isAuthenticated = await this.auth.isAuthenticated();
     if (this.isAuthenticated) {
       this.auth.getUser().subscribe(data => this.user = data);

@@ -1,54 +1,70 @@
 <mat-toolbar>
-  <h1 class="title">
-    BETKICK
-  </h1>
-  <a href="/" id="logo">
-    <mat-icon id="player">directions_run</mat-icon>
-    <mat-icon id="ball">sports_soccer</mat-icon>
+  <a href="/">
+    <div class="header">
+      <div id="logo">
+        <mat-icon id="player">directions_run</mat-icon>
+        <mat-icon id="ball">sports_soccer</mat-icon>
+      </div>
+      <h1 class="title">
+        BetKick
+      </h1>
+    </div>
   </a>
-  <div *ngIf="user; else login">
-    <button mat-icon-button  [matMenuTriggerFor]="menu">
-      <mat-icon>account_box</mat-icon>
+
+  <div class="menu-options">
+    <a href="/leaderboard">
+      <button mat-raised-button id="leaderboard">
+        Leaderboard
+        <mat-icon id="leaderboard-icon">star_border</mat-icon>
+      </button>
+    </a>
+
+    <button mat-raised-button id="standings">
+      Standings
+      <mat-icon id="standings-icon">format_list_numbered_rtl</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-      <a >
+
+    <div *ngIf="user; else login">
+      <button mat-raised-button [matMenuTriggerFor]="menu" id="account-menu">
+        Account
+        <mat-icon id="account-icon">account_box</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
         <p mat-menu-item>
           <mat-icon>money</mat-icon>
-          Balance: ${{money}}
+          Balance: ${{ money }}
         </p>
-      </a>
-      <a href="/deposit">
-        <button mat-menu-item>
-          <mat-icon>payment</mat-icon>
-          Deposit
-        </button>
-      </a>
-      <a href="/withdraw">
-        <button mat-menu-item>
-          <mat-icon>account_balance</mat-icon>
-          Withdraw
-        </button>
-      </a>
-      <a href="/my-bets">
-        <button (click)="getBetHistory()" mat-menu-item>
-          <mat-icon>subject</mat-icon>
-          My Bets
-        </button>
-      </a>
-      <a href="/home">
-        <button mat-menu-item (click)="auth.logout()" id="logout">
-          <mat-icon>highlight_off</mat-icon>
-          Logout
-        </button>
-      </a>
-    </mat-menu>
+        <a href="/deposit">
+          <button mat-menu-item>
+            <mat-icon>payment</mat-icon>
+            Deposit
+          </button>
+        </a>
+        <a href="/withdraw">
+          <button mat-menu-item>
+            <mat-icon>account_balance</mat-icon>
+            Withdraw
+          </button>
+        </a>
+        <a href="/my-bets">
+          <button (click)="getBetHistory()" mat-menu-item>
+            <mat-icon>subject</mat-icon>
+            My Bets
+          </button>
+        </a>
+        <a href="/home">
+          <button mat-menu-item (click)="auth.logout()" id="logout">
+            <mat-icon>highlight_off</mat-icon>
+            Logout
+          </button>
+        </a>
+      </mat-menu>
+    </div>
+    <ng-template #login>
+      <button mat-raised-button (click)="auth.login()" id="login">
+        <mat-icon id="lock">lock</mat-icon>
+        Login
+      </button>
+    </ng-template>
   </div>
-  <ng-template #login>
-    <button mat-raised-button (click)="auth.login()" id="login">
-      <mat-icon id="lock">lock</mat-icon>
-      Login
-    </button>
-  </ng-template>
-
-
 </mat-toolbar>

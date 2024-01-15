@@ -20,10 +20,15 @@ export class MoneyUserService {
     this.money.next(newMoney);
   }
 
+  replaceMoney(newMoney: number) {
+    this.money.next(newMoney);
+  }
+
   getUserBalance() {
     const userId = this.authService.userId!;
+    const encodedUserId = encodeURIComponent(userId);
     let params = new HttpParams();
-    params = params.set('userId', userId);
+    params = params.set('userId', encodedUserId);
 
     return this.http.get<any>('api/user/balance', {params})
   }
@@ -69,7 +74,7 @@ export class MoneyUserService {
     const mensajeEmergente = this.snackBar.open(msj, 'CLOSE', {
       duration: 5000,
       verticalPosition: 'top',
-      horizontalPosition: 'center', 
+      horizontalPosition: 'center',
     });
   }
 }

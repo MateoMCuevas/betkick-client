@@ -7,6 +7,7 @@ import { BetService } from "../service/bet.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthGuard } from '../auth-guard.guard';
 import { AuthService } from '../service/auth.service';
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-card-bet',
@@ -36,14 +37,18 @@ export class CardBetComponent implements OnInit {
       if (this.listBetsLength <= 0) { this.alertBetAmount = false }
     });
   }
-  getUserMoney() {
-    this.moneyUser.getUserBalance().subscribe((number: number) => {
-      this.money = number;
-    });
+  getUserMoney(): Observable<number> {
+    return this.moneyUser.getUserBalance().pipe(
+      map((balance: number) => {
+        return balance;
+      })
+    );
   }
 
-  updateMoney() {
-    this.moneyUser.setMoney(-this.totalBetAmount());
+  async updateMoney() {
+    // @ts-ignore
+    const balance: number = await this.getUserMoney().toPromise();
+    this.moneyUser.replaceMoney(balance);
   }
 
   totalBetAmount() {
@@ -53,13 +58,15 @@ export class CardBetComponent implements OnInit {
     });
     return totalBetAmount;
   }
-  checkUserMoney(): boolean {
-    this.getUserMoney()
-    let boolean: boolean = true;
-    if (this.totalBetAmount() > this.money) {
-      boolean = false;
+  async checkUserMoney(): Promise<boolean> {
+    try {
+      // @ts-ignore
+      const balance: number = await this.getUserMoney().toPromise();
+      return this.totalBetAmount() <= balance;
+    } catch (error) {
+      console.error('Error checking user money:', error);
+      return false;
     }
-    return boolean
   }
 
   //Function that loops through the listBets and calls the child component's function
@@ -75,8 +82,9 @@ export class CardBetComponent implements OnInit {
   }
 
   //Function that sends the bets made to the backend
-  sendData() {
-    if (this.checkLogin() && this.checkUserMoney() && this.checkBetAmounts() && this.listBetsLength > 0) {
+  async sendData() {
+    const enoughUserMoney = await this.checkUserMoney();
+    if (this.checkLogin() && enoughUserMoney && this.checkBetAmounts() && this.listBetsLength > 0) {
       this.alertBetAmount = false
       this.alertUserMoney = false
       this.betService.sendDataToBackend().subscribe(
@@ -89,15 +97,17 @@ export class CardBetComponent implements OnInit {
         }
       );
       this.updateMoney()
-      this.deleteAll()
-      this.moneyUser.showAlertMsj('SUCCESFUL BETS')
+      this.betService.deleteList()
+      this.alertBetAmount = false
+      this.alertUserMoney = false
+      this.moneyUser.showAlertMsj('SUCCESSFUL BETS')
     }else if(!this.checkLogin()){
       this.moneyUser.showAlertMsj('PLEASE LOGIN OR REGISTER')
     }
      else if (!this.checkBetAmounts()) {
       this.alertBetAmount = true
       this.alertUserMoney = false
-    } else if (!this.checkUserMoney()) {
+    } else if (!enoughUserMoney) {
       this.alertUserMoney = true
       this.alertBetAmount = false
     }
@@ -111,8 +121,11 @@ export class CardBetComponent implements OnInit {
     this.isCardVisible = !this.isCardVisible;
   }
 
-  deleteAll() {
+  deleteAll(event: Event) {
+    event.stopPropagation();
     this.betService.deleteList()
+    this.alertBetAmount = false
+    this.alertUserMoney = false
   }
   checkLogin(): boolean {
       return this.auth.getLoginBoolean()

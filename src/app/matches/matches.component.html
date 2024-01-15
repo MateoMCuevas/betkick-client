@@ -1,13 +1,13 @@
 <span *ngIf="urlActual != 'http://localhost:4200/home'">
   <div class="search">
     <input class="minimalist-input" type="text" [(ngModel)]="inputMatch" (input)="search()"
-      placeholder="Search for {{competition}} matches.">
+           placeholder="Search {{competition}} matches">
   </div>
 </span>
 <div class="search">
   <span *ngIf="urlActual == 'http://localhost:4200/home'">
     <input class="minimalist-input" type="text" [(ngModel)]="inputMatch" (input)="search()"
-      placeholder="Search for matches of this week.">
+           placeholder="Search all matches">
   </span>
 </div>
 <div class="container">
@@ -29,7 +29,7 @@
       </form>
     </div>
     <div *ngIf="todayMatches.length > 0">
-      <p class="label">Today Matches</p>
+      <p class="label">Today's Matches</p>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of todayMatches" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
@@ -37,7 +37,7 @@
       </form>
     </div>
     <div *ngIf="weekMatches.length > 0">
-      <p class="label">Matches Of This Week</p>
+      <p class="label">This Week's matches</p>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of weekMatches" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>

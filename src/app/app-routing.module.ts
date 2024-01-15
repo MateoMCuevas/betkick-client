@@ -6,9 +6,11 @@ import { DepositComponent } from './deposit/deposit.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { MyBetsComponent } from './my-bets/my-bets.component';
 import { AuthGuard } from './auth-guard.guard';
+import {LeaderboardComponent} from "./leaderboard/leaderboard.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'leaderboard', component: LeaderboardComponent },
   {
     path: 'home',
     component: HomeComponent,
@@ -17,7 +19,6 @@ const routes: Routes = [
       {path: 'home/competitions/:id', component: MatchesComponent}
     ]
   },
-
   {path: 'deposit', component: DepositComponent,canActivate:[AuthGuard]},
   {path: 'withdraw', component: WithdrawComponent,canActivate:[AuthGuard]},
   {path: 'my-bets', component: MyBetsComponent,canActivate:[AuthGuard]}

@@ -30,6 +30,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatchComponent } from './matches/match/match.component';
 import { LiveMatchComponent } from './matches/live-match/live-match.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -46,6 +49,7 @@ import { LiveMatchComponent } from './matches/live-match/live-match.component';
     MyBetsComponent,
     MatchComponent,
     LiveMatchComponent,
+    LeaderboardComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -65,7 +69,9 @@ import { LiveMatchComponent } from './matches/live-match/live-match.component';
     MatDividerModule,
     MatTabsModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

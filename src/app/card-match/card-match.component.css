@@ -1,50 +1,60 @@
 .cardMatch {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #ddd; /* Use a light gray color for the border */
+  border-radius: 4px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .infoMatch {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 
 }
 
 .priceBet {
-    display: grid;
-    grid-template-rows: 2rem 1fr 1fr;
-    width: 100%;
-    padding: 2;
+  display: grid;
+  grid-template-rows: 2rem 1fr 1fr;
+  width: 100%;
+}
+
+.odds {
+  color: #219321;
 }
 
 .amountInput {
-    justify-self: end;
-    text-align: right;
-    width: 50%;
+  justify-self: end;
+  text-align: right;
+  width: 50%;
 
 }
 
 .potProfits {
-    font-weight: bold;
-    justify-self: end;
-    width: 80%;
+  font-weight: bold;
+  justify-self: end;
+  width: 80%;
+}
+
+.profit {
+  color: #219321;
 }
 
 .deleteBtn {
-    background-color: black;
-    color: #08f905;
-    grid-row: 1;
-    justify-self: end;
-    width: 1.5rem;
-    height: 1.5rem;
+  background-color: black;
+  color: #08f905;
+  grid-row: 1;
+  justify-self: end;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
-@media(max-width: 768px) {
-    .potProfits {
-        font-weight: bold;
-        justify-self: end;
+@media (max-width: 768px) {
+  .potProfits {
+    font-weight: bold;
+    justify-self: end;
     text-align: right;
     width: 80%;
-    }
+  }
 }
