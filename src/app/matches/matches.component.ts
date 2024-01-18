@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { EventService } from "../service/event.service";
-import { BetService } from "../service/bet.service"
-import { ActivatedRoute } from "@angular/router";
-import { DatePipe, Location } from "@angular/common";
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Match, Winner } from "../model";
-import { isSameWeek } from 'date-fns';
+import {Component, OnInit} from '@angular/core';
+import {EventService} from "../service/event.service";
+import {BetService} from "../service/bet.service"
+import {ActivatedRoute} from "@angular/router";
+import {DatePipe} from "@angular/common";
+import {FormArray, FormBuilder} from '@angular/forms';
+import {Match} from "../model";
+import {isSameWeek} from 'date-fns';
 
 @Component({
   selector: 'app-matches',
@@ -15,10 +15,17 @@ import { isSameWeek } from 'date-fns';
 })
 export class MatchesComponent implements OnInit {
   matches: Match[] = [];
+
   liveMatches: Match[] = [];
   todayMatches: Match[] = [];
-  weekMatches: Match[] = [];
-  monthMatches: Match[] = [];
+  weekMatches: Match[][] = [];
+  weekIndex: number[] = [];
+  selectedWeek: number;
+
+  pageSize = 5; // Set the number of items per page
+  pageIndex = 0; // Current page index
+  pageSizeOptions = [5, 10, 20]; // Options for the user to choose page size
+
   searchMatches: Match[] = [];
   competition: string = "";
   inputMatch: string = "";
@@ -50,9 +57,20 @@ export class MatchesComponent implements OnInit {
     });
   }
 
+  get paginatedData(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.weekMatches[this.selectedWeek].slice(startIndex, startIndex + this.pageSize);
+  }
+
+  pageChanged(event: any): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
+
   search() {
     this.searchResults(this.inputMatch);
   }
+
   searchResults(team: string) {
     this.searchMatches.length = 0;
     let homeTeam: string = "";
@@ -75,7 +93,7 @@ export class MatchesComponent implements OnInit {
         this.competition = matches[1].competition.name;
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
         this.matches = this.matches.filter(function (match: any) {
-          return match.status != 'FINISHED' && match.status != 'AWARED'
+          return match.status != 'FINISHED' && match.status != 'AWARDED'
         })
         this.matches.forEach(match => {
           this.roundToOneDecimal(match);
@@ -85,7 +103,7 @@ export class MatchesComponent implements OnInit {
     this.eventService.getLeaderboard()
     .subscribe(leaderboard =>{
       console.log(leaderboard);
-      
+
     })
   }
 
@@ -97,12 +115,12 @@ export class MatchesComponent implements OnInit {
 
   handleButtonClick(eventData: any): void {
     const { match, odds, winnerTeam } = eventData;
-    let listBetsLenght: number = 0
+    let listBetsLength: number = 0
     this.betService.listBets$.subscribe((datos) => {
       let listBets: any = datos;
-      listBetsLenght = (listBets as FormArray).length;
+      listBetsLength = (listBets as FormArray).length;
     });
-    if (listBetsLenght < 10) {
+    if (listBetsLength < 10) {
       const valores = {
         matchId: match.id.toString(),
         homeTeam: match.homeTeam.shortName,
@@ -124,26 +142,45 @@ export class MatchesComponent implements OnInit {
   }
 
   matchFilter() {
-    this.liveMatches = []
-    this.todayMatches = []
-    this.weekMatches = []
-    this.monthMatches = []
+    this.liveMatches = [];
+    this.todayMatches = [];
+    this.weekMatches = [];
+
+    const uniqueWeeks = new Set<number>();
+
     this.matches.forEach((match: any) => {
       if (match.status == 'IN_PLAY' || match.status == 'PAUSED') {
-        this.liveMatches.push(match)
-      }
-      else if (this.isTodayMatch(match)) {
-        this.todayMatches.push(match)
-      }
-      else if (this.isThisWeekMatch(match)) {
-        this.weekMatches.push(match)
+        this.liveMatches.push(match);
+      } else if (this.isTodayMatch(match)) {
+        this.todayMatches.push(match);
       } else {
-        this.monthMatches.push(match)
+        const weekNumber = this.getWeekNumber(match.utcDate);
+
+        uniqueWeeks.add(weekNumber);
+
+        if (!this.weekMatches[weekNumber]) {
+          this.weekMatches[weekNumber] = [];
+        }
+
+        this.weekMatches[weekNumber].push(match);
       }
     });
-    console.log(this.todayMatches);
-
+    this.weekIndex = Array.from(uniqueWeeks).sort((a, b) => a - b);
   }
+
+  onWeekSelected(selectedWeek: number) {
+    this.selectedWeek = selectedWeek;
+  }
+
+  getWeekNumber(date: string): number {
+    const matchDate = new Date(date);
+    const currentDate = new Date();
+
+    const diffInTime = matchDate.getTime() - currentDate.getTime();
+    const diffInDays = diffInTime / (1000 * 3600 * 24);
+    return Math.floor(diffInDays / 7);
+  }
+
 
   isTodayMatch(match: Match): boolean {
     const todayDate = new Date();

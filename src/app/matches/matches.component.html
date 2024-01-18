@@ -4,12 +4,14 @@
            placeholder="Search {{competition}} matches">
   </div>
 </span>
+
 <div class="search">
   <span *ngIf="urlActual == 'http://localhost:4200/home'">
     <input class="minimalist-input" type="text" [(ngModel)]="inputMatch" (input)="search()"
            placeholder="Search all matches">
   </span>
 </div>
+
 <div class="container">
   <div *ngIf="searchMatches.length>0">
     <form class="listMatchesContainer" [formGroup]="form">
@@ -19,6 +21,10 @@
       </div>
     </form>
   </div>
+
+  <app-week-index [weeks]="weekIndex" (weekSelected)="onWeekSelected($event)">
+  </app-week-index>
+
   <div *ngIf="searchMatches.length==0">
     <div *ngIf="liveMatches.length > 0">
       <p class="label">Live Matches</p>
@@ -36,21 +42,20 @@
         </div>
       </form>
     </div>
-    <div *ngIf="weekMatches.length > 0">
-      <p class="label">This Week's matches</p>
+
+    <div *ngIf="selectedWeek !== undefined">
+      <p class="label">Week {{ selectedWeek }}</p>
       <form class="listMatchesContainer" [formGroup]="form">
-        <div *ngFor="let match of weekMatches" class="match-container">
+        <div *ngFor="let match of paginatedData" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
       </form>
-    </div>
-    <div *ngIf="monthMatches.length > 0">
-      <p class="label">Others Matches</p>
-      <form class="listMatchesContainer" [formGroup]="form">
-        <div *ngFor="let match of monthMatches" class="match-container">
-          <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
-        </div>
-      </form>
+      <mat-paginator
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [length]="weekMatches[selectedWeek].length"
+        (page)="pageChanged($event)"
+      ></mat-paginator>
     </div>
   </div>
 </div>

@@ -33,6 +33,7 @@ import { LiveMatchComponent } from './matches/live-match/live-match.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { WeekIndexComponent } from './matches/week-index/week-index.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatchComponent,
     LiveMatchComponent,
     LeaderboardComponent,
+    WeekIndexComponent,
   ],
   imports: [
     AppRoutingModule,
