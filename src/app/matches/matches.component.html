@@ -44,7 +44,7 @@
     </div>
 
     <div *ngIf="selectedWeek !== undefined">
-      <p class="label">Week {{ selectedWeek }}</p>
+      <p class="label">{{ getButtonText(selectedWeek) }}</p>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of paginatedData" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
@@ -55,6 +55,7 @@
         [pageSizeOptions]="pageSizeOptions"
         [length]="weekMatches[selectedWeek].length"
         (page)="pageChanged($event)"
+        #paginator
       ></mat-paginator>
     </div>
   </div>

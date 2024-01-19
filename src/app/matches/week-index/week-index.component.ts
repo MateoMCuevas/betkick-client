@@ -15,4 +15,14 @@ export class WeekIndexComponent {
     this.selectedWeek = week;
     this.weekSelected.emit(week);
   }
+
+  getButtonText(week: number) {
+    if (week == 0) {
+      return 'This week';
+    } else if (week == 1) {
+      return 'Next week';
+    } else {
+      return `In ${week} weeks`;
+    }
+  }
 }

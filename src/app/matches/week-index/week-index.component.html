@@ -2,7 +2,7 @@
   <h3>Week Index</h3>
   <ul>
     <li *ngFor="let week of weeks" [class.selected]="week === selectedWeek">
-      <button (click)="navigateToWeek(week)">{{ week }}</button>
+      <button (click)="navigateToWeek(week)">{{ getButtonText(week) }}</button>
     </li>
   </ul>
 </div>
