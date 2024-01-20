@@ -25,17 +25,23 @@
   <app-week-index [weeks]="weekIndex" (weekSelected)="onWeekSelected($event)">
   </app-week-index>
 
-  <div *ngIf="searchMatches.length==0">
+  <div *ngIf="searchMatches.length == 0">
     <div *ngIf="liveMatches.length > 0">
-      <p class="label">Live Matches</p>
+      <div class="weeks-label" style="justify-content: center">
+      <button mat-button disabled style="color:#07d904">
+        <mat-icon>live_tv</mat-icon>
+        <span style="font-weight: bolder; font-size: 1rem;"> Live </span>
+      </button>
+      </div>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of liveMatches" class="match-container">
           <app-live-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-live-match>
         </div>
       </form>
     </div>
+
     <div *ngIf="todayMatches.length > 0">
-      <p class="label">Today's Matches</p>
+      <p class="label">Today</p>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of todayMatches" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
@@ -44,7 +50,20 @@
     </div>
 
     <div *ngIf="selectedWeek !== undefined">
-      <p class="label">{{ getButtonText(selectedWeek) }}</p>
+      <div class="weeks-label">
+        <button mat-button style="color:#07d904" (click)="prevWeek(selectedWeek - 1)">
+          <mat-icon class="arrow">arrow_back</mat-icon>
+          <span style="font-weight: bolder; font-size: 1rem;">Prev</span>
+        </button>
+        <button mat-button disabled style="color:#07d904">
+          <mat-icon>calendar_today</mat-icon>
+          <span style="font-weight: bolder; font-size: 1rem;"> {{ getButtonText(selectedWeek) }} </span>
+        </button>
+        <button mat-button style="color:#07d904" (click)="nextWeek(selectedWeek + 1)">
+          <span style="font-weight: bolder; font-size: 1rem;">Next</span>
+          <mat-icon iconPositionEnd class="arrow">arrow_forward</mat-icon>
+        </button>
+      </div>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of paginatedData" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>

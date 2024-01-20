@@ -86,6 +86,7 @@ export class MatchesComponent implements OnInit {
     });
 
   }
+
   getMatches(competitionId?: number): void {
     this.eventService.getMatches(competitionId)
       .subscribe(matches => {
@@ -109,7 +110,7 @@ export class MatchesComponent implements OnInit {
   }
 
   handleButtonClick(eventData: any): void {
-    const { match, odds, winnerTeam } = eventData;
+    const {match, odds, winnerTeam} = eventData;
     let listBetsLength: number = 0
     this.betService.listBets$.subscribe((datos) => {
       let listBets: any = datos;
@@ -162,29 +163,62 @@ export class MatchesComponent implements OnInit {
     this.weekIndex = Array.from(uniqueWeeks).sort((a, b) => a - b);
   }
 
-  onWeekSelected(selectedWeek: number) {
-    this.selectedWeek = selectedWeek;
-
-    // Update the paginator length
-    if (this.paginator) {
-      this.paginator.length = this.weekMatches[selectedWeek].length;
+  // skip empty weeks
+  nextWeek(week: number) {
+    if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
+      week++;
+      for (week; week < this.weekMatches.length; week++) {
+        if (this.weekMatches[week].length > 0)
+          break;
+      }
     }
 
-    // Set the page index to 0
-    if (this.paginator) {
-      this.paginator.pageIndex = 0;
+    this.onWeekSelected(week);
+  }
 
-      // Manually trigger a page change event
-      this.paginator.page.emit({
-        pageIndex: 0,
-        pageSize: this.paginator.pageSize,
-        length: this.paginator.length
-      });
+  // skip empty weeks
+  prevWeek(week: number) {
+    if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
+      week--;
+      for (week; week >= 0; week--) {
+        if (this.weekMatches[week].length > 0)
+          break;
+      }
+    }
+
+    this.onWeekSelected(week);
+  }
+
+  onWeekSelected(selectedWeek: number) {
+
+    if (selectedWeek >= 0 && selectedWeek < this.weekMatches.length) {
+      this.selectedWeek = selectedWeek;
+
+      // Update the paginator length
+      if (this.paginator) {
+        this.paginator.length = this.weekMatches[selectedWeek].length;
+      }
+
+      // Set the page index to 0
+      if (this.paginator) {
+        this.paginator.pageIndex = 0;
+
+        // Manually trigger a page change event
+        this.paginator.page.emit({
+          pageIndex: 0,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      }
     }
   }
 
 
-  getWeekNumber(date: string): number {
+  getWeekNumber(date
+                  :
+                  string
+  ):
+    number {
     const matchDate = new Date(date);
     const currentDate = new Date();
 
@@ -211,7 +245,11 @@ export class MatchesComponent implements OnInit {
     }
   }
 
-  isTodayMatch(match: Match): boolean {
+  isTodayMatch(match
+                 :
+                 Match
+  ):
+    boolean {
     const todayDate = new Date();
     const matchDate = new Date(match.utcDate)
     return (
@@ -221,7 +259,11 @@ export class MatchesComponent implements OnInit {
     );
   }
 
-  roundToOneDecimal(match: Match): void {
+  roundToOneDecimal(match
+                      :
+                      Match
+  ):
+    void {
     match.odds.homeWinsOdds = Math.round(match.odds.homeWinsOdds * 10) / 10;
     match.odds.awayWinsOdds = Math.round(match.odds.awayWinsOdds * 10) / 10;
     match.odds.drawOdds = Math.round(match.odds.drawOdds * 10) / 10;
