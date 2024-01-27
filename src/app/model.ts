@@ -9,6 +9,7 @@ export interface Competition {
   id: number;
   name: string;
   emblem: string;
+  code: string;
 }
 
 export interface Score {

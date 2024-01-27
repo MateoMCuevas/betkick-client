@@ -27,6 +27,8 @@ export class MatchesComponent implements OnInit {
   pageIndex = 0; // Current page index
   pageSizeOptions = [5, 9, 18]; // Options for the user to choose page size
 
+  selectedFilters: string[] = ['filterWeeks'];
+
   searchMatches: Match[] = [];
   competition: string = "";
   inputMatch: string = "";
@@ -100,6 +102,7 @@ export class MatchesComponent implements OnInit {
           this.roundToOneDecimal(match);
         })
         this.filterMatches()
+        this.nextWeek(-1)
       });
   }
 
@@ -212,7 +215,6 @@ export class MatchesComponent implements OnInit {
       }
     }
   }
-
 
   getWeekNumber(date
                   :

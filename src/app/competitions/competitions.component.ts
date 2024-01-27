@@ -10,11 +10,6 @@ import {EventService} from "../service/event.service";
 export class CompetitionsComponent implements OnInit {
   competitions: Competition[] = [];
   competitionsToShow: Competition[] = [];
-  // HIGHLIGHT SELECTED COMPETITION
-  //activeCompetition: number | null = null;
-  /*setActive(index: number): void {
-    this.activeCompetition = index === this.activeCompetition ? null : index;
-  } */
 
   constructor(private eventService: EventService) {
   }

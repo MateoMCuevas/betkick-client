@@ -1,19 +1,24 @@
-<span *ngIf="urlActual != 'http://localhost:4200/home'">
-  <div class="search">
-    <input class="minimalist-input" type="text" [(ngModel)]="inputMatch" (input)="search()"
-           placeholder="Search {{competition}} matches">
-  </div>
-</span>
-
-<div class="search">
-  <span *ngIf="urlActual == 'http://localhost:4200/home'">
-    <input class="minimalist-input" type="text" [(ngModel)]="inputMatch" (input)="search()"
-           placeholder="Search all matches">
-  </span>
-</div>
-
 <div class="container">
-  <div *ngIf="searchMatches.length>0">
+  <div class="search-and-filter">
+
+    <input *ngIf="urlActual != 'http://localhost:4200/home'" class="search" type="text"
+           [(ngModel)]="inputMatch" (input)="search()"
+           placeholder="Search {{competition}} matches">
+
+    <input *ngIf="urlActual == 'http://localhost:4200/home'" class="search" type="text"
+           [(ngModel)]="inputMatch" (input)="search()"
+           placeholder="Search all matches">
+
+    <div class="filter">
+      <mat-button-toggle-group [(ngModel)]="selectedFilters" multiple>
+        <mat-button-toggle value="filterWeeks">{{ getButtonText(selectedWeek) }}</mat-button-toggle>
+        <mat-button-toggle value="filterToday">Today</mat-button-toggle>
+        <mat-button-toggle value="filterLive">Live</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div *ngIf="searchMatches.length > 0">
     <form class="listMatchesContainer" [formGroup]="form">
       <p class="label">Search Results</p>
       <div *ngFor="let match of searchMatches" class="match-container">
@@ -22,16 +27,13 @@
     </form>
   </div>
 
-  <app-week-index [weeks]="weekIndex" (weekSelected)="onWeekSelected($event)">
-  </app-week-index>
-
   <div *ngIf="searchMatches.length == 0">
-    <div *ngIf="liveMatches.length > 0">
+    <div *ngIf="liveMatches.length > 0 && selectedFilters.includes('filterLive')">
       <div class="weeks-label" style="justify-content: center">
-      <button mat-button disabled style="color:#07d904">
-        <mat-icon>live_tv</mat-icon>
-        <span style="font-weight: bolder; font-size: 1rem;"> Live </span>
-      </button>
+        <button mat-button disabled style="color:#07d904">
+          <mat-icon>live_tv</mat-icon>
+          <span style="font-weight: bolder; font-size: 1rem;"> Live </span>
+        </button>
       </div>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of liveMatches" class="match-container">
@@ -40,7 +42,7 @@
       </form>
     </div>
 
-    <div *ngIf="todayMatches.length > 0">
+    <div *ngIf="todayMatches.length > 0 && selectedFilters.includes('filterToday')">
       <p class="label">Today</p>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of todayMatches" class="match-container">
@@ -49,7 +51,8 @@
       </form>
     </div>
 
-    <div *ngIf="selectedWeek !== undefined">
+    <div *ngIf="selectedWeek !== undefined && selectedFilters.includes('filterWeeks')">
+
       <div class="weeks-label">
         <button mat-button style="color:#07d904" (click)="prevWeek(selectedWeek - 1)">
           <mat-icon class="arrow">arrow_back</mat-icon>
@@ -64,11 +67,13 @@
           <mat-icon iconPositionEnd class="arrow">arrow_forward</mat-icon>
         </button>
       </div>
+
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of paginatedData" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
       </form>
+
       <mat-paginator
         [pageSize]="pageSize"
         [pageSizeOptions]="pageSizeOptions"
@@ -76,6 +81,7 @@
         (page)="pageChanged($event)"
         #paginator
       ></mat-paginator>
+
     </div>
   </div>
 </div>
