@@ -18,7 +18,8 @@ export class CompetitionsComponent implements OnInit {
     this.getCompetitions();
   }
  filterCompetitions():void{
-    this.competitionsToShow = this.competitions.filter(competition => competition.id !== 2000 && competition.id !==2018 && competition.id !==2152);
+    //this.competitionsToShow = this.competitions.filter(competition => competition.id !== 2000 && competition.id !==2018 && competition.id !==2152);
+   this.competitionsToShow = this.competitions;
  }
  getCompetitions(): void {
   this.eventService.getCompetitions()
