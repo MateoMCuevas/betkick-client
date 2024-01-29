@@ -27,12 +27,12 @@
     </form>
   </div>
 
-  <div *ngIf="searchMatches.length == 0">
+  <div class="label-and-matches" *ngIf="searchMatches.length == 0">
     <div *ngIf="liveMatches.length > 0 && selectedFilters.includes('filterLive')">
-      <div class="weeks-label" style="justify-content: center">
+      <div class="label" style="justify-content: center">
         <button mat-button disabled style="color:#07d904">
           <mat-icon>live_tv</mat-icon>
-          <span style="font-weight: bolder; font-size: 1rem;"> Live </span>
+          <span style="font-weight: bolder; font-size: 1.1rem;"> Live </span>
         </button>
       </div>
       <form class="listMatchesContainer" [formGroup]="form">
@@ -42,8 +42,13 @@
       </form>
     </div>
 
-    <div *ngIf="todayMatches.length > 0 && selectedFilters.includes('filterToday')">
-      <p class="label">Today</p>
+    <div class="label-and-matches" *ngIf="todayMatches.length > 0 && selectedFilters.includes('filterToday')">
+      <div class="label" style="justify-content: center">
+        <button mat-button disabled style="color:#07d904">
+          <mat-icon>today</mat-icon>
+          <span style="font-weight: bolder; font-size: 1.1rem;"> Today </span>
+        </button>
+      </div>
       <form class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of todayMatches" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
@@ -52,7 +57,7 @@
     </div>
 
     <div class="label-and-matches" *ngIf="selectedWeek !== undefined && selectedFilters.includes('filterWeeks')">
-      <div class="weeks-label">
+      <div class="label">
         <button mat-button style="color:#07d904" (click)="prevWeek(selectedWeek - 1)">
           <mat-icon class="arrow">arrow_back</mat-icon>
           <span style="font-weight: bolder; font-size: 1.1rem;">Prev</span>
@@ -68,13 +73,14 @@
       </div>
 
       <form class="listMatchesContainer" [formGroup]="form">
-        <div *ngFor="let match of paginatedData" class="match-container">
+        <div *ngFor="let match of paginatedWeekMatches" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
       </form>
 
       <mat-paginator
         [pageSize]="pageSize"
+        [showFirstLastButtons]=true
         [pageSizeOptions]="pageSizeOptions"
         [length]="weekMatches[selectedWeek].length"
         (page)="pageChanged($event)"

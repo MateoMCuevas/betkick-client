@@ -60,7 +60,7 @@ export class MatchesComponent implements OnInit {
     });
   }
 
-  get paginatedData(): any[] {
+  get paginatedWeekMatches(): any[] {
     const startIndex = this.pageIndex * this.pageSize;
     return this.weekMatches[this.selectedWeek].slice(startIndex, startIndex + this.pageSize);
   }

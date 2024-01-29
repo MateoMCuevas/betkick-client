@@ -1,9 +1,10 @@
 .competitions {
+  background-color: #eaeaef;
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.7rem;
-  margin-bottom: 1rem;
+  border: 1px solid #d7d7d7;
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
