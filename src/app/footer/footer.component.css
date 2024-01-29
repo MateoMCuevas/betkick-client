@@ -1,0 +1,33 @@
+.footer {
+  margin-top: 3rem;
+  padding: 1rem;
+  background: #1a1919;
+  color: #e5e5e5;
+  text-align: left;
+  font-family: Roboto, sans-serif;
+}
+
+br {
+  margin-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1rem;
+  text-align: center;
+  margin: 0 0 0.6rem;
+}
+
+.footer p {
+  margin: 0 auto;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  max-width: 1110px;
+}
+
+.footer strong {
+  color: #ffffff;
+}
+
+.footer p:not(:last-child) {
+  margin-bottom: 10px;
+}

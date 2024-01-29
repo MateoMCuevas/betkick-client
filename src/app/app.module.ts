@@ -36,6 +36,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { WeekIndexComponent } from './matches/week-index/week-index.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatInputModule} from "@angular/material/input";
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import {MatInputModule} from "@angular/material/input";
     LiveMatchComponent,
     LeaderboardComponent,
     WeekIndexComponent,
+    FooterComponent,
   ],
   imports: [
     AppRoutingModule,

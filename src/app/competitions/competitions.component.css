@@ -3,6 +3,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.7rem;
+  margin-bottom: 1rem;
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -10,7 +11,7 @@
   .competitions {
     justify-content: center;
   }
-  }
+}
 
 .competition {
   flex: 0 0 auto;
@@ -40,7 +41,7 @@
   min-height: 55%;
   max-height: 55%;
   padding: 0.7rem;
-  box-shadow: 0 0.2rem 0.5rem 0 rgba(153,153,153,0.75);
+  box-shadow: 0 0.2rem 0.5rem 0 rgba(153, 153, 153, 0.75);
   border-radius: 1.2rem;
 }
 

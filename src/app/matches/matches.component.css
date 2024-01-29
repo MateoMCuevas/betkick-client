@@ -3,19 +3,17 @@ p {
 }
 
 .label {
-  margin: 2rem auto;
+  margin: 2rem auto 1rem auto;
   font-family: Roboto, serif;
   font-weight: bold;
   text-align: center;
   color: #07d904;
-  font-size: 1rem;
-  padding: 0.5rem;
+  padding: 1.6rem;
   height: 2rem;
   width: 100%;
   box-sizing: border-box;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   background: #1a1919;
-  border-radius: 1rem;
 }
 
 .weeks-label {
@@ -33,8 +31,10 @@ p {
   box-sizing: border-box;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   background: #1a1919;
-  border-top-left-radius: 0.7rem;
-  border-top-right-radius: 0.7rem;
+}
+
+.weeks-label mat-icon {
+  transform: scale(1.2);
 }
 
 .label-and-matches {

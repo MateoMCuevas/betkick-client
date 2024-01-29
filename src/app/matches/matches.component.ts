@@ -25,7 +25,7 @@ export class MatchesComponent implements OnInit {
 
   pageSize = 5; // Set the number of items per page
   pageIndex = 0; // Current page index
-  pageSizeOptions = [5, 9, 18]; // Options for the user to choose page size
+  pageSizeOptions = [3, 5, 9, 18]; // Options for the user to choose page size
 
   selectedFilters: string[] = ['filterWeeks'];
 
@@ -171,11 +171,10 @@ export class MatchesComponent implements OnInit {
     if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
       week++;
       for (week; week < this.weekMatches.length; week++) {
-        if (this.weekMatches[week].length > 0)
+        if (this.weekMatches[week] !== undefined && this.weekMatches[week].length > 0)
           break;
       }
     }
-
     this.onWeekSelected(week);
   }
 
@@ -184,7 +183,7 @@ export class MatchesComponent implements OnInit {
     if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
       week--;
       for (week; week >= 0; week--) {
-        if (this.weekMatches[week].length > 0)
+        if (this.weekMatches[week] !== undefined && this.weekMatches[week].length > 0)
           break;
       }
     }
