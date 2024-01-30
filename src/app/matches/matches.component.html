@@ -18,13 +18,20 @@
     </div>
   </div>
 
-  <div *ngIf="searchMatches.length > 0">
+  <div class="label-and-matches" *ngIf="searchMatches.length > 0">
+    <div class="label">
+      <button mat-button disabled style="color:#07d904">
+        <mat-icon>search</mat-icon>
+        <span style="font-weight: bolder; font-size: 1.1rem;"> Search Results </span>
+      </button>
+    </div>
+
     <form class="listMatchesContainer" [formGroup]="form">
-      <p class="label">Search Results</p>
       <div *ngFor="let match of searchMatches" class="match-container">
         <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
       </div>
     </form>
+
   </div>
 
   <div class="label-and-matches" *ngIf="searchMatches.length == 0">
