@@ -27,9 +27,11 @@ export class MatchesComponent implements OnInit {
   pageIndex = 0; // Current page index
   pageSizeOptions = [3, 5, 9, 18]; // Options for the user to choose page size
 
-  selectedFilters: string[] = ['filterWeeks'];
+  selectedFilters: string = 'filterWeeks';
 
   searchMatches: Match[] = [];
+  noMatchesFound: boolean = false;
+  debounceTimeout: any;
   competition: string = "";
   inputMatch: string = "";
   urlActual = window.location.href;
@@ -71,22 +73,37 @@ export class MatchesComponent implements OnInit {
   }
 
   search() {
-    this.searchResults(this.inputMatch);
+    clearTimeout(this.debounceTimeout);
+    this.debounceTimeout = setTimeout(() => {
+      this.noMatchesFound = false;
+      this.searchResults(this.inputMatch);
+    }, 300);
   }
 
   searchResults(team: string) {
-    this.searchMatches.length = 0;
-    let homeTeam: string = "";
-    let awayTeam: string = "";
-    team = team.toLowerCase();
-    this.matches.forEach(element => {
-      homeTeam = element.awayTeam.name.toLowerCase();
-      awayTeam = element.homeTeam.name.toLowerCase();
-      if (homeTeam.includes(team) || awayTeam.includes(team)) {
-        this.searchMatches.push(element);
-      }
-    });
-
+    if (team.length !== 0) {
+      this.selectedFilters = ''
+      this.searchMatches = [];
+      let homeTeamLongName: string = "";
+      let awayTeamLongName: string = "";
+      let homeTeamShortName: string = "";
+      let awayTeamShortName: string = "";
+      team = team.toLowerCase();
+      this.matches.forEach(element => {
+        homeTeamLongName = element.awayTeam.name.toLowerCase();
+        awayTeamLongName = element.homeTeam.name.toLowerCase();
+        homeTeamShortName = element.awayTeam.shortName.toLowerCase();
+        awayTeamShortName = element.homeTeam.shortName.toLowerCase();
+        if (homeTeamLongName.includes(team) || awayTeamLongName.includes(team) ||
+          homeTeamShortName.includes(team) || awayTeamShortName.includes(team)) {
+          this.searchMatches.push(element);
+        }
+      });
+      this.noMatchesFound = this.searchMatches.length == 0 && this.inputMatch.length > 0; // user is searching but nothing is found
+    } else {
+      this.searchMatches = [];
+      this.selectedFilters = 'filterWeeks'
+    }
   }
 
   getMatches(competitionId?: number): void {

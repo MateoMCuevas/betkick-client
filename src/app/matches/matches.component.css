@@ -23,6 +23,18 @@ p {
   transform: scale(1.2);
 }
 
+.text-and-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  font-weight: bolder;
+  font-size: 1.2rem;
+  margin-left: 0.6rem;
+}
+
 .label-and-matches {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
@@ -49,6 +61,18 @@ mat-paginator {
   align-items: flex-start;
   align-content: flex-start;
   margin: 0.5rem 0;
+}
+
+.noMatchesFound {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-family: Roboto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #000000
 }
 
 .match-container {

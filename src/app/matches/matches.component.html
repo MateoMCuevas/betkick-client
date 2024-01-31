@@ -1,6 +1,5 @@
 <div class="container">
   <div class="search-and-filter">
-
     <input *ngIf="urlActual != 'http://localhost:4200/home'" class="search" type="text"
            [(ngModel)]="inputMatch" (input)="search()"
            placeholder="Search {{competition}} matches">
@@ -10,7 +9,7 @@
            placeholder="Search all matches">
 
     <div class="filter">
-      <mat-button-toggle-group [(ngModel)]="selectedFilters" multiple>
+      <mat-button-toggle-group [(ngModel)]="selectedFilters" [disabled]="searchMatches.length !== 0 || noMatchesFound">
         <mat-button-toggle value="filterWeeks">{{ getButtonText(selectedWeek) }}</mat-button-toggle>
         <mat-button-toggle value="filterToday">Today</mat-button-toggle>
         <mat-button-toggle value="filterLive">Live</mat-button-toggle>
@@ -18,63 +17,79 @@
     </div>
   </div>
 
-  <div class="label-and-matches" *ngIf="searchMatches.length > 0">
+  <!-- Search results -->
+  <div class="label-and-matches" *ngIf="searchMatches.length > 0 || noMatchesFound">
     <div class="label">
-      <button mat-button disabled style="color:#07d904">
+      <div class="text-and-icon">
         <mat-icon>search</mat-icon>
-        <span style="font-weight: bolder; font-size: 1.1rem;"> Search Results </span>
-      </button>
+        <span class="text"> Search Results </span>
+      </div>
     </div>
 
-    <form class="listMatchesContainer" [formGroup]="form">
+    <form *ngIf="searchMatches.length > 0" class="listMatchesContainer" [formGroup]="form">
       <div *ngFor="let match of searchMatches" class="match-container">
         <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
       </div>
     </form>
 
+    <div class="noMatchesFound" *ngIf="noMatchesFound">
+      No matches found, please try again
+    </div>
   </div>
 
+  <!-- Live matches -->
   <div class="label-and-matches" *ngIf="searchMatches.length == 0">
-    <div *ngIf="liveMatches.length > 0 && selectedFilters.includes('filterLive')">
+    <div *ngIf="selectedFilters.includes('filterLive')">
       <div class="label" style="justify-content: center">
-        <button mat-button disabled style="color:#07d904">
+        <div class="text-and-icon">
           <mat-icon>live_tv</mat-icon>
-          <span style="font-weight: bolder; font-size: 1.1rem;"> Live </span>
-        </button>
+          <span class="text"> Live </span>
+        </div>
       </div>
-      <form class="listMatchesContainer" [formGroup]="form">
+
+      <form *ngIf="liveMatches.length > 0" class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of liveMatches" class="match-container">
           <app-live-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-live-match>
         </div>
       </form>
+
+      <div class="noMatchesFound" *ngIf="liveMatches.length == 0">
+        No live matches available at the moment
+      </div>
     </div>
 
-    <div class="label-and-matches" *ngIf="todayMatches.length > 0 && selectedFilters.includes('filterToday')">
+    <!-- Today's matches -->
+    <div class="label-and-matches" *ngIf="selectedFilters.includes('filterToday')">
       <div class="label" style="justify-content: center">
-        <button mat-button disabled style="color:#07d904">
+        <div class="text-and-icon">
           <mat-icon>today</mat-icon>
-          <span style="font-weight: bolder; font-size: 1.1rem;"> Today </span>
-        </button>
+          <span class="text"> Today </span>
+        </div>
       </div>
-      <form class="listMatchesContainer" [formGroup]="form">
+      <form *ngIf="todayMatches.length > 0" class="listMatchesContainer" [formGroup]="form">
         <div *ngFor="let match of todayMatches" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
       </form>
+
+      <div class="noMatchesFound" *ngIf="todayMatches.length == 0">
+        No matches scheduled for today
+      </div>
     </div>
 
+    <!-- Matches by week -->
     <div class="label-and-matches" *ngIf="selectedWeek !== undefined && selectedFilters.includes('filterWeeks')">
       <div class="label">
         <button mat-button style="color:#07d904" (click)="prevWeek(selectedWeek - 1)">
           <mat-icon class="arrow">arrow_back</mat-icon>
-          <span style="font-weight: bolder; font-size: 1.1rem;">Prev</span>
+          <span style="font-weight: bolder; font-size: 1.2rem;">Prev</span>
         </button>
-        <button mat-button disabled style="color:#07d904">
+        <div class="text-and-icon">
           <mat-icon>calendar_today</mat-icon>
-          <span style="font-weight: bolder; font-size: 1.1rem;"> {{ getButtonText(selectedWeek) }} </span>
-        </button>
+          <span class="text"> {{ getButtonText(selectedWeek) }} </span>
+        </div>
         <button mat-button style="color:#07d904" (click)="nextWeek(selectedWeek + 1)">
-          <span style="font-weight: bolder; font-size: 1.1rem;">Next</span>
+          <span style="font-weight: bolder; font-size: 1.2rem;">Next</span>
           <mat-icon iconPositionEnd class="arrow">arrow_forward</mat-icon>
         </button>
       </div>
