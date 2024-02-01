@@ -9,7 +9,7 @@
            placeholder="Search all matches">
 
     <div class="filter">
-      <mat-button-toggle-group [(ngModel)]="selectedFilters" [disabled]="searchMatches.length !== 0 || noMatchesFound">
+      <mat-button-toggle-group [(ngModel)]="selectedFilters" [disabled]="searchMatches.length !== 0 || noMatchesFound" (change)="onToggleChange()">
         <mat-button-toggle value="filterWeeks">{{ getButtonText(selectedWeek) }}</mat-button-toggle>
         <mat-button-toggle value="filterToday">Today</mat-button-toggle>
         <mat-button-toggle value="filterLive">Live</mat-button-toggle>
@@ -27,10 +27,18 @@
     </div>
 
     <form *ngIf="searchMatches.length > 0" class="listMatchesContainer" [formGroup]="form">
-      <div *ngFor="let match of searchMatches" class="match-container">
+      <div *ngFor="let match of paginatedSearchMatches" class="match-container">
         <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
       </div>
     </form>
+    <mat-paginator *ngIf="searchMatches.length > 0"
+                   [pageSize]="pageSize"
+                   [showFirstLastButtons]=true
+                   [pageSizeOptions]="pageSizeOptions"
+                   [length]="searchMatches.length"
+                   (page)="pageChanged($event)"
+                   #paginator
+    ></mat-paginator>
 
     <div class="noMatchesFound" *ngIf="noMatchesFound">
       No matches found, please try again
@@ -48,10 +56,18 @@
       </div>
 
       <form *ngIf="liveMatches.length > 0" class="listMatchesContainer" [formGroup]="form">
-        <div *ngFor="let match of liveMatches" class="match-container">
+        <div *ngFor="let match of paginatedLiveMatches" class="match-container">
           <app-live-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-live-match>
         </div>
       </form>
+      <mat-paginator *ngIf="liveMatches.length > 0"
+                     [pageSize]="pageSize"
+                     [showFirstLastButtons]=true
+                     [pageSizeOptions]="pageSizeOptions"
+                     [length]="liveMatches.length"
+                     (page)="pageChanged($event)"
+                     #paginator
+      ></mat-paginator>
 
       <div class="noMatchesFound" *ngIf="liveMatches.length == 0">
         No live matches available at the moment
@@ -67,10 +83,18 @@
         </div>
       </div>
       <form *ngIf="todayMatches.length > 0" class="listMatchesContainer" [formGroup]="form">
-        <div *ngFor="let match of todayMatches" class="match-container">
+        <div *ngFor="let match of paginatedTodayMatches" class="match-container">
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
       </form>
+      <mat-paginator *ngIf="todayMatches.length > 0"
+        [pageSize]="pageSize"
+        [showFirstLastButtons]=true
+        [pageSizeOptions]="pageSizeOptions"
+        [length]="todayMatches.length"
+        (page)="pageChanged($event)"
+        #paginator
+      ></mat-paginator>
 
       <div class="noMatchesFound" *ngIf="todayMatches.length == 0">
         No matches scheduled for today

@@ -67,6 +67,31 @@ export class MatchesComponent implements OnInit {
     return this.weekMatches[this.selectedWeek].slice(startIndex, startIndex + this.pageSize);
   }
 
+  get paginatedTodayMatches(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.todayMatches.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get paginatedLiveMatches(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.liveMatches.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get paginatedSearchMatches(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.searchMatches.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  onToggleChange() {
+    if (this.paginator) {
+      this.paginator.page.emit({
+        pageIndex: 0,
+        pageSize: this.paginator.pageSize,
+        length: this.paginator.length
+      });
+    }
+  }
+
   pageChanged(event: any): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
@@ -82,6 +107,7 @@ export class MatchesComponent implements OnInit {
 
   searchResults(team: string) {
     if (team.length !== 0) {
+
       this.selectedFilters = ''
       this.searchMatches = [];
       let homeTeamLongName: string = "";
@@ -100,9 +126,30 @@ export class MatchesComponent implements OnInit {
         }
       });
       this.noMatchesFound = this.searchMatches.length == 0 && this.inputMatch.length > 0; // user is searching but nothing is found
+      if (!this.noMatchesFound) {
+
+      }
+      if (this.paginator) {
+        this.paginator.length = this.searchMatches.length;
+
+        this.paginator.pageIndex = 0;
+
+        this.paginator.page.emit({
+          pageIndex: 0,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      }
     } else {
       this.searchMatches = [];
       this.selectedFilters = 'filterWeeks'
+      if (this.paginator) {
+        this.paginator.page.emit({
+          pageIndex: 0,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      }
     }
   }
 
@@ -216,10 +263,8 @@ export class MatchesComponent implements OnInit {
       // Update the paginator length
       if (this.paginator) {
         this.paginator.length = this.weekMatches[selectedWeek].length;
-      }
 
-      // Set the page index to 0
-      if (this.paginator) {
+        // Set the page index to 0
         this.paginator.pageIndex = 0;
 
         // Manually trigger a page change event
