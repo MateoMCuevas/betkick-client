@@ -51,7 +51,6 @@ export class MatchesComponent implements OnInit {
     private betService: BetService,
     private route: ActivatedRoute,
   ) {
-    //private location: Location) {
   }
 
   ngOnInit(): void {
