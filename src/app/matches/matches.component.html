@@ -2,11 +2,11 @@
   <div class="search-and-filter">
     <input *ngIf="urlActual != 'http://localhost:4200/home'" class="search" type="text"
            [(ngModel)]="inputMatch" (input)="search()"
-           placeholder="Search {{competition}} matches">
+           placeholder="Search upcoming matches in {{competition}}...">
 
     <input *ngIf="urlActual == 'http://localhost:4200/home'" class="search" type="text"
            [(ngModel)]="inputMatch" (input)="search()"
-           placeholder="Search all matches">
+           placeholder="Search upcoming matches in all competitions...">
 
     <div class="filter">
       <mat-button-toggle-group [(ngModel)]="selectedFilters" [disabled]="searchMatches.length !== 0 || noMatchesFound" (change)="onToggleChange()">

@@ -119,8 +119,9 @@ export class MatchesComponent implements OnInit {
         awayTeamLongName = element.homeTeam.name.toLowerCase();
         homeTeamShortName = element.awayTeam.shortName.toLowerCase();
         awayTeamShortName = element.homeTeam.shortName.toLowerCase();
-        if (homeTeamLongName.includes(team) || awayTeamLongName.includes(team) ||
-          homeTeamShortName.includes(team) || awayTeamShortName.includes(team)) {
+        if ((homeTeamLongName.includes(team) || awayTeamLongName.includes(team) ||
+            homeTeamShortName.includes(team) || awayTeamShortName.includes(team)) &&
+          !(element.status == 'IN_PLAY' || element.status == 'PAUSED')) {
           this.searchMatches.push(element);
         }
       });
@@ -158,7 +159,7 @@ export class MatchesComponent implements OnInit {
         this.matches = matches;
         this.competition = matches[1].competition.name;
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
-        this.matches = this.matches.filter(function (match: any) {
+        this.matches = this.matches.filter(function (match: Match) {
           return match.status != 'FINISHED' && match.status != 'AWARDED'
         })
         this.matches.forEach(match => {
