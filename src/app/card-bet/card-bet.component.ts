@@ -74,7 +74,7 @@ export class CardBetComponent implements OnInit {
     let flag: boolean = true
     this.listBets.forEach((betData: FormGroup) => {
       const betAmount = betData.get('betAmount')?.value;
-      if (betAmount === 0 || !betAmount) {
+      if (betAmount <= 0 || !betAmount) {
         flag = false;
       }
     })
@@ -83,37 +83,38 @@ export class CardBetComponent implements OnInit {
 
   //Function that sends the bets made to the backend
   async sendData() {
-    const enoughUserMoney = await this.checkUserMoney();
-    if (this.checkLogin() && enoughUserMoney && this.checkBetAmounts() && this.listBetsLength > 0) {
-      this.alertBetAmount = false
-      this.alertUserMoney = false
-      this.betService.sendDataToBackend().subscribe(
-        (response) => {
-          console.log("Backend's response: ", response);
-        },
-        (error) => {
-          alert(error.error.apierror.message)
-          console.error('An error occurred: ', error.error.apierror.message);
-        }
-      );
-      this.updateMoney()
-      this.betService.deleteList()
-      this.alertBetAmount = false
-      this.alertUserMoney = false
-      this.moneyUser.showAlertMsj('SUCCESSFUL BETS')
-    }else if(!this.checkLogin()){
+    if (this.checkLogin()) {
+      const enoughUserMoney = await this.checkUserMoney();
+      if (enoughUserMoney && this.checkBetAmounts() && this.listBetsLength > 0) {
+        this.alertBetAmount = false
+        this.alertUserMoney = false
+        this.betService.sendDataToBackend()
+          /*.subscribe(
+          (response) => {
+            console.log("Backend's response: ", response);
+          },
+          (error) => {
+            alert(error.error.apierror.message)
+            console.error('An error occurred: ', error.error.apierror.message);
+          }
+        ); */
+        this.updateMoney()
+        this.betService.deleteList()
+        this.alertBetAmount = false
+        this.alertUserMoney = false
+        this.moneyUser.showAlertMsj('SUCCESSFUL BETS')
+      } else if (!this.checkBetAmounts()) {
+        this.alertBetAmount = true
+        this.alertUserMoney = false
+      } else if (!enoughUserMoney) {
+        this.alertUserMoney = true
+        this.alertBetAmount = false
+      } else {
+        this.alertBetAmount = false
+        this.alertUserMoney = false
+      }
+    } else {
       this.moneyUser.showAlertMsj('PLEASE LOGIN OR REGISTER')
-    }
-     else if (!this.checkBetAmounts()) {
-      this.alertBetAmount = true
-      this.alertUserMoney = false
-    } else if (!enoughUserMoney) {
-      this.alertUserMoney = true
-      this.alertBetAmount = false
-    }
-    else {
-      this.alertBetAmount = false
-      this.alertUserMoney = false
     }
   }
 

@@ -25,6 +25,8 @@ export class CardMatchComponent {
   calculatePotProfits( form: FormGroup): number {
     const betAmount= parseFloat(form.get('betAmount')?.value ?? 0);
     const betOdds= parseFloat(form.get('betOdds')?.value);
+    if (betAmount === undefined || isNaN(betAmount) || betAmount <= 0)
+      return 0;
     return Number((betAmount * betOdds).toFixed(2));
   }
 

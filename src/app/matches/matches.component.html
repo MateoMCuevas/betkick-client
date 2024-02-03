@@ -1,10 +1,10 @@
 <div class="container">
   <div class="search-and-filter">
-    <input *ngIf="urlActual != 'http://localhost:4200/home'" class="search" type="text"
+    <input *ngIf="urlActual.includes('/competitions/')" class="search" type="text"
            [(ngModel)]="inputMatch" (input)="search()"
            placeholder="Search upcoming matches in {{competition}}...">
 
-    <input *ngIf="urlActual == 'http://localhost:4200/home'" class="search" type="text"
+    <input *ngIf="urlActual.includes('home') && !urlActual.includes('/competitions/')" class="search" type="text"
            [(ngModel)]="inputMatch" (input)="search()"
            placeholder="Search upcoming matches in all competitions...">
 

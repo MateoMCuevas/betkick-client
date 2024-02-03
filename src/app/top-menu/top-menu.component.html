@@ -12,20 +12,18 @@
   </a>
 
   <div class="menu-options">
-    <a href="/leaderboard">
-      <button mat-raised-button id="leaderboard">
+      <button mat-button routerLink="/leaderboard" id="leaderboard">
         Leaderboard
         <mat-icon id="leaderboard-icon">star_border</mat-icon>
       </button>
-    </a>
 
-    <button mat-raised-button id="standings">
+    <button mat-button id="standings">
       Standings
       <mat-icon id="standings-icon">format_list_numbered_rtl</mat-icon>
     </button>
 
     <div *ngIf="user; else login">
-      <button mat-raised-button [matMenuTriggerFor]="menu" id="account-menu">
+      <button mat-button [matMenuTriggerFor]="menu" id="account-menu">
         Account
         <mat-icon id="account-icon">account_box</mat-icon>
       </button>
@@ -61,7 +59,7 @@
       </mat-menu>
     </div>
     <ng-template #login>
-      <button mat-raised-button (click)="auth.login()" id="login">
+      <button mat-button (click)="auth.login()" id="login">
         <mat-icon id="lock">lock</mat-icon>
         Login
       </button>

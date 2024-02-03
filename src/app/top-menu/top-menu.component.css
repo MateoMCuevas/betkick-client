@@ -21,13 +21,13 @@ a {
 }
 
 .money::-webkit-scrollbar-thumb {
-  background: #08f905;
+  background: #08ce06;
 }
 
 .title {
   font-family: Roboto;
   font-size: 1.2rem;
- color: #08f905;
+  color: #08ce06;
 }
 
 .header, .menu-options {
@@ -38,7 +38,7 @@ a {
 }
 
 mat-icon {
-  color: #08f905;
+  color: #08ce06;
 }
 
 #logo {
@@ -65,24 +65,30 @@ mat-icon {
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  background-color: #1f1f21;
+  font-weight: bolder;
+  background-color: #1a1919;
   border-radius: 1.1rem;
   padding: 1rem;
   color: #08ce06;
   transition: background-color 0.3s ease, color 0.3s ease;
-  border: 0.1rem solid #08ce06;
+  /* border: 0.1rem solid #6b6b6b; */
 }
 
 #lock, #leaderboard-icon, #standings-icon, #account-icon {
   font-size: 1rem;
   color: #08ce06;
   transition: background-color 0.3s ease, color 0.3s ease;
+  transform: scale(1.1);
 }
 
 #login:hover, #leaderboard:hover, #standings:hover, #account-menu:hover {
   background-color: #2a2828;
   color: #09ef06;
-  border-color: #09ef06;
+  /*border-color: #09ef06; */
+}
+
+.active {
+  background-color: #2a2828;
 }
 
 #login:hover mat-icon, #leaderboard:hover mat-icon, #standings:hover mat-icon {

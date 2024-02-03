@@ -67,9 +67,9 @@ mat-paginator {
   height: 100%;
   width: 100%;
   text-align: center;
-  font-family: Roboto;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  font-family: Roboto, serif;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
   font-size: 1.2rem;
   font-weight: 500;
   color: #000000
