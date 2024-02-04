@@ -6,6 +6,11 @@
   right: 1%;
   z-index: 1001;
 }
+@media (max-width: 1810px) {
+  .card-bet-container {
+    left: 1%;
+  }
+}
 
 .floating-icon {
   height: 3rem;
