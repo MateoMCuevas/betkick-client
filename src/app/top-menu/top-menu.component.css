@@ -2,6 +2,9 @@ mat-toolbar {
   display: flex;
   justify-content: space-between;
   background-color: #1a1919;
+  max-height: 52px;
+  padding-left: 16rem;
+  padding-right: 16rem;
 }
 
 a {
@@ -27,6 +30,7 @@ a {
 .title {
   font-family: Roboto;
   font-size: 1.2rem;
+  font-weight: bold;
   color: #08ce06;
 }
 
@@ -34,7 +38,19 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header {
   gap: 0.3rem;
+}
+
+.menu-options {
+  gap: 1rem;
+}
+
+.navigation-options {
+  /* border: 0.1rem solid #08ce06;
+  border-radius: 20px; */
 }
 
 mat-icon {
@@ -60,37 +76,38 @@ mat-icon {
   font-size: 0.8rem;
 }
 
-#login, #leaderboard, #standings, #account-menu {
+
+#login, #leaderboard, #standings, #account-menu, #home{
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  font-weight: bolder;
   background-color: #1a1919;
   border-radius: 1.1rem;
   padding: 1rem;
   color: #08ce06;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* border: 0.1rem solid #6b6b6b; */
 }
 
-#lock, #leaderboard-icon, #standings-icon, #account-icon {
+#lock, #leaderboard-icon, #standings-icon, #account-icon, #home-icon{
   font-size: 1rem;
   color: #08ce06;
   transition: background-color 0.3s ease, color 0.3s ease;
   transform: scale(1.1);
 }
 
-#login:hover, #leaderboard:hover, #standings:hover, #account-menu:hover {
+#login:hover, #leaderboard:hover, #standings:hover, #account-menu:hover, #home:hover{
   background-color: #2a2828;
-  color: #09ef06;
   /*border-color: #09ef06; */
+}
+
+#login, #account-menu {
+  border: 0.1rem solid #08ce06;
 }
 
 .active {
   background-color: #2a2828;
 }
 
-#login:hover mat-icon, #leaderboard:hover mat-icon, #standings:hover mat-icon {
-  color: #09ef06;
+#login:hover mat-icon, #leaderboard:hover mat-icon, #standings:hover mat-icon, #account-menu:hover mat-icon{
 }

@@ -31,7 +31,12 @@
         <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
       </div>
     </form>
-    <mat-paginator *ngIf="searchMatches.length > 0"
+
+    <div class="noMatchesFound" *ngIf="noMatchesFound">
+      No matches found, please try again
+    </div>
+
+    <mat-paginator
                    [pageSize]="pageSize"
                    [showFirstLastButtons]=true
                    [pageSizeOptions]="pageSizeOptions"
@@ -39,10 +44,6 @@
                    (page)="pageChanged($event)"
                    #paginator
     ></mat-paginator>
-
-    <div class="noMatchesFound" *ngIf="noMatchesFound">
-      No matches found, please try again
-    </div>
   </div>
 
   <!-- Live matches -->
@@ -60,7 +61,12 @@
           <app-live-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-live-match>
         </div>
       </form>
-      <mat-paginator *ngIf="liveMatches.length > 0"
+
+      <div class="noMatchesFound" *ngIf="liveMatches.length == 0">
+        No live matches available at the moment
+      </div>
+
+      <mat-paginator
                      [pageSize]="pageSize"
                      [showFirstLastButtons]=true
                      [pageSizeOptions]="pageSizeOptions"
@@ -68,10 +74,6 @@
                      (page)="pageChanged($event)"
                      #paginator
       ></mat-paginator>
-
-      <div class="noMatchesFound" *ngIf="liveMatches.length == 0">
-        No live matches available at the moment
-      </div>
     </div>
 
     <!-- Today's matches -->
@@ -87,18 +89,19 @@
           <app-match [match]="match" (oddsButtonClick)="handleButtonClick($event)"></app-match>
         </div>
       </form>
-      <mat-paginator *ngIf="todayMatches.length > 0"
-        [pageSize]="pageSize"
-        [showFirstLastButtons]=true
-        [pageSizeOptions]="pageSizeOptions"
-        [length]="todayMatches.length"
-        (page)="pageChanged($event)"
-        #paginator
-      ></mat-paginator>
 
       <div class="noMatchesFound" *ngIf="todayMatches.length == 0">
         No matches scheduled for today
       </div>
+
+      <mat-paginator
+                     [pageSize]="pageSize"
+                     [showFirstLastButtons]=true
+                     [pageSizeOptions]="pageSizeOptions"
+                     [length]="todayMatches.length"
+                     (page)="pageChanged($event)"
+                     #paginator
+      ></mat-paginator>
     </div>
 
     <!-- Matches by week -->
@@ -106,14 +109,14 @@
       <div class="label">
         <button mat-button style="color:#07d904" (click)="prevWeek(selectedWeek - 1)">
           <mat-icon class="arrow">arrow_back</mat-icon>
-          <span style="font-weight: bolder; font-size: 1.2rem;">Prev</span>
+          <span style="font-size: 1rem;">Prev</span>
         </button>
         <div class="text-and-icon">
           <mat-icon>calendar_today</mat-icon>
           <span class="text"> {{ getButtonText(selectedWeek) }} </span>
         </div>
         <button mat-button style="color:#07d904" (click)="nextWeek(selectedWeek + 1)">
-          <span style="font-weight: bolder; font-size: 1.2rem;">Next</span>
+          <span style="font-size: 1rem;">Next</span>
           <mat-icon iconPositionEnd class="arrow">arrow_forward</mat-icon>
         </button>
       </div>

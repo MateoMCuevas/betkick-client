@@ -13,10 +13,9 @@ p {
   justify-content: space-around;
   margin: 0 auto 0 auto;
   font-family: Roboto, serif;
-  font-weight: bold;
   text-align: center;
   color: #07d904;
-  padding: 1.6rem;
+  padding: 1.4rem;
   height: 2rem;
   width: 100%;
   box-sizing: border-box;
@@ -25,7 +24,7 @@ p {
 }
 
 .label mat-icon {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .text-and-icon {
@@ -35,8 +34,8 @@ p {
 }
 
 .text {
-  font-weight: bolder;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
   margin-left: 0.6rem;
 }
 
@@ -95,12 +94,8 @@ mat-paginator {
   padding: 0 1rem;
   font-size: 16px;
   font-family: Roboto, serif;
-  border: 1px solid #e0e0e0
-}
-
-.search:focus {
-  background-color: #e0e0e0;
-  outline: none;
+  border: 1px solid #e0e0e0;
+  transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
 }
 
 .filter {

@@ -11,19 +11,26 @@
     </div>
   </a>
 
-  <div class="menu-options">
-      <button mat-button routerLink="/leaderboard" id="leaderboard">
-        Leaderboard
-        <mat-icon id="leaderboard-icon">star_border</mat-icon>
-      </button>
-
+  <div class="menu-options navigation-options">
     <button mat-button id="standings">
       Standings
       <mat-icon id="standings-icon">format_list_numbered_rtl</mat-icon>
     </button>
 
+    <button mat-button routerLink="/home" id="home">
+      Home
+      <mat-icon id="home-icon">home</mat-icon>
+    </button>
+
+    <button mat-button routerLink="/leaderboard" id="leaderboard">
+      Leaderboard
+      <mat-icon id="leaderboard-icon">star_border</mat-icon>
+    </button>
+  </div>
+
+  <div class="menu-options">
     <div *ngIf="user; else login">
-      <button mat-button [matMenuTriggerFor]="menu" id="account-menu">
+      <button   mat-button [matMenuTriggerFor]="menu" id="account-menu">
         Account
         <mat-icon id="account-icon">account_box</mat-icon>
       </button>
