@@ -3,8 +3,36 @@ mat-toolbar {
   justify-content: space-between;
   background-color: #1a1919;
   max-height: 52px;
-  padding-left: 16rem;
-  padding-right: 16rem;
+}
+
+.small-toolbar {
+  max-height: 45px;
+}
+
+@media (min-width: 1200px) {
+  mat-toolbar {
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
+}
+
+@media (min-width: 1550px) {
+  mat-toolbar {
+    padding-left: 12vw;
+    padding-right: 12vw;
+  }
+}
+
+@media (min-width: 1700px) {
+  mat-toolbar {
+    padding-left: 16vw;
+    padding-right: 16vw;
+  }
+}
+
+
+@media (max-width: 700px) {
+
 }
 
 a {
@@ -77,7 +105,7 @@ mat-icon {
 }
 
 
-#login, #leaderboard, #standings, #account-menu, #home{
+#login, #leaderboard, #standings, #account-menu, #home {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,14 +117,14 @@ mat-icon {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#lock, #leaderboard-icon, #standings-icon, #account-icon, #home-icon{
+#lock, #leaderboard-icon, #standings-icon, #account-icon, #home-icon {
   font-size: 1rem;
   color: #08ce06;
   transition: background-color 0.3s ease, color 0.3s ease;
   transform: scale(1.1);
 }
 
-#login:hover, #leaderboard:hover, #standings:hover, #account-menu:hover, #home:hover{
+#login:hover, #leaderboard:hover, #standings:hover, #account-menu:hover, #home:hover {
   background-color: #2a2828;
   /*border-color: #09ef06; */
 }
@@ -105,9 +133,23 @@ mat-icon {
   border: 0.1rem solid #08ce06;
 }
 
-.active {
-  background-color: #2a2828;
+#account-menu-small {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  background-color: #1a1919;
+  border-radius: 1.1rem;
+  padding: 1rem;
+  color: #08ce06;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#login:hover mat-icon, #leaderboard:hover mat-icon, #standings:hover mat-icon, #account-menu:hover mat-icon{
+#account-icon-small {
+  font-size: 1rem;
+  color: #08ce06;
+  transform: scale(1.6);
+}
+
+#login:hover mat-icon, #leaderboard:hover mat-icon, #standings:hover mat-icon, #account-menu:hover mat-icon {
 }

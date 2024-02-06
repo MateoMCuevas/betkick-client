@@ -37,6 +37,7 @@ import { WeekIndexComponent } from './matches/week-index/week-index.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatInputModule} from "@angular/material/input";
 import { FooterComponent } from './footer/footer.component';
+import { TopMenuDropdownComponent } from './top-menu-dropdown/top-menu-dropdown.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { FooterComponent } from './footer/footer.component';
     LeaderboardComponent,
     WeekIndexComponent,
     FooterComponent,
+    TopMenuDropdownComponent,
   ],
   imports: [
     AppRoutingModule,
