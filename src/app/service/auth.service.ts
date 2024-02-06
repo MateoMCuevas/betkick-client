@@ -33,17 +33,24 @@ export class AuthService {
     const user = await lastValueFrom(this.getUser());
     return user !== null;
   }
- 
+
   login(): void {
 
     location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/okta')}`;
   }
 
   logout(): void {
-    this.http.post('/api/logout', {}, { withCredentials: true }).subscribe((response: any) => {
-      location.href = response.logoutUrl;
-    });
+    this.http.post('/api/logout', {}, { withCredentials: true }).subscribe(
+      (response: any) => {
+        // Redirect to the logout URL received from the server
+        window.location.href = response.logoutUrl;
+      },
+      (error) => {
+        console.error('Logout error:', error);
+      }
+    );
   }
+
   getLoginBoolean():boolean{
     return this.loginBoolean
   }

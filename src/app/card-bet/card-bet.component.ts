@@ -89,7 +89,7 @@ export class CardBetComponent implements OnInit {
         this.alertBetAmount = false
         this.alertUserMoney = false
         this.betService.sendDataToBackend()
-          /*.subscribe(
+          .subscribe(
           (response) => {
             console.log("Backend's response: ", response);
           },
@@ -97,7 +97,7 @@ export class CardBetComponent implements OnInit {
             alert(error.error.apierror.message)
             console.error('An error occurred: ', error.error.apierror.message);
           }
-        ); */
+        );
         this.updateMoney()
         this.betService.deleteList()
         this.alertBetAmount = false

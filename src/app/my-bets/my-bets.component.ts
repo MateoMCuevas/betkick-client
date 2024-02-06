@@ -28,16 +28,7 @@ export class MyBetsComponent implements OnInit {
     await this.auth.getUser().subscribe(data => this.user = data);
     this.getBetHistory()
   }
-  getMyBets() {
-    this.betService.getBetHistory().subscribe(
-      (response) => {
-        this.MyBets = response;
-      },
-      (error) => {
-        console.error('An error occurred: ', error);
-      }
-    );
-  }
+
   getBetHistory() {
     this.betService.getBetHistory().subscribe(
       (response) => {
@@ -53,7 +44,7 @@ export class MyBetsComponent implements OnInit {
 
       },
       (error) => {
-        console.error('An error occurred: ', error);
+        console.error('An error occurred in my-bets: ', error);
       }
     );
   }
