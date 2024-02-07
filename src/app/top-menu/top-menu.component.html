@@ -74,8 +74,12 @@
       </mat-menu>
     </div>
     <ng-template #login>
-      <button mat-button (click)="auth.login()" id="login">
+      <button mat-button (click)="auth.login()" id="login" *ngIf="!isSmallScreenBool">
         <mat-icon id="lock">lock</mat-icon>
+        Login
+      </button>
+      <button mat-button (click)="auth.login()" id="login-small" *ngIf="isSmallScreenBool">
+        <mat-icon id="lock-small">lock</mat-icon>
         Login
       </button>
     </ng-template>

@@ -50,6 +50,7 @@ export class MatchesComponent implements OnInit {
     private fb: FormBuilder,
     private betService: BetService,
     private route: ActivatedRoute,
+    private datePipe: DatePipe,
   ) {
   }
 
@@ -157,7 +158,7 @@ export class MatchesComponent implements OnInit {
     this.eventService.getMatches(competitionId)
       .subscribe(matches => {
         this.matches = matches;
-        this.competition = matches[1].competition.name;
+        this.competition = matches[0].competition.name;
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
         this.matches = this.matches.filter(function (match: Match) {
           return match.status != 'FINISHED' && match.status != 'AWARDED'
@@ -313,13 +314,10 @@ export class MatchesComponent implements OnInit {
                  Match
   ):
     boolean {
-    const todayDate = new Date();
-    const matchDate = new Date(match.utcDate)
-    return (
-      todayDate.getUTCFullYear() === matchDate.getUTCFullYear() &&
-      todayDate.getUTCMonth() === matchDate.getUTCMonth() &&
-      todayDate.getUTCDate() === matchDate.getUTCDate()
-    );
+    const todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd')
+    const matchDate = this.datePipe.transform(match.utcDate, 'yyyy-MM-dd')
+
+    return todayDate === matchDate;
   }
 
   roundToOneDecimal(match
