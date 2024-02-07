@@ -30,9 +30,4 @@ export class MatchComponent {
     }
   }
 
-  adjustedDate(utcDateString: string): Date {
-    const utcDate = new Date(utcDateString);
-    utcDate.setHours(utcDate.getHours() - 3);
-    return utcDate;
-  }
 }

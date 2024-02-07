@@ -75,13 +75,15 @@ h2 {
   font-size: large;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 450px) {
   .card-bet-container {
-    width: 100%;
+    width: 95%;
+    right: 1%;
+    left: 2.5%;
   }
 
   .floating-icon {
-    width: 100%;
+    width: 95%;
   }
 
   .card-bet-content {
