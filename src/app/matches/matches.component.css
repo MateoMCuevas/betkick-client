@@ -94,7 +94,7 @@ mat-paginator {
   padding: 0 1rem;
   font-size: 16px;
   font-family: Roboto, serif;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #dcdcdc;
   transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
 }
 
@@ -113,21 +113,47 @@ mat-paginator {
 
 @media only screen and (max-width: 760px) {
   .search-and-filter {
-  grid-template-columns: 60% 40%;
+    grid-template-columns: 60% 40%;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .search-and-filter {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 54% 46%;
+  }
+
+  .label mat-icon {
+    transform: scale(0.9);
   }
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 500px) {
+
+  .label {
+    padding: 1.5rem;
+  }
+
+  .label mat-icon {
+    margin-bottom: 0.2rem;
+  }
+
   .search-and-filter {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
-    gap: 1rem;
+    padding: 0;
+    gap: 0.2rem;
+  }
+
+  .search {
+    margin: 0 auto;
+    width: 90%;
+    height: 75%;
+    font-size: 1rem;
+    order: 2;
+  }
+
+  .filter {
+    transform: scale(0.85);
   }
 }
 
@@ -136,7 +162,6 @@ mat-paginator {
     width: 400px;
     max-height: 16rem;
   }
-
 }
 
 @media (max-width: 680px) {
