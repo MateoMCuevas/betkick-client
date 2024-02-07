@@ -87,4 +87,8 @@ export class MyBetsComponent implements OnInit {
   isListEmpty(): boolean {
     return this.selectedList.length === 0;
   }
+
+  calculateEarnings(amount: number, odds: number): number{
+    return Number((amount*odds).toFixed(2))
+  }
 }
