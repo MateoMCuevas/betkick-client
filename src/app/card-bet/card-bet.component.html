@@ -22,7 +22,7 @@
             <app-card-match *ngIf="listBets && listBets.length > 0" [listBets]="listBets"></app-card-match>
             <div class="alertMsj" *ngIf="alertUserMoney">Make sure you have enough balance!</div>
         <div class="alertMsj" *ngIf="alertBetAmount">Make sure all bets have an amount!</div>
-            <h3 *ngIf="!(listBets && listBets.length > 0)" style="text-align: center; color: black;">Place your bets</h3>
+         <h3 *ngIf="!(listBets && listBets.length > 0)" style="text-align: center; color: black;">Place your bets</h3>
         </mat-card-content>
         <button mat-button class="betBtn" type="submit"  (click)="sendData() "><h2>CONFIRM</h2></button>
     </mat-card>
