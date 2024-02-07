@@ -31,7 +31,6 @@
 }
 
 .card-bet-content {
-  border: 1px solid white;
   background-color: #eaeaef;
   max-height: 400px;
   overflow-y: auto;

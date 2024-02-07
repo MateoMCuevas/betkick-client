@@ -1,5 +1,4 @@
 <div class="competitions">
-
   <div class="competition" *ngFor="let competition of competitionsToShow"
        routerLink="competitions/{{competition.id}}" routerLinkActive="active" (click)="onClick($event)">
     <img src="{{competition.emblem}}" class="comp-emblem" alt="" routerLinkActive="markerClass">

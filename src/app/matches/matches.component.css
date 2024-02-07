@@ -111,6 +111,26 @@ mat-paginator {
   border-right: 1px solid #d7d7d7;
 }
 
+@media only screen and (max-width: 760px) {
+  .search-and-filter {
+  grid-template-columns: 60% 40%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .search-and-filter {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .search-and-filter {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 785px) {
   .match-container {
     width: 400px;
@@ -120,7 +140,6 @@ mat-paginator {
 }
 
 @media (max-width: 680px) {
-
   .match-container {
     width: 500px;
     max-height: 18rem;
