@@ -34,6 +34,10 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { WeekIndexComponent } from './matches/week-index/week-index.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatInputModule} from "@angular/material/input";
+import { FooterComponent } from './footer/footer.component';
+import { TopMenuDropdownComponent } from './top-menu-dropdown/top-menu-dropdown.component';
 
 
 @NgModule({
@@ -52,6 +56,8 @@ import { WeekIndexComponent } from './matches/week-index/week-index.component';
     LiveMatchComponent,
     LeaderboardComponent,
     WeekIndexComponent,
+    FooterComponent,
+    TopMenuDropdownComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -73,7 +79,9 @@ import { WeekIndexComponent } from './matches/week-index/week-index.component';
     MatProgressBarModule,
     MatSnackBarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

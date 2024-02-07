@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class EventService {
-  competitionsUrl: string = 'api/competitions';
+  competitionsUrl: string = 'api/active-competitions';
   matchesUrl: string = 'api/matches';
   standingsUrl: string= 'api/standings'
 

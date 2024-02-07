@@ -12,6 +12,7 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
 export class AuthService {
   $authenticationState = new BehaviorSubject<boolean>(false);
   userId: string | undefined;
+  userName: string | undefined;
   loginBoolean: boolean = false;
   constructor(private http: HttpClient, private location: Location) {
   }
@@ -22,6 +23,7 @@ export class AuthService {
           if (response !== null) {
             this.$authenticationState.next(true);
             this.userId = response.sub;
+            this.userName = response.name;
             this.loginBoolean = true;
           }
           return response;
@@ -33,17 +35,22 @@ export class AuthService {
     const user = await lastValueFrom(this.getUser());
     return user !== null;
   }
- 
-  login(): void {
 
+  login(): void {
     location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/okta')}`;
   }
 
   logout(): void {
-    this.http.post('/api/logout', {}, { withCredentials: true }).subscribe((response: any) => {
-      location.href = response.logoutUrl;
-    });
+    this.http.post('/api/logout', {}, { withCredentials: true }).subscribe(
+      (response: any) => {
+        // Redirect to the logout URL received from the server
+        window.location.href = response.logoutUrl;
+      },
+      (error) => {
+      }
+    );
   }
+
   getLoginBoolean():boolean{
     return this.loginBoolean
   }

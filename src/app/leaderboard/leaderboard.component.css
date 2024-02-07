@@ -6,6 +6,7 @@
   justify-content: flex-start; /* Optional: Adjust as needed */
   align-items: center; /* Optional: Adjust as needed */
   overflow: scroll;
+  background-color: #eaeaef;
 }
 
 .mat-elevation-z8 {

@@ -8,7 +8,9 @@ export interface Team {
 export interface Competition {
   id: number;
   name: string;
+  shortName: string;
   emblem: string;
+  code: string;
 }
 
 export interface Score {
@@ -34,6 +36,7 @@ export interface Match {
   "score": Score;
   "utcDate": string;
   "competition": Competition;
+  "status": string;
   "homeTeam": Team;
   "awayTeam": Team;
   "odds": MatchOdds;

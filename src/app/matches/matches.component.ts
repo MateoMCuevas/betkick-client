@@ -25,9 +25,13 @@ export class MatchesComponent implements OnInit {
 
   pageSize = 5; // Set the number of items per page
   pageIndex = 0; // Current page index
-  pageSizeOptions = [5, 9, 18]; // Options for the user to choose page size
+  pageSizeOptions = [3, 5, 9, 18]; // Options for the user to choose page size
+
+  selectedFilters: string = 'filterWeeks';
 
   searchMatches: Match[] = [];
+  noMatchesFound: boolean = false;
+  debounceTimeout: any;
   competition: string = "";
   inputMatch: string = "";
   urlActual = window.location.href;
@@ -47,7 +51,6 @@ export class MatchesComponent implements OnInit {
     private betService: BetService,
     private route: ActivatedRoute,
   ) {
-    //private location: Location) {
   }
 
   ngOnInit(): void {
@@ -58,9 +61,34 @@ export class MatchesComponent implements OnInit {
     });
   }
 
-  get paginatedData(): any[] {
+  get paginatedWeekMatches(): any[] {
     const startIndex = this.pageIndex * this.pageSize;
     return this.weekMatches[this.selectedWeek].slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get paginatedTodayMatches(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.todayMatches.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get paginatedLiveMatches(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.liveMatches.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get paginatedSearchMatches(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.searchMatches.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  onToggleChange() {
+    if (this.paginator) {
+      this.paginator.page.emit({
+        pageIndex: 0,
+        pageSize: this.paginator.pageSize,
+        length: this.paginator.length
+      });
+    }
   }
 
   pageChanged(event: any): void {
@@ -69,22 +97,60 @@ export class MatchesComponent implements OnInit {
   }
 
   search() {
-    this.searchResults(this.inputMatch);
+    clearTimeout(this.debounceTimeout);
+    this.debounceTimeout = setTimeout(() => {
+      this.noMatchesFound = false;
+      this.searchResults(this.inputMatch);
+    }, 300);
   }
 
   searchResults(team: string) {
-    this.searchMatches.length = 0;
-    let homeTeam: string = "";
-    let awayTeam: string = "";
-    team = team.toLowerCase();
-    this.matches.forEach(element => {
-      homeTeam = element.awayTeam.name.toLowerCase();
-      awayTeam = element.homeTeam.name.toLowerCase();
-      if (homeTeam.includes(team) || awayTeam.includes(team)) {
-        this.searchMatches.push(element);
-      }
-    });
+    if (team.length !== 0) {
 
+      this.selectedFilters = ''
+      this.searchMatches = [];
+      let homeTeamLongName: string = "";
+      let awayTeamLongName: string = "";
+      let homeTeamShortName: string = "";
+      let awayTeamShortName: string = "";
+      team = team.toLowerCase();
+      this.matches.forEach(element => {
+        homeTeamLongName = element.awayTeam.name.toLowerCase();
+        awayTeamLongName = element.homeTeam.name.toLowerCase();
+        homeTeamShortName = element.awayTeam.shortName.toLowerCase();
+        awayTeamShortName = element.homeTeam.shortName.toLowerCase();
+        if ((homeTeamLongName.includes(team) || awayTeamLongName.includes(team) ||
+            homeTeamShortName.includes(team) || awayTeamShortName.includes(team)) &&
+          !(element.status == 'IN_PLAY' || element.status == 'PAUSED')) {
+          this.searchMatches.push(element);
+        }
+      });
+      this.noMatchesFound = this.searchMatches.length == 0 && this.inputMatch.length > 0; // user is searching but nothing is found
+      if (!this.noMatchesFound) {
+
+      }
+      if (this.paginator) {
+        this.paginator.length = this.searchMatches.length;
+
+        this.paginator.pageIndex = 0;
+
+        this.paginator.page.emit({
+          pageIndex: 0,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      }
+    } else {
+      this.searchMatches = [];
+      this.selectedFilters = 'filterWeeks'
+      if (this.paginator) {
+        this.paginator.page.emit({
+          pageIndex: 0,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      }
+    }
   }
 
   getMatches(competitionId?: number): void {
@@ -93,13 +159,14 @@ export class MatchesComponent implements OnInit {
         this.matches = matches;
         this.competition = matches[1].competition.name;
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
-        this.matches = this.matches.filter(function (match: any) {
+        this.matches = this.matches.filter(function (match: Match) {
           return match.status != 'FINISHED' && match.status != 'AWARDED'
         })
         this.matches.forEach(match => {
           this.roundToOneDecimal(match);
         })
         this.filterMatches()
+        this.nextWeek(-1)
       });
   }
 
@@ -168,11 +235,10 @@ export class MatchesComponent implements OnInit {
     if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
       week++;
       for (week; week < this.weekMatches.length; week++) {
-        if (this.weekMatches[week].length > 0)
+        if (this.weekMatches[week] !== undefined && this.weekMatches[week].length > 0)
           break;
       }
     }
-
     this.onWeekSelected(week);
   }
 
@@ -181,7 +247,7 @@ export class MatchesComponent implements OnInit {
     if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
       week--;
       for (week; week >= 0; week--) {
-        if (this.weekMatches[week].length > 0)
+        if (this.weekMatches[week] !== undefined && this.weekMatches[week].length > 0)
           break;
       }
     }
@@ -197,10 +263,8 @@ export class MatchesComponent implements OnInit {
       // Update the paginator length
       if (this.paginator) {
         this.paginator.length = this.weekMatches[selectedWeek].length;
-      }
 
-      // Set the page index to 0
-      if (this.paginator) {
+        // Set the page index to 0
         this.paginator.pageIndex = 0;
 
         // Manually trigger a page change event
@@ -212,7 +276,6 @@ export class MatchesComponent implements OnInit {
       }
     }
   }
-
 
   getWeekNumber(date
                   :

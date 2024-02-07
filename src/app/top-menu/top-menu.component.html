@@ -1,36 +1,49 @@
-<mat-toolbar>
+<mat-toolbar [ngClass]="{'small-toolbar': isSmallScreenBool}">
+
+  <ng-container *ngIf="isSmallScreen$ | async">
+    <app-top-menu-dropdown></app-top-menu-dropdown>
+  </ng-container>
+
   <a href="/">
     <div class="header">
       <div id="logo">
         <mat-icon id="player">directions_run</mat-icon>
         <mat-icon id="ball">sports_soccer</mat-icon>
       </div>
-      <h1 class="title">
+      <h1 class="title" *ngIf="!isSmallScreenBool">
         BetKick
       </h1>
     </div>
   </a>
 
-  <div class="menu-options">
-    <a href="/leaderboard">
-      <button mat-raised-button id="leaderboard">
+    <div class="menu-options navigation-options" *ngIf="!isSmallScreenBool">
+      <button mat-button id="standings">
+        Standings
+        <mat-icon id="standings-icon">format_list_numbered_rtl</mat-icon>
+      </button>
+
+      <button mat-button routerLink="/home" id="home">
+        Home
+        <mat-icon id="home-icon">home</mat-icon>
+      </button>
+
+      <button mat-button routerLink="/leaderboard" id="leaderboard">
         Leaderboard
         <mat-icon id="leaderboard-icon">star_border</mat-icon>
       </button>
-    </a>
+    </div>
 
-    <button mat-raised-button id="standings">
-      Standings
-      <mat-icon id="standings-icon">format_list_numbered_rtl</mat-icon>
-    </button>
-
+  <div class="menu-options">
     <div *ngIf="user; else login">
-      <button mat-raised-button [matMenuTriggerFor]="menu" id="account-menu">
-        Account
-        <mat-icon id="account-icon">account_box</mat-icon>
+      <button mat-button [matMenuTriggerFor]="menu" id="account-menu" *ngIf="!isSmallScreenBool">
+        {{ auth.userName }}
+        <mat-icon id="account-icon">account_circle</mat-icon>
+      </button>
+      <button mat-button [matMenuTriggerFor]="menu" id="account-menu-small" *ngIf="isSmallScreenBool">
+        <mat-icon id="account-icon-small">account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <p mat-menu-item>
+        <p mat-menu-item style="cursor: default">
           <mat-icon>money</mat-icon>
           Balance: ${{ money }}
         </p>
@@ -47,7 +60,7 @@
           </button>
         </a>
         <a href="/my-bets">
-          <button (click)="getBetHistory()" mat-menu-item>
+          <button mat-menu-item>
             <mat-icon>subject</mat-icon>
             My Bets
           </button>
@@ -61,7 +74,7 @@
       </mat-menu>
     </div>
     <ng-template #login>
-      <button mat-raised-button (click)="auth.login()" id="login">
+      <button mat-button (click)="auth.login()" id="login">
         <mat-icon id="lock">lock</mat-icon>
         Login
       </button>

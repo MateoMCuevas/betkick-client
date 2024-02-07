@@ -16,7 +16,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {path: '', component: MatchesComponent},
-      {path: 'home/competitions/:id', component: MatchesComponent}
+      {path: 'competitions/:id', component: MatchesComponent}
     ]
   },
   {path: 'deposit', component: DepositComponent,canActivate:[AuthGuard]},

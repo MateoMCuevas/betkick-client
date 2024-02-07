@@ -1,0 +1,17 @@
+#dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  background-color: #1a1919;
+  border-radius: 1.1rem;
+  padding: 1rem;
+  color: #08ce06;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#dropdown-icon {
+  font-size: 1rem;
+  color: #08ce06;
+  transform: scale(1.8);
+}
