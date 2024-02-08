@@ -38,8 +38,10 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatInputModule} from "@angular/material/input";
 import { FooterComponent } from './footer/footer.component';
 import { TopMenuDropdownComponent } from './top-menu-dropdown/top-menu-dropdown.component';
-import { StandingsComponent } from './standings/standings.component';
+import { StandingsTableComponent } from './standings-table/standings-table.component';
 import { StandingsCompetitionsComponent } from './standings-competitions/standings-competitions.component';
+import { StandingsComponent } from './standings/standings.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -60,33 +62,35 @@ import { StandingsCompetitionsComponent } from './standings-competitions/standin
     WeekIndexComponent,
     FooterComponent,
     TopMenuDropdownComponent,
-    StandingsComponent,
+    StandingsTableComponent,
     StandingsCompetitionsComponent,
+    StandingsComponent,
   ],
-  imports: [
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatListModule,
-    MatCardModule,
-    MatChipsModule,
-    MatFormFieldModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatTabsModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatButtonToggleModule,
-    MatInputModule
-  ],
+    imports: [
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatListModule,
+        MatCardModule,
+        MatChipsModule,
+        MatFormFieldModule,
+        MatMenuModule,
+        MatDividerModule,
+        MatTabsModule,
+        MatProgressBarModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatButtonToggleModule,
+        MatInputModule,
+        MatTooltipModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
