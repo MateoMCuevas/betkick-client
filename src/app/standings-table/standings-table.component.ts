@@ -67,31 +67,35 @@ export class StandingsTableComponent implements OnInit {
 
       if (!sort.active || sort.direction === '') {
         // default order is by points
-        return this.compare(a.points, b.points, false);
+        return this.compare(a.points, b.points, false, a, b);
       }
 
       switch (sort.active) {
         case 'won':
-          return this.compare(a.won, b.won, isAsc);
+          return this.compare(a.won, b.won, isAsc, a, b);
         case 'draw':
-          return this.compare(a.draw, b.draw, isAsc);
+          return this.compare(a.draw, b.draw, isAsc, a, b);
         case 'lost':
-          return this.compare(a.lost, b.lost, isAsc);
+          return this.compare(a.lost, b.lost, isAsc, a, b);
         case 'points':
-          return this.compare(a.points, b.points, isAsc);
+          return this.compare(a.points, b.points, isAsc, a, b);
         case 'goalsFor':
-          return this.compare(a.goalsFor, b.goalsFor, isAsc);
+          return this.compare(a.goalsFor, b.goalsFor, isAsc, a, b);
         case 'goalsAgainst':
-          return this.compare(a.goalsAgainst, b.goalsAgainst, isAsc);
+          return this.compare(a.goalsAgainst, b.goalsAgainst, isAsc, a, b);
         case 'goalDifference':
-          return this.compare(a.goalDifference, b.goalDifference, isAsc);
+          return this.compare(a.goalDifference, b.goalDifference, isAsc, a, b);
         default:
           return 0;
       }
     });
   }
 
-  compare(a: number | string, b: number | string, isAsc: boolean) {
+  compare(a: number | string, b: number | string, isAsc: boolean, standingA: Standing, standingB: Standing) {
+    if (a === b) {
+      return (standingA.position < standingB.position ? -1 : 1) * (!isAsc ? 1 : -1);
+    }
+
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 

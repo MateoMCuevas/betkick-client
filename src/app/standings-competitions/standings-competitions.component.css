@@ -36,6 +36,7 @@
 
 .active:hover {
   background-color: #D6D6D6;
+  cursor: default;
 }
 
 .comp-emblem {
