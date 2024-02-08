@@ -4,11 +4,11 @@ import {EventService} from "../service/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-competitions',
-  templateUrl: './competitions.component.html',
-  styleUrls: ['./competitions.component.css']
+  selector: 'app-standings-competitions',
+  templateUrl: './standings-competitions.component.html',
+  styleUrls: ['./standings-competitions.component.css']
 })
-export class CompetitionsComponent implements OnInit {
+export class StandingsCompetitionsComponent implements OnInit {
   competitions: Competition[] = [];
   competitionsToShow: Competition[] = [];
 
@@ -26,18 +26,16 @@ export class CompetitionsComponent implements OnInit {
     // Check if the clicked element has the "active" class
     const hasActiveClass = clickedElement.classList.contains('active') || clickedElement.classList.contains('markerClass');
 
-    if (hasActiveClass) {
+    /*if (hasActiveClass) {
       this.router.navigate(["/home"]);
-    }
+    } */
   }
 
   getCompetitions(): void {
-    this.eventService.getActiveCompetitions()
+    this.eventService.getCompetitionsWithStandings()
       .subscribe(competitions => {
         this.competitions = competitions;
         this.competitionsToShow = this.competitions.reverse();
       });
   }
-
-
 }

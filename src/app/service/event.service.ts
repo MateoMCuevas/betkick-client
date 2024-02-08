@@ -8,16 +8,24 @@ import {HttpClient} from "@angular/common/http";
 })
 export class EventService {
   competitionsUrl: string = 'api/active-competitions';
+  competitionsWithStandingsUrl: string = 'api/competitions-with-standings';
   matchesUrl: string = 'api/matches';
   standingsUrl: string= 'api/standings'
 
   constructor(private http: HttpClient) {
   }
 
-  getCompetitions(): Observable<Competition[]> {
+  getActiveCompetitions(): Observable<Competition[]> {
     return this.http.get<Competition[]>(this.competitionsUrl)
       .pipe(
-        catchError(this.handleError<Competition[]>('getCompetitions', []))
+        catchError(this.handleError<Competition[]>('getActiveCompetitions', []))
+      );
+  }
+
+  getCompetitionsWithStandings(): Observable<Competition[]> {
+    return this.http.get<Competition[]>(this.competitionsWithStandingsUrl)
+      .pipe(
+        catchError(this.handleError<Competition[]>('getCompetitionsWithStandings', []))
       );
   }
 

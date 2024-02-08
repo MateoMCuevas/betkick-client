@@ -18,7 +18,7 @@ export interface Score {
   away: number;
 }
 
- export enum Winner {
+export enum Winner {
   HOME_TEAM = 'HOME_TEAM',
   AWAY_TEAM = 'AWAY_TEAM',
   DRAW = 'DRAW'
@@ -48,24 +48,26 @@ export class User {
   name!: string;
 }
 
-export interface Standing{
+export interface Standing {
   "position": number;
   "team": Team;
   "won": number;
+  "draw": number;
   "lost": number;
   "points": number;
   "goalsFor": number;
   "goalsAgainst": number;
   "goalDifference": number;
 }
-export interface CompetitionStandings{
+
+export interface CompetitionStandings {
   "group": string;
   "standings": Standing[];
 }
 
-export interface UserBetSummary{
-  "name":string;
+export interface UserBetSummary {
+  "name": string;
   "earnings": number;
   "betsWon": number;
-  "betsLost":number;
+  "betsLost": number;
 }
