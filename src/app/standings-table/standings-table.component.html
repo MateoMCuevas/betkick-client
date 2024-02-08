@@ -7,7 +7,10 @@
         <td mat-cell class="club" *matCellDef="let standing" >
           {{ standing.position }}
          <img src="{{ standing.team.crest }}" alt="team crest">
-          {{ standing.team.name }}
+          <a class="team-link" matTooltip="Upcoming matches" [routerLink]="['/home']"
+             [queryParams]="{ search: encodeURI(standing.team.name) }">
+            {{ standing.team.name }}
+          </a>
         </td>
       </ng-container>
 

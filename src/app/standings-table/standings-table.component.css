@@ -29,6 +29,14 @@ table {
   padding: 1rem 1rem 0 0.8rem;
 }
 
+a.team-link {
+  color: #007bff; /* Set the link color */
+  text-decoration: none;
+}
+a.team-link:visited {
+  color: #007bff; /* Set the link color */
+}
+
 .club {
   display: flex;
   align-items: center;

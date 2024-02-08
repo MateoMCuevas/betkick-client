@@ -60,6 +60,13 @@ export class MatchesComponent implements OnInit {
       const competitionId = id !== 0 ? id : undefined;
       this.getMatches(competitionId);
     });
+    this.route.queryParams.subscribe(params => {
+      // Retrieve the 'search' parameter from the URL
+      if (params['search']) {
+        this.inputMatch = params['search'] ? decodeURI(params['search']) : '';
+        this.search();
+      }
+    });
   }
 
   get paginatedWeekMatches(): any[] {
