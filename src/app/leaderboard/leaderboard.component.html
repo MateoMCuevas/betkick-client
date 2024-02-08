@@ -2,7 +2,6 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
 
-    <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> Position </th>
       <td mat-cell *matCellDef="let i = index">
@@ -17,13 +16,11 @@
     </ng-container>
 
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Username </th>
       <td mat-cell *matCellDef="let user"> {{user.name}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="betsWon">
       <th mat-header-cell *matHeaderCellDef> Bets Won </th>
       <td mat-cell *matCellDef="let user"> {{user.betsWon}} </td>
@@ -34,7 +31,6 @@
       <td mat-cell *matCellDef="let user"> {{user.betsLost}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="earnings">
       <th mat-header-cell *matHeaderCellDef> Earnings </th>
       <td mat-cell *matCellDef="let user" [ngStyle]="{'color': user.earnings < 0 ? '#ff0000' : '#00cc00'}">

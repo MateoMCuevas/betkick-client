@@ -38,6 +38,8 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatInputModule} from "@angular/material/input";
 import { FooterComponent } from './footer/footer.component';
 import { TopMenuDropdownComponent } from './top-menu-dropdown/top-menu-dropdown.component';
+import { StandingsComponent } from './standings/standings.component';
+import { StandingsCompetitionsComponent } from './standings-competitions/standings-competitions.component';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { TopMenuDropdownComponent } from './top-menu-dropdown/top-menu-dropdown.
     WeekIndexComponent,
     FooterComponent,
     TopMenuDropdownComponent,
+    StandingsComponent,
+    StandingsCompetitionsComponent,
   ],
   imports: [
     AppRoutingModule,

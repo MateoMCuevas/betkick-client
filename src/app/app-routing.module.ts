@@ -7,10 +7,12 @@ import { WithdrawComponent } from './withdraw/withdraw.component';
 import { MyBetsComponent } from './my-bets/my-bets.component';
 import { AuthGuard } from './auth-guard.guard';
 import {LeaderboardComponent} from "./leaderboard/leaderboard.component";
+import {StandingsComponent} from "./standings/standings.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'leaderboard', component: LeaderboardComponent },
+  { path: 'standings', component: StandingsComponent },
   {
     path: 'home',
     component: HomeComponent,
