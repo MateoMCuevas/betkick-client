@@ -40,6 +40,8 @@ table {
 .club img {
   max-width: 29px;
   max-height: 29px;
+  min-width: 29px;
+  min-height: 29px;
 }
 
 .points {
@@ -47,7 +49,7 @@ table {
   font-weight: 500;
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 755px) {
   .tables {
     width: 95%;
     padding-left: 0.8rem;
@@ -55,7 +57,7 @@ table {
   }
 }
 
-@media only screen and (max-width: 530px) {
+@media only screen and (max-width: 630px) {
   td:not(.club), th {
     padding-left: 0.3rem;
     padding-right: 0.3rem;
@@ -69,6 +71,27 @@ table {
 
   .club {
     padding-bottom: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  td, th{
+    font-size: 0.85rem;
+  }
+
+  td:not(.club), th {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .group {
+    padding-left: 0;
+    padding-top: 0.2rem;
+    padding-bottom: 0;
+  }
+
+  .club {
+    padding-bottom: 0.8rem;
   }
 }
 
