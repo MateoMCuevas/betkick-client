@@ -72,9 +72,18 @@
 
 .shields{
   display: flex;
-  width: 70%;
+  width: 60%;
   justify-content: space-around;
   width: auto;
+}
+
+.score{
+  margin-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: xx-large;
+  font-family: 'Oswald';
+  justify-self: center;
 }
 
 .team-crest{
@@ -115,6 +124,30 @@
   background-color: rgb(154, 63, 63);
 }
 
+.successfulBet{
+  font-family: 'Oswald';
+  font-size:1rem;
+  text-align: center;
+  padding: 0.5rem;
+  height: 2rem;
+  width: 30%;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  background:rgb(25, 149, 25);
+}
+
+.failedBet{
+  font-family: 'Oswald';
+  font-size:1rem;
+  text-align: center;
+  padding: 0.5rem;
+  height: 2rem;
+  width: 30%;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  background:rgb(149, 25, 25);
+}
+
 .emptyListMessage{
   font-family: 'Oswald';
   font-size: large;
@@ -123,10 +156,57 @@
   margin-top: 25%;
 }
 
+@media (max-width: 1196px)
+{
+  .container{
+    width:70%;
+    left:15%;
+  }
 
-@media (max-width: 580px) {
+}
+@media (max-width: 975px)
+{
+  .score{
+    margin-top: 1rem;
+    font-size: medium;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+
+}
+@media (max-width: 750px) {
+  .container{
+    width: 80%;
+    left:10%
+  }
   .card-container {
     max-width: 100%;
+  }
+  
+
+}
+@media (max-width: 580px) {
+  .infoBet{
+    width: 60%;
+  }
+  .shields{
+    width: 40%;
+  }
+ 
+  .team-crest{
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  .numberBet{
+    font-size: auto;
+  }
+}
+@media (max-width: 380px) {
+ 
+  .team-crest{
+    width: 3.5rem;
+    height: 3.5rem;
   }
 
 }

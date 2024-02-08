@@ -10,11 +10,11 @@ import { MoneyUserService } from '../service/money-user.service';
   styleUrls: ['./my-bets.component.css']
 })
 export class MyBetsComponent implements OnInit {
-  selectedList: any[]=[]
-  myFinishedBets: any[]=[]
-  myActiveBets: any[]=[]
-  myLiveBets: any[]=[]
-  MyBets: any[]=[]
+  selectedList: any[] = []
+  myFinishedBets: any[] = []
+  myActiveBets: any[] = []
+  myLiveBets: any[] = []
+  MyBets: any[] = []
   selectedListType: number = 0;
   isAuthenticated!: boolean;
   user!: User;
@@ -88,7 +88,20 @@ export class MyBetsComponent implements OnInit {
     return this.selectedList.length === 0;
   }
 
-  calculateEarnings(amount: number, odds: number): number{
-    return Number((amount*odds).toFixed(2))
+  calculateEarnings(amount: number, odds: number): number {
+    return Number((amount * odds).toFixed(2))
+  }
+  successfulBet(bet: any): boolean {
+    if (bet.winner === 'DRAW' && bet.match.score.home === bet.match.score.away) {
+      return true
+    }
+    else if (bet.winner === 'HOME_TEAM' && bet.match.score.home > bet.match.score.away) {
+      return true
+    }
+    else if (bet.winner === 'AWAY_TEAM' && bet.match.score.away > bet.match.score.home) {
+      return true
+    } else {
+      return false
+    }
   }
 }
