@@ -36,7 +36,7 @@ export class MyBetsComponent implements OnInit {
           return bet.match.status == 'SCHEDULED' || bet.match.status == 'TIMED' || bet.match.status == 'CANCELLED' || bet.match.status == 'POSTPONED' || bet.match.status == 'SUSPENDED'
         })
         this.myFinishedBets = response.filter(function (bet: any) {
-          return bet.match.status == 'FINISHED' || bet.match.status == 'AWARED'
+          return bet.match.status == 'FINISHED' || bet.match.status == 'AWARDED'
         })
         this.myLiveBets = response.filter(function (bet: any) {
           return bet.match.status == 'IN_PLAY' || bet.match.status == 'PAUSED'
@@ -104,4 +104,6 @@ export class MyBetsComponent implements OnInit {
       return false
     }
   }
+
+  protected readonly encodeURI = encodeURI;
 }

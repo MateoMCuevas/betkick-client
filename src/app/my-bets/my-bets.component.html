@@ -1,83 +1,7 @@
-<!--mat-tab-group class="container">
-    <mat-tab label="ACTIVED BETS">
-        <mat-card class="card-container"*ngFor="let bet of myActiveBets">
-        <mat-card-header class="card-header">
-          <mat-card-subtitle style="color: #08f905;">BET TICKET</mat-card-subtitle>
-          <mat-card-title>{{bet.match.homeTeam.shortName}}</mat-card-title>
-          <mat-card-title>{{bet.match.awayTeam.shortName}}</mat-card-title>
-          <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}} WINS</mat-card-subtitle>
-          <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}} WINS</mat-card-subtitle>
-          <mat-card-subtitle *ngIf="bet.winner ==='DRAW'">DRAW</mat-card-subtitle>
-        </mat-card-header>
-        <mat-divider style="background-color: white;"></mat-divider>
-        <mat-card-content class="card-content">
-          <mat-divider></mat-divider>
-            <p style="margin-top: 1rem;">${{bet.amount}} :AMOUNT</p>
-            <p>X{{bet.odds}} :ODDS</p>
-            <h3>${{bet.amount*bet.odds}} :EARNINGS</h3>
-          <mat-divider></mat-divider>
-        </mat-card-content>
-        <mat-card-actions class="footer">
-            <mat-card-subtitle style="color:#08f905;">DATE: {{adjustedDate( bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
-            <button mat-raised-button style="margin-left: auto; background-color: rgb(154, 2, 2); color: antiquewhite;" (click)="cancelBet(bet)">CANCEL BET</button>
-        </mat-card-actions>
-      </mat-card>
-
-    </mat-tab>
-    <mat-tab label="LIVE BETS">
-        <mat-card class="card-container  inLive"*ngFor="let bet of myLiveBets">
-            <mat-card-header class="card-header">
-              <mat-card-subtitle style="color: #08f905;">BET TICKET</mat-card-subtitle>
-              <mat-card-title>{{bet.match.homeTeam.shortName}}</mat-card-title>
-              <mat-card-title>{{bet.match.awayTeam.shortName}}</mat-card-title>
-              <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}} WINS</mat-card-subtitle>
-              <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}} WINS</mat-card-subtitle>
-              <mat-card-subtitle *ngIf="bet.winner ==='DRAW'">DRAW</mat-card-subtitle>
-            </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content class="card-content">
-              <mat-divider></mat-divider>
-                <p style="margin-top: 1rem;">${{bet.amount}} :AMOUNT</p>
-            <p>X{{bet.odds}} :ODDS</p>
-            <h3>${{bet.amount*bet.odds}} :EARNINGS</h3>
-              <mat-divider></mat-divider>
-            </mat-card-content>
-            <mat-card-actions class="date">
-                <mat-card-subtitle style="color:#08f905;">DATE:{{adjustedDate( bet.match.utcDate)| date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
-            </mat-card-actions>
-            <mat-card-footer>
-              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-            </mat-card-footer>
-          </mat-card>
-    </mat-tab>
-    <mat-tab label="FINISHED BETS" >
-        <mat-card class="card-container finished"*ngFor="let bet of myFinishedBets">
-            <mat-card-header class="card-header">
-              <mat-card-subtitle style="color: #08f905;">BET TICKET</mat-card-subtitle>
-              <mat-card-title>{{bet.match.homeTeam.shortName}}</mat-card-title>
-              <mat-card-title>{{bet.match.awayTeam.shortName}}</mat-card-title>
-              <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}} WINS</mat-card-subtitle>
-              <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}} WINS</mat-card-subtitle>
-              <mat-card-subtitle *ngIf="bet.winner ==='DRAW'">DRAW</mat-card-subtitle>
-            </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content class="card-content">
-              <mat-divider></mat-divider>
-                <p>${{bet.amount}} :AMOUNT</p>
-                <p>X{{bet.odds}} :ODDS</p>
-                <h3>${{bet.amount*bet.odds}} :EARNINGS</h3>
-              <mat-divider></mat-divider>
-            </mat-card-content>
-            <mat-card-actions class="date">
-                <mat-card-subtitle style="color: #08f905;">DATE: {{adjustedDate( bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
-            </mat-card-actions>
-          </mat-card>
-    </mat-tab>
-  </mat-tab-group-->
 <div class="container">
 
   <div class="buttons">
-    <button class="button" (click)="showList(1)">ACTIVED BETS
+    <button class="button" (click)="showList(1)">ACTIVE BETS
     </button>
     <button class="button" (click)="showList(2)">LIVE BETS
     </button>
@@ -90,41 +14,46 @@
     <div *ngIf="!isListEmpty() ; else emptyListMessage">
       <mat-card class="card-container" *ngFor="let bet of selectedList">
         <mat-card-header class="card-header">
-          <div class="infoBet">
-            <mat-card-subtitle style="color: #08f905;">BET TICKET</mat-card-subtitle>
-            <mat-card-title>{{bet.match.homeTeam.shortName}}</mat-card-title>
-            <mat-card-title>{{bet.match.awayTeam.shortName}}</mat-card-title>
-            <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}}
-              WINS</mat-card-subtitle>
-            <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{bet.match.homeTeam.name}}
-              WINS</mat-card-subtitle>
-            <mat-card-subtitle *ngIf="bet.winner ==='DRAW'">DRAW</mat-card-subtitle>
+          <div class="betInfo">
+            <mat-card-title>{{ bet.match.homeTeam.shortName }}</mat-card-title>
+            <mat-card-title>{{ bet.match.awayTeam.shortName }}</mat-card-title>
+            <mat-card-subtitle class="green">
+              {{ adjustedDate(bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}
+            </mat-card-subtitle>
           </div>
-          <div class="shields">
+          <div class="crests">
             <img src="{{  bet.match.homeTeam.crest }}" class="team-crest" alt="">
             <p class="score">vs</p>
             <img src="{{  bet.match.awayTeam.crest }}" class="team-crest" alt="">
           </div>
+          <div class="box">
+            <p>Prediction</p>
+            <p *ngIf="bet.winner ==='AWAY_TEAM'" class="green">{{ bet.match.awayTeam.shortName }}
+              wins</p>
+            <p *ngIf="bet.winner ==='HOME_TEAM'" class="green">{{ bet.match.homeTeam.shortName }}
+              wins</p>
+            <p *ngIf="bet.winner ==='DRAW'" class="green">Draw</p>
+          </div>
         </mat-card-header>
-        <mat-divider style="background-color: white;"></mat-divider>
+        <mat-divider style="background-color: #333333;"></mat-divider>
         <mat-card-content class="card-content">
-          <div class="numberBet">
-            <p>AMOUNT</p>
-            <p>${{bet.amount}}</p>
+          <div class="box">
+            <p>Bet Amount</p>
+            <p class="green">${{ bet.amount }}</p>
           </div>
-          <div class="numberBet">
-            <p>ODDS</p>
-            <p>X{{bet.odds}}</p>
+          <div class="box">
+            <p>Odds</p>
+            <p class="green">X{{ bet.odds }}</p>
           </div>
-          <div class="numberBet">
-            <p>POTENTIAL PROFITS </p>
-            <p>${{calculateEarnings(bet.amount,bet.odds)}}</p>
+          <div class="box">
+            <p>Potential Profits</p>
+            <p class="green">${{ calculateEarnings(bet.amount, bet.odds) }}</p>
           </div>
         </mat-card-content>
         <mat-card-actions class="footer">
-          <mat-card-subtitle>DATE: {{adjustedDate( bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
-          <button mat-raised-button style="margin-left: auto; background-color: rgb(154, 2, 2); color: antiquewhite;"
-            (click)="cancelBet(bet)">CANCEL BET</button>
+          <button mat-raised-button class="cancelButton" (click)="cancelBet(bet)">
+            Cancel bet
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -137,19 +66,21 @@
     <div *ngIf="!isListEmpty() ; else emptyListMessage">
       <mat-card class="card-container" *ngFor="let bet of selectedList">
         <mat-card-header class="card-header">
-          <div class="infoBet">
+          <div class="betInfo">
             <mat-card-subtitle style="color: #08f905;">BET TICKET</mat-card-subtitle>
-            <mat-card-title>{{bet.match.homeTeam.shortName}}</mat-card-title>
-            <mat-card-title>{{bet.match.awayTeam.shortName}}</mat-card-title>
-            <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}}
-              WINS</mat-card-subtitle>
-            <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{bet.match.homeTeam.name}}
-              WINS</mat-card-subtitle>
+            <mat-card-title>{{ bet.match.homeTeam.shortName }}</mat-card-title>
+            <mat-card-title>{{ bet.match.awayTeam.shortName }}</mat-card-title>
+            <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{ bet.match.awayTeam.name }}
+              WINS
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{ bet.match.homeTeam.name }}
+              WINS
+            </mat-card-subtitle>
             <mat-card-subtitle *ngIf="bet.winner ==='DRAW'">DRAW</mat-card-subtitle>
           </div>
-          <div class="shields">
+          <div class="crests">
             <img src="{{  bet.match.homeTeam.crest }}" class="team-crest" alt="">
-            <p class="score">{{bet.match.score.home}} - {{bet.match.score.away}}</p>
+            <p class="score">{{ bet.match.score.home }} - {{ bet.match.score.away }}</p>
             <img src="{{  bet.match.awayTeam.crest }}" class="team-crest" alt="">
           </div>
         </mat-card-header>
@@ -158,23 +89,25 @@
         </mat-card-footer>
         <mat-divider style="background-color: white;"></mat-divider>
         <mat-card-content class="card-content">
-          <div class="numberBet">
+          <div class="box">
             <p>AMOUNT</p>
-            <p>${{bet.amount}}</p>
+            <p>${{ bet.amount }}</p>
           </div>
-          <div class="numberBet">
+          <div class="box">
             <p>ODDS</p>
-            <p>X{{bet.odds}}</p>
+            <p>X{{ bet.odds }}</p>
           </div>
-          <div class="numberBet">
+          <div class="box">
             <p>POTENTIAL PROFITS </p>
-            <p>${{calculateEarnings(bet.amount,bet.odds)}}</p>
+            <p>${{ calculateEarnings(bet.amount, bet.odds) }}</p>
           </div>
         </mat-card-content>
         <mat-card-actions class="footer">
-          <mat-card-subtitle>DATE: {{adjustedDate( bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
+          <mat-card-subtitle>DATE: {{ adjustedDate(bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}
+          </mat-card-subtitle>
           <button mat-raised-button style="margin-left: auto; background-color: rgb(154, 2, 2); color: antiquewhite;"
-            (click)="cancelBet(bet)">CANCEL BET</button>
+                  (click)="cancelBet(bet)">CANCEL BET
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -183,48 +116,51 @@
     </ng-template>
   </div>
 
-  
 
   <div class="list" *ngIf="selectedListType === 3">
     <div *ngIf="!isListEmpty() ; else emptyListMessage">
       <mat-card class="card-container" *ngFor="let bet of selectedList">
         <mat-card-header class="card-header">
-          <div class="infoBet">
+          <div class="betInfo">
             <mat-card-subtitle style="color: #08f905;">BET TICKET</mat-card-subtitle>
-            <mat-card-title>{{bet.match.homeTeam.shortName}}</mat-card-title>
-            <mat-card-title>{{bet.match.awayTeam.shortName}}</mat-card-title>
-            <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{bet.match.awayTeam.name}}
-              WINS</mat-card-subtitle>
-            <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{bet.match.homeTeam.name}}
-              WINS</mat-card-subtitle>
+            <mat-card-title>{{ bet.match.homeTeam.shortName }}</mat-card-title>
+            <mat-card-title>{{ bet.match.awayTeam.shortName }}</mat-card-title>
+            <mat-card-subtitle *ngIf="bet.winner ==='AWAY_TEAM'" style="color: #08f905;">{{ bet.match.awayTeam.name }}
+              WINS
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="bet.winner ==='HOME_TEAM'" style="color: #08f905;">{{ bet.match.homeTeam.name }}
+              WINS
+            </mat-card-subtitle>
             <mat-card-subtitle *ngIf="bet.winner ==='DRAW'">DRAW</mat-card-subtitle>
           </div>
-          <div class="shields">
+          <div class="crests">
             <img src="{{  bet.match.homeTeam.crest }}" class="team-crest" alt="">
-            <p class="score">{{bet.match.score.home}} vs {{bet.match.score.away}}</p>
+            <p class="score">{{ bet.match.score.home }} vs {{ bet.match.score.away }}</p>
             <img src="{{  bet.match.awayTeam.crest }}" class="team-crest" alt="">
           </div>
         </mat-card-header>
         <mat-divider style="background-color: white;"></mat-divider>
         <mat-card-content class="card-content">
-          <div class="numberBet">
+          <div class="box">
             <p>AMOUNT</p>
-            <p>${{bet.amount}}</p>
+            <p>${{ bet.amount }}</p>
           </div>
-          <div class="numberBet">
+          <div class="box">
             <p>ODDS</p>
-            <p>X{{bet.odds}}</p>
+            <p>X{{ bet.odds }}</p>
           </div>
-          <div class="numberBet">
+          <div class="box">
             <p>POTENTIAL PROFITS </p>
-            <p>${{calculateEarnings(bet.amount,bet.odds)}}</p>
+            <p>${{ calculateEarnings(bet.amount, bet.odds) }}</p>
           </div>
         </mat-card-content>
         <mat-card-actions class="footer">
-          <mat-card-subtitle>DATE: {{adjustedDate( bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}</mat-card-subtitle>
+          <mat-card-subtitle>DATE: {{ adjustedDate(bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}
+          </mat-card-subtitle>
           <div *ngIf="successfulBet(bet); else failedBet" class="successfulBet"
-            >SUCCESSFUL BET</div>
-           <ng-template #failedBet>
+          >SUCCESSFUL BET
+          </div>
+          <ng-template #failedBet>
             <div class="failedBet">FAILED BET</div>
           </ng-template>
         </mat-card-actions>

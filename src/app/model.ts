@@ -28,7 +28,6 @@ export interface MatchOdds {
   "awayWinsOdds": number;
   "homeWinsOdds": number;
   "drawOdds": number;
-
 }
 
 export interface Match {

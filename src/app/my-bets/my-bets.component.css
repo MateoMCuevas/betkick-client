@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   position: absolute;
   width: 50%;
@@ -7,16 +7,18 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-.buttons{
+
+.buttons {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   padding: 2rem;
   color: #08f905;
 }
-.button{
-  font-family: 'Oswald';
-  font-size:1rem;
+
+.button {
+  font-family: 'Oswald', serif;
+  font-size: 1rem;
   text-align: center;
   padding: 0.5rem;
   height: 4rem;
@@ -24,60 +26,79 @@
   box-sizing: border-box;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   color: #08f905;
-  background:black;
+  background: black;
   border-radius: 1rem;
 }
 
-.list{
+.list {
   width: 80%;
 }
+
 .card-container {
-  /* Color de borde más oscuro */
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   margin-top: 1rem;
   width: 100%;
+  padding: 0.9rem;
+  background-color: #111111;
 }
 
-.card-container:hover, .button:hover{
+.card-container:hover, .button:hover {
   transform: scale(1.05);
 }
-
 
 .footer {
   display: flex;
   height: 1rem;
-  justify-content: space-between;
   align-items: center;
-  font-size: small;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  color: grey;
+  justify-content: center;
+  background-color: #111111;
+}
+
+.cancelButton {
+  transform: scale(1.2);
+  background-color: black;
+  color: white;
+  border: 1px solid #333333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: red;
 }
 
 .card-header {
-  background-color: black;
-  /* Fondo del encabezado más oscuro */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  background-color: #111111;
   color: white;
   padding: 1rem;
-  display: flex;
-  align-items: center;
 }
 
-.infoBet{
-  width: 40%;
+.betInfo {
+  font-family: Roboto;
+  font-weight: 500;
+  background-color: black;
+  border: 1px solid #333333;
+  padding: 1rem;
+  border-radius: 12px;
 }
 
-.shields{
+.crests {
   display: flex;
-  width: 60%;
   justify-content: space-around;
   width: auto;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: black;
+  border: 1px solid #333333;
 }
 
-.score{
+.score {
   margin-top: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -86,127 +107,76 @@
   justify-self: center;
 }
 
-.team-crest{
+.team-crest {
   width: 5rem;
   height: 5rem;
 }
 
 .card-content {
   height: 20%;
-  background-color: white;
-  color: black;
-  padding: 0.5rem;
+  background-color: #111111;
+  color: white;
+  padding: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.numberBet {
-  font-family: 'Oswald';
-  font-size:1rem;
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: Roboto, serif;
+  font-size: 1rem;
   text-align: center;
-  padding: 0.5rem;
   height: 5rem;
   width: 30%;
   box-sizing: border-box;
-  color: black;
-  background:rgb(210, 210, 210);
-
+  color: white;
+  border-radius: 12px;
+  font-weight: 500;
+  background: black;
+  border: 1px solid #333333;
 }
 
-.cancelBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2rem;
-  width: 100%;
-  cursor: pointer;
-  background-color: rgb(154, 63, 63);
+.box p {
+  margin: 0;
 }
 
-.successfulBet{
-  font-family: 'Oswald';
-  font-size:1rem;
+.green {
+  color: #08f305;
+}
+
+.successfulBet {
+  font-family: 'Oswald', serif;
+  font-size: 1rem;
   text-align: center;
   padding: 0.5rem;
   height: 2rem;
   width: 30%;
   box-sizing: border-box;
   color: rgb(255, 255, 255);
-  background:rgb(25, 149, 25);
+  background: rgb(25, 149, 25);
 }
 
-.failedBet{
-  font-family: 'Oswald';
-  font-size:1rem;
+.failedBet {
+  font-family: 'Oswald', serif;
+  font-size: 1rem;
   text-align: center;
   padding: 0.5rem;
   height: 2rem;
   width: 30%;
   box-sizing: border-box;
   color: rgb(255, 255, 255);
-  background:rgb(149, 25, 25);
+  background: rgb(149, 25, 25);
 }
 
-.emptyListMessage{
-  font-family: 'Oswald';
+.emptyListMessage {
+  font-family: 'Oswald', serif;
   font-size: large;
   display: flex;
   justify-content: center;
   margin-top: 25%;
 }
 
-@media (max-width: 1196px)
-{
-  .container{
-    width:70%;
-    left:15%;
-  }
-
-}
-@media (max-width: 975px)
-{
-  .score{
-    margin-top: 1rem;
-    font-size: medium;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-
-}
-@media (max-width: 750px) {
-  .container{
-    width: 80%;
-    left:10%
-  }
-  .card-container {
-    max-width: 100%;
-  }
-  
-
-}
-@media (max-width: 580px) {
-  .infoBet{
-    width: 60%;
-  }
-  .shields{
-    width: 40%;
-  }
- 
-  .team-crest{
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-  .numberBet{
-    font-size: auto;
-  }
-}
-@media (max-width: 380px) {
- 
-  .team-crest{
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-
-}
