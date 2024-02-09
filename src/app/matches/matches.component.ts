@@ -219,7 +219,7 @@ export class MatchesComponent implements OnInit {
     const uniqueWeeks = new Set<number>();
 
     this.matches.forEach((match: any) => {
-      if (match.status == 'IN_PLAY' || match.status == 'PAUSED') {
+      if ((match.status == 'IN_PLAY' || match.status == 'PAUSED') && match.winner === null) {
         this.liveMatches.push(match);
       } else if (this.isTodayMatch(match)) {
         this.todayMatches.push(match);

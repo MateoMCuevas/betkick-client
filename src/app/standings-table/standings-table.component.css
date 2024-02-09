@@ -6,17 +6,16 @@
   justify-content: flex-start; /* Optional: Adjust as needed */
   align-items: center; /* Optional: Adjust as needed */
   overflow: scroll;
-  background-color: white;
   margin: 0 auto;
 }
 
 .container {
-  background-color: white;
-  border-bottom: 1px solid #d7d7d7;
+  background-color: #eaeaef;
 }
 
 table {
   margin-bottom: 0.9rem;
+  background-color: #eaeaef;
 }
 
 .group {
@@ -25,7 +24,6 @@ table {
   font-weight: bold;
   display: block;
   color: #2c2a2a;
-  background-color: white;
   padding: 1rem 1rem 0 0.8rem;
 }
 

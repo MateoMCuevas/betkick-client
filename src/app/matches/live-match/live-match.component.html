@@ -14,15 +14,15 @@
     <p>{{ match.awayTeam.shortName }}</p>
   </div>
   <div class="odds-container">
-    <button id="localWin" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
+    <button id="localWin" matTooltip="{{ match.homeTeam.shortName + ' wins' }}" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
       <span id="localWinSpan" class="odds-symbol">1</span>
       {{match.odds.homeWinsOdds}}
     </button>
-    <button id="draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
+    <button id="draw" matTooltip="Draw" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
       <span id="drawSpan" class="odds-symbol">X</span>
       {{match.odds.drawOdds}}
     </button>
-    <button id="awayWin" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
+    <button id="awayWin" matTooltip="{{ match.awayTeam.shortName + ' wins' }}" (click)="handleButtonClick(match,match.odds.drawOdds,$event)">
       <span id="awayWinSpan" class="odds-symbol">2</span>
       {{match.odds.awayWinsOdds}}
     </button>
