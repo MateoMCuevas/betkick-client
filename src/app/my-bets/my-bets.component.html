@@ -11,7 +11,7 @@
   <div class="bet-list">
     <div *ngIf="!isListEmpty() ; else emptyListMessage">
       <mat-card class="card-container" *ngFor="let bet of selectedList; let index = index">
-        <div class="card-title">
+        <div class="card-title" [ngStyle]="{ 'border-bottom': selectedListType === 2 ? '0' : '1px solid #333333' }">
             <span style="color: white">Bet #{{ bet.id }} | Placed on
               {{ adjustedDate(bet.placedAt) | date:"MMM dd, yyyy 'at' hh:mm a" }} </span>
           <p *ngIf="selectedListType === 3 && bet.isWon" class="betResult" style="background-color: #02b202">
@@ -72,7 +72,7 @@
             <p *ngIf="selectedListType !== 3 || bet.isWon" class="green">
               ${{ calculateEarnings(bet.amount, bet.odds) }}</p>
 
-            <p *ngIf="selectedListType === 3 && !bet.isWon">Your Prediction</p>
+            <p *ngIf="selectedListType === 3 && !bet.isWon">Prediction</p>
             <p *ngIf="bet.winner === 'AWAY_TEAM' && selectedListType === 3 && !bet.isWon"
                class="red">{{ bet.match.awayTeam.shortName }} wins</p>
             <p *ngIf="bet.winner === 'HOME_TEAM' && selectedListType === 3 && !bet.isWon"
@@ -89,7 +89,7 @@
       </mat-card>
     </div>
     <ng-template #emptyListMessage>
-      <p class="emptyListMessage">NO BETS AVAILABLE.</p>
+      <p class="noBetsMessage">Bet history is empty. <a routerLink="/home">Place some bets!</a></p>
     </ng-template>
   </div>
 </div>

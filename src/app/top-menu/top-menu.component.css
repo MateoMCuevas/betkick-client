@@ -2,7 +2,7 @@ mat-toolbar {
   display: flex;
   justify-content: space-between;
   background-color: #1a1919;
-  max-height: 52px;
+  max-height: 58px;
 }
 
 .small-toolbar {
@@ -101,7 +101,7 @@ mat-icon {
   position: absolute;
   top: 1.2rem;
   left: 1.5rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 
