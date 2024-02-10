@@ -51,8 +51,8 @@ p {
   }
 
   .team-container img {
-    width: 40%;
-    max-height: 80%;
+    max-width: 54px;
+    max-height: 54px;
   }
 
   .odds-container {
@@ -103,7 +103,7 @@ p {
     cursor: pointer;
   }
   .score{
-    font-size: large;
+    font-size: 1.1rem;
     font-family: 'Oswald';
   }
   @media (max-width: 600px){
@@ -121,7 +121,7 @@ p {
       font-weight: bold;
       font-size: small;
     }
-    .score{
+    .versus{
       font-size: medium;
       font-family: 'Oswald';
     }

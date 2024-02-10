@@ -57,14 +57,27 @@
   display: flex;
   font-family: Roboto, serif;
   text-align: center;
+  align-items: center;
   justify-content: center;
   border-bottom: 1px solid #333333;
   border-radius: 14px 14px 0 0;
   margin: 0 auto;
+  gap: 1rem;
   box-sizing: border-box;
   font-size: 1rem;
   font-weight: 500;
   padding: 1rem
+}
+
+.betResult {
+  margin: 0;
+  font-size: 1rem;
+  font-family: Roboto;
+  color: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .card-container {
@@ -133,13 +146,24 @@
   border: 1px solid #333333;
 }
 
-.score {
+.versus {
   margin-top: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
   font-size: xx-large;
-  font-family: 'Oswald';
+  font-family: Roboto, serif;
   justify-self: center;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.6rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-family: Roboto, serif;
+  margin-bottom: 0;
 }
 
 .team-crest {
@@ -183,6 +207,10 @@
   color: #08f305;
 }
 
+.red {
+  color: rgb(255, 0, 0);
+}
+
 .successfulBet {
   font-family: 'Oswald', serif;
   font-size: 1rem;
@@ -215,13 +243,19 @@
   margin-top: 25%;
 }
 
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 600px) {
   .card-container, .card-title {
     border-radius: 0;
   }
 
+  .card-container {
+    margin-bottom: 1.8rem;
+  }
+
   .card-header {
     flex-direction: column;
+    padding: 0;
+    padding-bottom: 1rem;
   }
 
   .card-header .box, .crests, .betInfo {
@@ -230,6 +264,10 @@
 
   .card-header .box {
     font-size: 1.3rem;
+  }
+
+  .score {
+    font-size: 2rem;
   }
 
   .betInfo {

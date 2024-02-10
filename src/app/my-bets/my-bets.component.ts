@@ -96,17 +96,5 @@ export class MyBetsComponent implements OnInit {
     return Number((amount * odds).toFixed(2))
   }
 
-  successfulBet(bet: any): boolean {
-    if (bet.winner === 'DRAW' && bet.match.score.home === bet.match.score.away) {
-      return true
-    } else if (bet.winner === 'HOME_TEAM' && bet.match.score.home > bet.match.score.away) {
-      return true
-    } else if (bet.winner === 'AWAY_TEAM' && bet.match.score.away > bet.match.score.home) {
-      return true
-    } else {
-      return false
-    }
-  }
-
   protected readonly encodeURI = encodeURI;
 }
