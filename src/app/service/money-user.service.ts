@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, delay, Observable} from 'rxjs';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -37,15 +37,13 @@ export class MoneyUserService {
     const userId = this.authService.userId!;
     const params = new HttpParams().set('userId', userId);
 
-    return this.http.post<any>('/api/user/withdraw', withdrawAmount * -1, {params})
+    return this.http.post<any>('/api/user/withdraw', withdrawAmount, {params})
       .subscribe(
         (response) => {
-          // Handle successful response
-          console.log('Withdraw request successful:', response);
+          this.showAlertMsj('Successful withdrawal');
         },
         (error) => {
-          // Handle error
-          console.error('Withdraw request error:', error);
+          this.showAlertMsj('Withdraw failed');
         }
       );
   }
@@ -57,12 +55,10 @@ export class MoneyUserService {
     return this.http.post<any>('/api/user/deposit', depositAmount, {params})
       .subscribe(
         (response) => {
-          // Handle successful response
-          console.log('Deposit request successful:', response);
+          this.showAlertMsj('Successful deposit');
         },
         (error) => {
-          // Handle error
-          console.error('Deposit request error:', error);
+          this.showAlertMsj('Deposit failed');
         }
       );
   }
@@ -71,7 +67,7 @@ export class MoneyUserService {
     return this.money.asObservable();
   }
   showAlertMsj(msj: string): void {
-    const mensajeEmergente = this.snackBar.open(msj, 'CLOSE', {
+    const alertMsj = this.snackBar.open(msj, 'Close', {
       duration: 5000,
       verticalPosition: 'top',
       horizontalPosition: 'center',

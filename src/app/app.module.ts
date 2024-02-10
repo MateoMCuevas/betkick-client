@@ -43,6 +43,7 @@ import { StandingsCompetitionsComponent } from './standings-competitions/standin
 import { StandingsComponent } from './standings/standings.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -67,32 +68,33 @@ import {MatSortModule} from "@angular/material/sort";
     StandingsCompetitionsComponent,
     StandingsComponent,
   ],
-  imports: [
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatListModule,
-    MatCardModule,
-    MatChipsModule,
-    MatFormFieldModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatTabsModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatButtonToggleModule,
-    MatInputModule,
-    MatTooltipModule,
-    MatSortModule
-  ],
+    imports: [
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatListModule,
+        MatCardModule,
+        MatChipsModule,
+        MatFormFieldModule,
+        MatMenuModule,
+        MatDividerModule,
+        MatTabsModule,
+        MatProgressBarModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatButtonToggleModule,
+        MatInputModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatSelectModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -8,35 +8,40 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./withdraw.component.css']
 })
 export class WithdrawComponent implements OnInit {
-  withdrawMoney: number;
-  moneyUser: number;
-  withdrawForm: FormGroup
-  constructor(private user: MoneyUserService,
-    private fb: FormBuilder) { }
+  withdrawForm: FormGroup;
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder, private moneyUser: MoneyUserService) {}
+
+  ngOnInit(): void {
     this.withdrawForm = this.fb.group({
-      withdrawAmount: ['', [Validators.required, Validators.min(0)]],
-      cbu: ['', Validators.required],
-      bankName: ['', Validators.required],
-      accountHolder: ['', Validators.required]
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
+      expirationDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{4}$/)]],
+      cardHolderName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s\-]+$/)]],
+      cardType: ['', Validators.required],
+      transactionAmount: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]]
     });
   }
 
-  withdrawMoneyEvent() {
-    this.getUserMoney()
-    if (this.withdrawForm.valid && this.withdrawMoney<=this.moneyUser) {
-      this.user.sendWithdrawRequest(-this.withdrawMoney);
-      this.user.setMoney(-this.withdrawMoney);
-      this.user.showAlertMsj('SUCCESFUL WITHDRAWAL')
+  submitForm(): void {
+    if (this.withdrawForm.valid) {
+      // @ts-ignore
+      const transactionAmount = parseFloat(this.withdrawForm.get('transactionAmount').value);
+      this.moneyUser.getUserBalance().subscribe(balance => {
+        if (balance < transactionAmount) {
+          this.moneyUser.showAlertMsj("You don't have enough balance to make this transaction");
+        } else {
+          this.moneyUser.sendWithdrawRequest(transactionAmount);
+          this.moneyUser.setMoney(transactionAmount);
+          this.withdrawForm.reset();
+          Object.keys(this.withdrawForm.controls).forEach(key => {
+            // @ts-ignore
+            this.withdrawForm.get(key).setErrors(null) ;
+          });
+        }
+      })
     } else {
-      this.user.showAlertMsj('PLEASE FILL CORRECTLY ALL THE FIELDS OF THE FORM OR CHECK YOUR BALANCE')
+      this.moneyUser.showAlertMsj('Invalid form data. Please check and try again');
     }
-  }
-
-  getUserMoney() {
-    this.user.getUserBalance().subscribe((number: number) => {
-      this.moneyUser = number;
-    });
   }
 }
