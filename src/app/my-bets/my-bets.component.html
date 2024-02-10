@@ -10,7 +10,7 @@
 
     <div class="bet-list" *ngIf="selectedListType === 1">
       <div *ngIf="!isListEmpty() ; else emptyListMessage">
-        <mat-card class="card-container" *ngFor="let bet of selectedList">
+        <mat-card class="card-container" *ngFor="let bet of selectedList; let index = index">
           <div class="card-title">
             <span style="color: white">Bet #{{ bet.id }} | Placed on
               {{  adjustedDate(bet.placedAt ) | date:"MMM dd, yyyy 'at' hh:mm a" }} </span>
@@ -53,7 +53,7 @@
             </div>
           </mat-card-content>
           <mat-card-actions class="footer">
-            <button mat-raised-button class="cancelButton" (click)="cancelBet(bet)">
+            <button mat-raised-button class="cancelButton" (click)="cancelBet(bet, index)">
               Cancel bet
             </button>
           </mat-card-actions>
@@ -66,7 +66,7 @@
 
     <div class="bet-list" *ngIf="selectedListType === 2">
       <div *ngIf="!isListEmpty() ; else emptyListMessage">
-        <mat-card class="card-container" *ngFor="let bet of selectedList">
+        <mat-card class="card-container" *ngFor="let bet of selectedList; let index = index">
           <mat-card-header class="card-header">
             <div class="betInfo">
               <mat-card-subtitle style="color: #08f905;">BET TICKET</mat-card-subtitle>
@@ -108,7 +108,7 @@
             <mat-card-subtitle>DATE: {{ adjustedDate(bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}
             </mat-card-subtitle>
             <button mat-raised-button style="margin-left: auto; background-color: rgb(154, 2, 2); color: antiquewhite;"
-                    (click)="cancelBet(bet)">CANCEL BET
+                    (click)="cancelBet(bet, index)">CANCEL BET
             </button>
           </mat-card-actions>
         </mat-card>

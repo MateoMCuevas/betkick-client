@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BetService } from '../service/bet.service';
-import { AuthService } from '../service/auth.service';
-import { User } from '../model';
-import { MoneyUserService } from '../service/money-user.service';
+import {Component, OnInit} from '@angular/core';
+import {BetService} from '../service/bet.service';
+import {AuthService} from '../service/auth.service';
+import {User} from '../model';
+import {MoneyUserService} from '../service/money-user.service';
 
 @Component({
   selector: 'app-my-bets',
@@ -19,9 +19,11 @@ export class MyBetsComponent implements OnInit {
   isAuthenticated!: boolean;
   user!: User;
   money: number;
+
   constructor(public auth: AuthService,
-    private betService: BetService,
-    private moneyService: MoneyUserService) { }
+              private betService: BetService,
+              private moneyService: MoneyUserService) {
+  }
 
   async ngOnInit() {
     this.isAuthenticated = await this.auth.isAuthenticated();
@@ -49,10 +51,11 @@ export class MyBetsComponent implements OnInit {
     );
   }
 
-  cancelBet(bet: any) {
+  cancelBet(bet: any, index: number) {
     this.betService.cancelBet(bet.id).subscribe((number: number) => {
       this.money = number;
     });
+    this.selectedList.splice(index, 1)
     this.moneyService.setMoney(this.money)
     this.moneyService.showAlertMsj('THE BET WAS SUCCESSFULLY CANCELED')
   }
@@ -67,6 +70,7 @@ export class MyBetsComponent implements OnInit {
     this.selectedListType = listType;
     this.updateList()
   }
+
   updateList(): void {
     switch (this.selectedListType) {
       case 1:
@@ -91,14 +95,13 @@ export class MyBetsComponent implements OnInit {
   calculateEarnings(amount: number, odds: number): number {
     return Number((amount * odds).toFixed(2))
   }
+
   successfulBet(bet: any): boolean {
     if (bet.winner === 'DRAW' && bet.match.score.home === bet.match.score.away) {
       return true
-    }
-    else if (bet.winner === 'HOME_TEAM' && bet.match.score.home > bet.match.score.away) {
+    } else if (bet.winner === 'HOME_TEAM' && bet.match.score.home > bet.match.score.away) {
       return true
-    }
-    else if (bet.winner === 'AWAY_TEAM' && bet.match.score.away > bet.match.score.home) {
+    } else if (bet.winner === 'AWAY_TEAM' && bet.match.score.away > bet.match.score.home) {
       return true
     } else {
       return false

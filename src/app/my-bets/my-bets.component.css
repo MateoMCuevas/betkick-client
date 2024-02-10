@@ -1,14 +1,14 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  max-width: 800px;
   margin: 0 auto;
   border-top: 1px solid #333333;
   border-bottom: 1px solid #333333;
   background-color: #1A1919;
   padding-bottom: 1.3rem;
+  min-height: 700px;
 }
 
 .button-group {
@@ -22,6 +22,7 @@
   color: #08f905;
   border: 1px solid #333333;
   max-width: 830px;
+  transform: scale(0.9);
 }
 
 .button {
@@ -34,7 +35,7 @@
   width: 7rem;
   box-sizing: border-box;
   color: white;
-  background:#0A0A0A;
+  background: #0A0A0A;
   border-radius: 1rem;
   margin: 0.2rem;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -50,20 +51,18 @@
 }
 
 .card-title {
-  width:100%;
+  width: 100%;
   color: white;
   background-color: #0A0A0A;
   display: flex;
-  font-family: Roboto;
+  font-family: Roboto, serif;
   text-align: center;
   justify-content: center;
   border-bottom: 1px solid #333333;
-  border-radius: 14px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 14px 14px 0 0;
   margin: 0 auto;
   box-sizing: border-box;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 1rem
 }
@@ -216,3 +215,31 @@
   margin-top: 25%;
 }
 
+@media only screen and (max-width: 630px) {
+  .card-container, .card-title {
+    border-radius: 0;
+  }
+
+  .card-header {
+    flex-direction: column;
+  }
+
+  .card-header .box, .crests, .betInfo {
+    width: 80%;
+  }
+
+  .card-header .box {
+    font-size: 1.3rem;
+  }
+
+  .betInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-container, .bet-list {
+    width: 100%;
+  }
+}

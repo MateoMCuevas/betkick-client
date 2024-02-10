@@ -28,11 +28,20 @@ table {
 }
 
 a.team-link {
-  color: #007bff; /* Set the link color */
+  color: #007bff;
   text-decoration: none;
 }
+
+a.team-link:hover {
+  color: #00a6ff;
+}
+
+a.team-link:visited:hover {
+  color: #00a6ff;
+}
+
 a.team-link:visited {
-  color: #007bff; /* Set the link color */
+  color: #007bff;
 }
 
 .club {
