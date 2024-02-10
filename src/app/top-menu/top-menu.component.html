@@ -47,25 +47,25 @@
           <mat-icon>money</mat-icon>
           Balance: ${{ money }}
         </p>
-        <a href="/deposit">
+        <a routerLink="/deposit">
           <button mat-menu-item>
             <mat-icon>payment</mat-icon>
             Deposit
           </button>
         </a>
-        <a href="/withdraw">
+        <a routerLink="/withdraw">
           <button mat-menu-item>
             <mat-icon>account_balance</mat-icon>
             Withdraw
           </button>
         </a>
-        <a href="/my-bets">
+        <a routerLink="/my-bets">
           <button mat-menu-item>
             <mat-icon>subject</mat-icon>
             My Bets
           </button>
         </a>
-        <a href="/home">
+        <a routerLink="/home">
           <button mat-menu-item (click)="auth.logout()" id="logout">
             <mat-icon>highlight_off</mat-icon>
             Logout

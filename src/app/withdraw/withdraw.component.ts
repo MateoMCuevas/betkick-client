@@ -9,16 +9,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class WithdrawComponent implements OnInit {
   withdrawForm: FormGroup;
+  internationalBanks = [
+    'Bank of America',
+    'Deutsche Bank',
+    'HSBC',
+    'BNP Paribas',
+    'UBS',
+    'Santander',
+    'Mitsubishi UFJ Financial Group',
+    'Wells Fargo',
+  ];
 
   constructor(private fb: FormBuilder, private moneyUser: MoneyUserService) {}
 
   ngOnInit(): void {
     this.withdrawForm = this.fb.group({
-      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
-      cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
-      expirationDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{4}$/)]],
-      cardHolderName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s\-]+$/)]],
-      cardType: ['', Validators.required],
+      birthDate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
+      accountHolderName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s\-]+$/)]],
+      accountNumber: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      bankName: ['', Validators.required],
       transactionAmount: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]]
     });
   }

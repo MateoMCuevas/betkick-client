@@ -5,41 +5,31 @@
   </div>
   <form class="mat-elevation-z8" [formGroup]="withdrawForm" (ngSubmit)="submitForm()">
     <mat-form-field>
-      <input matInput placeholder="Card Number" formControlName="cardNumber" >
-      <mat-error *ngIf="withdrawForm.get('cardNumber')?.hasError('required')">Card Number is required</mat-error>
-      <mat-error *ngIf="withdrawForm.get('cardNumber')?.hasError('pattern')">Invalid Card Number (must be 16 digits)
+      <input matInput placeholder="Account Holder Name" formControlName="accountHolderName">
+      <mat-error *ngIf="withdrawForm.get('accountHolderName')?.hasError('required')">Card Holder Name is required
+      </mat-error>
+      <mat-error *ngIf="withdrawForm.get('accountHolderName')?.hasError('pattern')">Invalid characters in Card Holder Name
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="CVV" formControlName="cvv">
-      <mat-error *ngIf="withdrawForm.get('cvv')?.hasError('required')">CVV is required</mat-error>
-      <mat-error *ngIf="withdrawForm.get('cvv')?.hasError('pattern')">CVV must be a 3-digit number</mat-error>
+      <input matInput placeholder="Birth Date" formControlName="birthDate">
+      <mat-error *ngIf="withdrawForm.get('birthDate')?.hasError('required')">Birth Date is required</mat-error>
+      <mat-error *ngIf="withdrawForm.get('birthDate')?.hasError('pattern')">Invalid Birth Date format (use YYYY-MM-DD)</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Expiration Date" formControlName="expirationDate">
-      <mat-error *ngIf="withdrawForm.get('expirationDate')?.hasError('required')">Expiration Date is required</mat-error>
-      <mat-error *ngIf="withdrawForm.get('expirationDate')?.hasError('pattern')">Invalid Expiration Date (must be in
-        MM/YYYY format)
-      </mat-error>
+      <input matInput placeholder="Account Number" formControlName="accountNumber">
+      <mat-error *ngIf="withdrawForm.get('accountNumber')?.hasError('required')">Account Number is required</mat-error>
+      <mat-error *ngIf="withdrawForm.get('accountNumber')?.hasError('pattern')">Invalid Account Number (should be numeric)</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Card Holder Name" formControlName="cardHolderName">
-      <mat-error *ngIf="withdrawForm.get('cardHolderName')?.hasError('required')">Card Holder Name is required
-      </mat-error>
-      <mat-error *ngIf="withdrawForm.get('cardHolderName')?.hasError('pattern')">Invalid characters in Card Holder Name
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Card Type</mat-label>
-      <mat-select formControlName="cardType">
-        <mat-option value="visa">Visa</mat-option>
-        <mat-option value="mastercard">MasterCard</mat-option>
+      <mat-label>Bank Name</mat-label>
+      <mat-select formControlName="bankName">
+        <mat-option *ngFor="let bank of internationalBanks" [value]="bank">{{ bank }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="withdrawForm.get('cardType')?.hasError('required')">Card Type is required</mat-error>
+      <mat-error *ngIf="withdrawForm.get('bankName')?.hasError('required')">Bank Name is required</mat-error>
     </mat-form-field>
 
     <mat-form-field>
