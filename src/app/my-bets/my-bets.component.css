@@ -133,6 +133,7 @@
 
 .betInfo {
   font-family: Roboto;
+  min-width: 125px;
   font-weight: 500;
   background-color: #0A0A0A;
   border: 1px solid #333333;

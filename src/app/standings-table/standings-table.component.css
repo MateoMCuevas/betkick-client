@@ -11,6 +11,8 @@
 
 .container {
   background-color: #eaeaef;
+  min-height: 800px;
+  margin-bottom: 50px;
 }
 
 table {
