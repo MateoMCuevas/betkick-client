@@ -33,7 +33,7 @@
       </button>
     </div>
 
-  <div class="menu-options">
+  <div class="menu-options" (click)="getUserBalance()">
     <div *ngIf="user; else login">
       <button mat-button [matMenuTriggerFor]="menu" id="account-menu" *ngIf="!isSmallScreenBool">
         {{ auth.userName }}
@@ -42,7 +42,7 @@
       <button mat-button [matMenuTriggerFor]="menu" id="account-menu-small" *ngIf="isSmallScreenBool">
         <mat-icon id="account-icon-small">account_circle</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
+      <mat-menu #menu="matMenu" >
         <p mat-menu-item style="cursor: default">
           <mat-icon>money</mat-icon>
           Balance: ${{ money }}

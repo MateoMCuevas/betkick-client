@@ -41,4 +41,10 @@ export class TopMenuComponent implements OnInit {
     });
   }
 
+  getUserBalance() {
+    this.moneyUser.getUserBalance().subscribe(balance => {
+      this.money = balance;
+    });
+  }
+
 }
