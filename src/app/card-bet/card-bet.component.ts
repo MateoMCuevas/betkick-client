@@ -91,18 +91,16 @@ export class CardBetComponent implements OnInit {
         this.betService.sendDataToBackend()
           .subscribe(
           (response) => {
-            console.log("Backend's response: ", response);
+            this.moneyUser.showAlertMsj('Your bets have been placed!')
           },
           (error) => {
-            alert(error.error.apierror.message)
-            console.error('An error occurred: ', error.error.apierror.message);
+            this.moneyUser.showAlertMsj('Bets failed')
           }
         );
         this.updateMoney()
         this.betService.deleteList()
         this.alertBetAmount = false
         this.alertUserMoney = false
-        this.moneyUser.showAlertMsj('SUCCESSFUL BETS')
       } else if (!this.checkBetAmounts()) {
         this.alertBetAmount = true
         this.alertUserMoney = false
@@ -114,7 +112,7 @@ export class CardBetComponent implements OnInit {
         this.alertUserMoney = false
       }
     } else {
-      this.moneyUser.showAlertMsj('PLEASE LOGIN OR REGISTER')
+      this.moneyUser.showAlertMsj('Please login or register')
     }
   }
 

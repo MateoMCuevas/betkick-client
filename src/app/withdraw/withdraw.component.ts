@@ -13,11 +13,6 @@ export class WithdrawComponent implements OnInit {
     'Bank of America',
     'Deutsche Bank',
     'HSBC',
-    'BNP Paribas',
-    'UBS',
-    'Santander',
-    'Mitsubishi UFJ Financial Group',
-    'Wells Fargo',
   ];
 
   constructor(private fb: FormBuilder, private moneyUser: MoneyUserService) {}

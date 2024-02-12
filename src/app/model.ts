@@ -65,6 +65,7 @@ export interface CompetitionStandings {
 }
 
 export interface UserBetSummary {
+  "position": number;
   "name": string;
   "earnings": number;
   "betsWon": number;

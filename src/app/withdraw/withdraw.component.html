@@ -6,9 +6,9 @@
   <form class="mat-elevation-z8" [formGroup]="withdrawForm" (ngSubmit)="submitForm()">
     <mat-form-field>
       <input matInput placeholder="Account Holder Name" formControlName="accountHolderName">
-      <mat-error *ngIf="withdrawForm.get('accountHolderName')?.hasError('required')">Card Holder Name is required
+      <mat-error *ngIf="withdrawForm.get('accountHolderName')?.hasError('required')">Account Holder Name is required
       </mat-error>
-      <mat-error *ngIf="withdrawForm.get('accountHolderName')?.hasError('pattern')">Invalid characters in Card Holder Name
+      <mat-error *ngIf="withdrawForm.get('accountHolderName')?.hasError('pattern')">Invalid characters in Account Holder Name
       </mat-error>
     </mat-form-field>
 
