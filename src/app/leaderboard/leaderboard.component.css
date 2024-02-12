@@ -11,8 +11,9 @@
 
 .mat-elevation-z8 {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 
@@ -31,6 +32,12 @@ th, td {
   text-align: center; /* Center content horizontally in both headers and cells */
   font-size: 0.95rem;
   font-family: Roboto, serif;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+  margin-left: 15px;
 }
 
 th {

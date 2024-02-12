@@ -3,7 +3,7 @@
 
     <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="sortedDataSource">
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> Position</th>
+        <th mat-header-cell *matHeaderCellDef> <span style="margin-left: 25px">Position</span></th>
         <td mat-cell *matCellDef="let user">
           <div class="position-cell-container">
             <mat-icon [ngClass]="{'star-icon-gold': user.position === 1, 'star-icon-silver': user.position === 2,
@@ -32,8 +32,8 @@
       </ng-container>
 
       <ng-container matColumnDef="earnings">
-        <th mat-header-cell mat-sort-header="earnings" *matHeaderCellDef> Earnings</th>
-        <td mat-cell *matCellDef="let user" [ngStyle]="{'color': user.earnings < 0 ? '#ff0000' : '#00cc00'}">
+        <th mat-header-cell mat-sort-header="earnings" *matHeaderCellDef> Net Gain/Loss</th>
+        <td mat-cell *matCellDef="let user" [ngStyle]="{'color': user.earnings < 0 ? '#d50000' : '#009400'}">
           {{ user.earnings | currency:'USD' }}
         </td>
       </ng-container>
@@ -42,7 +42,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[15, 10, 5]"
+    <mat-paginator [pageSizeOptions]="[10, 15]"
                    [showFirstLastButtons]="true"
                    aria-label="Select page of the leaderboard">
     </mat-paginator>
