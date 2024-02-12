@@ -6,20 +6,21 @@
   justify-content: flex-start; /* Optional: Adjust as needed */
   align-items: center; /* Optional: Adjust as needed */
   overflow: scroll;
-  background-color: #eaeaef;
 }
 
 .mat-elevation-z8 {
   width: 100%;
-  max-width: 1350px;
+  max-width: 1100px;
 }
+
 
 table, mat-paginator {
   width: 100%; /* Ensure the table takes 100% of its container */
   font-size: 0.85rem;
   min-width: 395px;
-  overflow: scroll;
+  overflow-x: scroll;
 }
+
 
 th, td {
   text-align: center; /* Center content horizontally in both headers and cells */

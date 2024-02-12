@@ -60,7 +60,6 @@ export class StandingsTableComponent implements OnInit {
 
   sortData(sort: Sort, tableData: TableData, index: number) {
     const standings = tableData.standings
-    console.log(index)
 
     this.sortedDataSources[index].standings.data = standings.data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
