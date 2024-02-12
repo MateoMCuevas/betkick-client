@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthGuard } from '../auth-guard.guard';
 import { AuthService } from '../service/auth.service';
 import {map, Observable} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-card-bet',
@@ -27,7 +28,8 @@ export class CardBetComponent implements OnInit {
   constructor(
     private betService: BetService,
     private moneyUser: MoneyUserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -43,6 +45,11 @@ export class CardBetComponent implements OnInit {
         return balance;
       })
     );
+  }
+
+  shouldShowCardBetContainer(): boolean {
+    const currentRoute = this.router.url
+    return currentRoute?.includes("home")
   }
 
   async updateMoney() {

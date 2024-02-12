@@ -22,17 +22,17 @@
       </ng-container>
 
       <ng-container matColumnDef="betsWon">
-        <th mat-header-cell matTooltip="Bets won" mat-sort-header="betsWon" *matHeaderCellDef> Bets Won</th>
+        <th mat-header-cell mat-sort-header="betsWon" *matHeaderCellDef> Bets Won</th>
         <td mat-cell *matCellDef="let user"> {{ user.betsWon }}</td>
       </ng-container>
 
       <ng-container matColumnDef="betsLost">
-        <th mat-header-cell matTooltip="Bets lost" mat-sort-header="betsLost" *matHeaderCellDef> Bets Lost</th>
+        <th mat-header-cell mat-sort-header="betsLost" *matHeaderCellDef> Bets Lost</th>
         <td mat-cell *matCellDef="let user"> {{ user.betsLost }}</td>
       </ng-container>
 
       <ng-container matColumnDef="earnings">
-        <th mat-header-cell matTooltip="Earnings" mat-sort-header="earnings" *matHeaderCellDef> Earnings</th>
+        <th mat-header-cell mat-sort-header="earnings" *matHeaderCellDef> Earnings</th>
         <td mat-cell *matCellDef="let user" [ngStyle]="{'color': user.earnings < 0 ? '#ff0000' : '#00cc00'}">
           {{ user.earnings | currency:'USD' }}
         </td>
@@ -42,7 +42,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[15, 10]"
+    <mat-paginator [pageSizeOptions]="[15, 10, 5]"
                    [showFirstLastButtons]="true"
                    aria-label="Select page of the leaderboard">
     </mat-paginator>

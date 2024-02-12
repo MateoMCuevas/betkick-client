@@ -14,7 +14,6 @@ export class MyBetsComponent implements OnInit {
   myFinishedBets: any[] = []
   myActiveBets: any[] = []
   myLiveBets: any[] = []
-  MyBets: any[] = []
   selectedListType: number = 0;
   isAuthenticated!: boolean;
   user!: User;
@@ -43,7 +42,7 @@ export class MyBetsComponent implements OnInit {
         this.myLiveBets = response.filter(function (bet: any) {
           return bet.match.status == 'IN_PLAY' || bet.match.status == 'PAUSED'
         })
-
+        this.showList(1)
       },
       (error) => {
         console.error('An error occurred in my-bets: ', error);
@@ -57,7 +56,7 @@ export class MyBetsComponent implements OnInit {
     });
     this.selectedList.splice(index, 1)
     this.moneyService.setMoney(this.money)
-    this.moneyService.showAlertMsj('THE BET WAS SUCCESSFULLY CANCELED')
+    this.moneyService.showAlertMsj('The bet was successfully cancelled')
   }
 
   adjustedDate(utcDateString: string): Date {

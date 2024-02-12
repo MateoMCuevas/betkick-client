@@ -1,4 +1,4 @@
-<div class="card-bet-container">
+<div class="card-bet-container" *ngIf="shouldShowCardBetContainer()">
     <div class="floating-icon" (click)="toggleCardVisibility()">
         <mat-card-header class="card-bet-header">
             <button mat-icon-button class="arrowBtn">
