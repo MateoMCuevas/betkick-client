@@ -35,11 +35,13 @@ a.team-link {
 }
 
 a.team-link:hover {
-  color: #00a6ff;
+  color: #007bff;
+  text-decoration: underline;
 }
 
 a.team-link:visited:hover {
-  color: #00a6ff;
+  color: #007bff;
+  text-decoration: underline;
 }
 
 a.team-link:visited {

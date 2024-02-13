@@ -252,17 +252,20 @@
   margin-top: 1.5rem;
 }
 
+
 a {
   color: #007bff;
   text-decoration: none;
 }
 
 a:hover {
-  color: #00a6ff;
+  color: #007bff;
+  text-decoration: underline;
 }
 
 a:visited:hover {
-  color: #00a6ff;
+  color: #007bff;
+  text-decoration: underline;
 }
 
 a:visited {

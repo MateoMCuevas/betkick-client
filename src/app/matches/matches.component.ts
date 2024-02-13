@@ -123,16 +123,32 @@ export class MatchesComponent implements OnInit {
       let awayTeamShortName: string = "";
       team = team.toLowerCase();
       this.matches.forEach(element => {
-        homeTeamLongName = element.awayTeam.name.toLowerCase();
-        awayTeamLongName = element.homeTeam.name.toLowerCase();
-        homeTeamShortName = element.awayTeam.shortName.toLowerCase();
-        awayTeamShortName = element.homeTeam.shortName.toLowerCase();
-        if ((homeTeamLongName.includes(team) || awayTeamLongName.includes(team) ||
-            homeTeamShortName.includes(team) || awayTeamShortName.includes(team)) &&
-          !(element.status == 'IN_PLAY' || element.status == 'PAUSED')) {
-          this.searchMatches.push(element);
+          homeTeamLongName = element.awayTeam.name.toLowerCase();
+          awayTeamLongName = element.homeTeam.name.toLowerCase();
+          homeTeamShortName = element.awayTeam.shortName.toLowerCase();
+          awayTeamShortName = element.homeTeam.shortName.toLowerCase();
+
+          if (team.includes(' ') && team.trim() !== '') { // check if user is searching for a specific matchup
+            const teamNames = team.split(' ');
+
+            // Check if both parts of the space-separated team name are present in either long or short names
+            if (
+              (teamNames.every(name => homeTeamLongName.includes(name) || awayTeamLongName.includes(name)) ||
+                teamNames.every(name => homeTeamShortName.includes(name) || awayTeamShortName.includes(name))) &&
+              !(element.status == 'IN_PLAY' || element.status == 'PAUSED')
+            ) {
+              this.searchMatches.push(element);
+            }
+          } else if (team.trim() !== '') { // else check if any team has the user input in its name
+            if ((homeTeamLongName.includes(team) || awayTeamLongName.includes(team) ||
+                homeTeamShortName.includes(team) || awayTeamShortName.includes(team)) &&
+              !(element.status == 'IN_PLAY' || element.status == 'PAUSED')) {
+              this.searchMatches.push(element);
+            }
+          }
         }
-      });
+      )
+      ;
       this.noMatchesFound = this.searchMatches.length == 0 && this.inputMatch.length > 0; // user is searching but nothing is found
       if (!this.noMatchesFound) {
 
@@ -161,7 +177,9 @@ export class MatchesComponent implements OnInit {
     }
   }
 
-  getMatches(competitionId?: number): void {
+  getMatches(competitionId ?: number)
+    :
+    void {
     this.eventService.getMatches(competitionId)
       .subscribe(matches => {
         this.matches = matches;
@@ -178,15 +196,27 @@ export class MatchesComponent implements OnInit {
       });
   }
 
-  compareDates(date1: string, date2: string): number {
+  compareDates(date1
+                 :
+                 string, date2
+                 :
+                 string
+  ):
+    number {
     const dateA = new Date(date1);
     const dateB = new Date(date2);
     return dateA.getTime() - dateB.getTime();
   }
 
-  handleButtonClick(eventData: any): void {
+  handleButtonClick(eventData
+                      :
+                      any
+  ):
+    void {
     const {match, odds, winnerTeam} = eventData;
-    let listBetsLength: number = 0
+    let listBetsLength
+      :
+      number = 0
     this.betService.listBets$.subscribe((datos) => {
       let listBets: any = datos;
       listBetsLength = (listBets as FormArray).length;
@@ -239,7 +269,10 @@ export class MatchesComponent implements OnInit {
   }
 
   // skip empty weeks
-  nextWeek(week: number) {
+  nextWeek(week
+             :
+             number
+  ) {
     if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
       week++;
       for (week; week < this.weekMatches.length; week++) {
@@ -251,7 +284,10 @@ export class MatchesComponent implements OnInit {
   }
 
   // skip empty weeks
-  prevWeek(week: number) {
+  prevWeek(week
+             :
+             number
+  ) {
     if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
       week--;
       for (week; week >= 0; week--) {
@@ -263,7 +299,10 @@ export class MatchesComponent implements OnInit {
     this.onWeekSelected(week);
   }
 
-  onWeekSelected(selectedWeek: number) {
+  onWeekSelected(selectedWeek
+                   :
+                   number
+  ) {
 
     if (selectedWeek >= 0 && selectedWeek < this.weekMatches.length) {
       this.selectedWeek = selectedWeek;
@@ -306,7 +345,10 @@ export class MatchesComponent implements OnInit {
   }
 
 
-  getButtonText(week: number) {
+  getButtonText(week
+                  :
+                  number
+  ) {
     if (week == 0) {
       return 'This week';
     } else if (week == 1) {
