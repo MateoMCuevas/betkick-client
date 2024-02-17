@@ -44,7 +44,7 @@ export interface Match {
 export class User {
   sub!: string;
   email!: number;
-  name!: string;
+  nickname!: string;
 }
 
 export interface Standing {

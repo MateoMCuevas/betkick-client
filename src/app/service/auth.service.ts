@@ -23,7 +23,7 @@ export class AuthService {
           if (response !== null) {
             this.$authenticationState.next(true);
             this.userId = response.sub;
-            this.userName = response.name;
+            this.userName = response.nickname;
             this.loginBoolean = true;
           }
           return response;

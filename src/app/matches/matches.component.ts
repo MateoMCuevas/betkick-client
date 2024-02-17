@@ -180,8 +180,13 @@ export class MatchesComponent implements OnInit {
   getMatches(competitionId ?: number)
     :
     void {
-    this.eventService.getMatches(competitionId)
+    this.eventService.getMatches()
       .subscribe(matches => {
+        if (competitionId !== undefined) {
+          // Filter matches only when competitionId is defined
+          matches = matches.filter(match => match.competition.id === competitionId);
+        }
+
         this.matches = matches;
         this.competition = matches[0].competition.name;
         this.matches.sort((a, b) => this.compareDates(a.utcDate, b.utcDate));
@@ -253,6 +258,10 @@ export class MatchesComponent implements OnInit {
         this.liveMatches.push(match);
       } else if (this.isTodayMatch(match)) {
         this.todayMatches.push(match);
+        if (!this.weekMatches[0]) {
+          this.weekMatches[0] = [];
+        }
+        this.weekMatches[0].push(match);
       } else {
         const weekNumber = this.getWeekNumber(match.utcDate);
 
@@ -349,7 +358,7 @@ export class MatchesComponent implements OnInit {
                   :
                   number
   ) {
-    if (week == 0) {
+    if (week == 0 || week == undefined) {
       return 'This week';
     } else if (week == 1) {
       return 'Next week';

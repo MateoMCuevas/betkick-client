@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {catchError, Observable, of} from "rxjs";
+import {catchError, Observable, of, tap} from "rxjs";
 import {Competition, CompetitionStandings, Match, UserBetSummary} from "../model";
 import {HttpClient} from "@angular/common/http";
 
@@ -10,7 +10,9 @@ export class EventService {
   competitionsUrl: string = 'api/active-competitions';
   competitionsWithStandingsUrl: string = 'api/competitions-with-standings';
   matchesUrl: string = 'api/matches';
-  standingsUrl: string= 'api/standings'
+  standingsUrl: string = 'api/standings'
+  matches: Match[] = [];
+
 
   constructor(private http: HttpClient) {
   }
@@ -29,11 +31,19 @@ export class EventService {
       );
   }
 
-  getMatches(competitionId?: number): Observable<Match[]> {
-    const url = this.matchesUrl +
-      (competitionId !== undefined ? `?competitionId=${competitionId}` : '');
+  getMatches(): Observable<Match[]> {
+    if (this.matches.length > 0) {
+      // If matches is not empty, return it immediately
+      return of(this.matches);
+    }
+
+    const url = this.matchesUrl;
+
     return this.http.get<Match[]>(url)
       .pipe(
+        tap((data) => {
+          this.matches = data;
+        }),
         catchError(this.handleError<Match[]>('getMatches', []))
       );
   }
