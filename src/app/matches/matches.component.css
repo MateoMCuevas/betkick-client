@@ -21,7 +21,7 @@ p {
   width: 100%;
   box-sizing: border-box;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-  background: #1a1919;
+  background: #0A0A0A;
 }
 
 .label mat-icon {

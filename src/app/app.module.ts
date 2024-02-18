@@ -44,6 +44,7 @@ import { StandingsComponent } from './standings/standings.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSortModule} from "@angular/material/sort";
 import {MatSelectModule} from "@angular/material/select";
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import {MatSelectModule} from "@angular/material/select";
     StandingsTableComponent,
     StandingsCompetitionsComponent,
     StandingsComponent,
+    LandingPageComponent,
   ],
     imports: [
         AppRoutingModule,

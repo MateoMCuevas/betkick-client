@@ -9,10 +9,11 @@ import { AuthGuard } from './auth-guard.guard';
 import {LeaderboardComponent} from "./leaderboard/leaderboard.component";
 import {StandingsTableComponent} from "./standings-table/standings-table.component";
 import {StandingsComponent} from "./standings/standings.component";
+import {LandingPageComponent} from "./landing-page/landing-page.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'leaderboard', component: LeaderboardComponent },
+  { path: '', component: LandingPageComponent },
   {
     path: 'standings',
     component: StandingsComponent,
