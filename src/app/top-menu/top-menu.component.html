@@ -45,7 +45,7 @@
       <mat-menu #menu="matMenu" >
         <p mat-menu-item style="cursor: default">
           <mat-icon>money</mat-icon>
-          Balance: ${{ money }}
+          Balance: {{ money | currency: 'USD' }}
         </p>
         <a routerLink="/deposit">
           <button mat-menu-item>

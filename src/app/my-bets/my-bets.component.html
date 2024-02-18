@@ -11,7 +11,7 @@
   <div class="bet-list">
     <div *ngIf="!isListEmpty() ; else emptyListMessage">
       <mat-card class="card-container" *ngFor="let bet of selectedList; let index = index">
-        <div class="card-title" [ngStyle]="{ 'border-bottom': selectedListType === 2 ? '0' : '1px solid #333333' }">
+        <div class="card-title" [ngStyle]="{ 'border-bottom': selectedListType === 2 ? '0' : '1px solid #2D2D2D' }">
             <span style="color: white">Bet #{{ bet.id }} | Placed on
               {{ adjustedDate(bet.placedAt) | date:"MMM dd, yyyy 'at' hh:mm a" }} </span>
           <p *ngIf="selectedListType === 3 && bet.isWon" class="betResult" style="background-color: #02b202">
@@ -56,21 +56,21 @@
             <p *ngIf="bet.winner ==='DRAW' && selectedListType !== 3" class="green">Draw</p>
           </div>
         </mat-card-header>
-        <mat-divider style="background-color: #333333;"></mat-divider>
+        <mat-divider style="background-color: #2D2D2D;"></mat-divider>
         <mat-card-content class="card-content">
           <div class="box">
             <p>Bet Amount</p>
-            <p class="green">${{ bet.amount }}</p>
+            <p class="green">{{ bet.amount | currency: 'USD' }}</p>
           </div>
           <div class="box">
             <p>Odds</p>
-            <p class="green">X{{ bet.odds }}</p>
+            <p class="green">X{{ bet.odds | number:'1.1-1' }}</p>
           </div>
           <div class="box">
             <p *ngIf="selectedListType !== 3">Potential Earnings</p>
             <p *ngIf="selectedListType === 3 && bet.isWon">Earnings</p>
             <p *ngIf="selectedListType !== 3 || bet.isWon" class="green">
-              ${{ calculateEarnings(bet.amount, bet.odds) }}</p>
+              {{ calculateEarnings(bet.amount, bet.odds) | currency: 'USD' }}</p>
 
             <p *ngIf="selectedListType === 3 && !bet.isWon">Prediction</p>
             <p *ngIf="bet.winner === 'AWAY_TEAM' && selectedListType === 3 && !bet.isWon"
