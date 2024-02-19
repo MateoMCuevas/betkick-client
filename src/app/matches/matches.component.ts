@@ -338,19 +338,30 @@ export class MatchesComponent implements OnInit {
                   string
   ):
     number {
+    // Get UTC the date of the current week's monday
+    const today = new Date();
+    const currentDay = today.getUTCDay();
+    const daysToMonday = currentDay === 0 ? 6 : (1 - currentDay);
+
+    const monday = new Date(today);
+    monday.setUTCDate(today.getUTCDate() - daysToMonday);
+
+    // Reset the time to midnight
+    monday.setUTCHours(0, 0, 0, 0);
+
+    // Calculate the difference in days between the match date and the monday of the current week
     const matchDate = new Date(date);
-    const currentDate = new Date();
+
+    // Hours, minutes, seconds and milliseconds don't matter
+    matchDate.setUTCHours(0, 0, 0, 0);
 
     // Calculate the difference in days
-    const diffInTime = matchDate.getTime() - currentDate.getTime();
+    const diffInTime = matchDate.getTime() - monday.getTime();
     const diffInDays = diffInTime / (1000 * 3600 * 24);
 
-    // Adjust for the day of the week (Sunday is 0, Monday is 1, ..., Saturday is 6)
-    const dayOfWeek = (currentDate.getDay() + 6) % 7;
-    const adjustedDiffInDays = diffInDays + dayOfWeek;
-
     // Calculate the week number
-    return Math.floor(adjustedDiffInDays / 7);
+    return Math.floor(diffInDays / 7);
+
   }
 
 

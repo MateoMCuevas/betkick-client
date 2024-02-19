@@ -1,13 +1,18 @@
 .container {
   font-family: Roboto, serif;
-  background-color: black;
+  background-color: #0A0A0A;
   min-height: 700px;
   border-top: 1px solid #2D2D2D;
   border-bottom: 1px solid #2D2D2D;
 }
 
+h3 {
+  line-height: 1.2;
+  letter-spacing: 2px;
+}
+
 .hero {
-  background-image: url('/assets/images/stadium.jpg');
+  background-image: url('/assets/images/stadium3.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -23,28 +28,31 @@ h1 {
   font-weight: bolder;
   text-align: center;
   color: white;
+  letter-spacing: 3px;
 }
 
 .hero p {
   font-size: 1.1rem;
   text-align: center;
   color: white;
+  letter-spacing: 1px;
 }
 
 button {
-  border: 1px solid #2D2D2D;
+  border: none;
   font-family: 'Roboto', serif;
+  font-weight: bolder;
   font-size: 1rem;
   text-align: center;
   height: 2.5rem;
   width: 9rem;
   box-sizing: border-box;
-  color: white;
-  background: black;
-  border-radius: 18px;
+  color: rgba(255, 255, 255);
+  background: rgba(0, 0, 0);
   margin: 0.2rem;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 button:hover {
@@ -52,8 +60,40 @@ button:hover {
   cursor: pointer;
 }
 
+.betkick {
+  background-image: url('/assets/images/header4.jpg');
+  background-position: bottom;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1000px;
+  gap: 1rem;
+  margin: 4rem auto 0;
+  border-radius: 12px;
+  padding: 3rem 1.5rem;
+}
+
+.betkick h3 {
+  color: white;
+  text-align: center;
+  margin-bottom: 0;
+  font-weight: 500;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+}
+
+.betkick p {
+  color: white;
+  text-align: center;
+  padding: 0 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
 .feature {
-  background-color: #0A0A0A;
+  background-color: black;
   border: 1px solid  #2D2D2D;
   display: flex;
   justify-content: center;
@@ -68,11 +108,9 @@ button:hover {
 .medium-img {
   border-bottom: 0.7rem;
   border-top: 0.7rem;
-  border-radius: 14px;
   width: 625px;
   height: 375px;
 }
-
 
 .text {
   color: white;
@@ -83,7 +121,8 @@ button:hover {
 }
 
 .text p {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
 }
 
 .left {
@@ -94,23 +133,25 @@ button:hover {
   text-align: center;
 }
 
-.text h2 {
+.text h3 {
   font-weight: 500;
   font-size: 2rem;
 }
 
-.left h2 {
+.left h3 {
   align-self: flex-start;
 }
 
 .powered-by {
+  background-color: black;
   color: white;
-  margin: 0 auto 1rem;
   text-align: center;
   display: block;
   font-weight: bold;
   letter-spacing: 3px;
   font-size: 0.8rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
   padding-top: 1rem;
 }
 
@@ -118,9 +159,10 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5.5rem;
+  gap: 6rem;
+  padding-bottom: 0.5rem;
+  background-color: black;
   border-bottom: 1px solid #2D2D2D;
-  padding-bottom: 1rem;
 }
 
 .image-container {
@@ -169,7 +211,7 @@ button:hover {
     text-align: center;
   }
 
-  .text h2 {
+  .text h3 {
     align-self: auto;
   }
 }

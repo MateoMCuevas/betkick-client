@@ -6,7 +6,7 @@
   margin: 0 auto;
   border-top: 1px solid #2D2D2D;
   border-bottom: 1px solid #2D2D2D;
-  background-color: black;
+  background-color: #0A0A0A;
   padding-bottom: 1.3rem;
   min-height: 700px;
 }
@@ -18,9 +18,7 @@
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
-  padding: 0.8rem;
   color: #08f905;
-  border: 1px solid #2D2D2D;
   max-width: 830px;
   transform: scale(0.9);
 }
@@ -241,7 +239,7 @@
 }
 
 .noBetsMessage {
-  background-color: #0A0A0A;
+  background-color: black;
   font-weight: 500;
   padding: 2.5rem;
   font-family: Roboto, serif;
