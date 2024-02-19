@@ -60,6 +60,48 @@ button:hover {
   cursor: pointer;
 }
 
+.powered-by {
+  background-color: black;
+  color: white;
+  text-align: center;
+  display: block;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.tech-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+  padding-bottom: 0.5rem;
+  background-color: black;
+  border-bottom: 1px solid #2D2D2D;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container img {
+  width: 40px;
+  height: 40px;
+}
+
+.image-container p {
+  color: white;
+  font-size: 0.6rem;
+  margin-top: 0.3rem;
+  font-weight: bold;
+}
+
 .betkick {
   background-image: url('/assets/images/header4.jpg');
   background-position: bottom;
@@ -142,46 +184,27 @@ button:hover {
   align-self: flex-start;
 }
 
-.powered-by {
-  background-color: black;
-  color: white;
-  text-align: center;
-  display: block;
-  font-weight: bold;
-  letter-spacing: 3px;
-  font-size: 0.8rem;
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-
-.tech-container {
+.cta {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 6rem;
-  padding-bottom: 0.5rem;
-  background-color: black;
-  border-bottom: 1px solid #2D2D2D;
-}
-
-.image-container {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 3rem 1.5rem;
+  max-width: 1000px;
+  min-height: 400px;
+  max-height: 500px;
+  border-radius: 12px;
+  margin: 0 auto 4rem;
+  background-image: url('/assets/images/betting2.jpg');
+  background-size: cover;
 }
 
-.image-container img {
-  width: 40px;
-  height: 40px;
-}
-
-.image-container p {
+.cta h3 {
+  font-size: 2.1rem;
+  font-weight: bolder;
+  text-align: center;
   color: white;
-  font-size: 0.6rem;
-  margin-top: 0.3rem;
-  font-weight: bold;
+  letter-spacing: 3px;
 }
 
 @media only screen and (max-width: 1065px) {
