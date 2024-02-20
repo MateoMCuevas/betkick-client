@@ -5,48 +5,50 @@
     <button (click)="auth.login()">
       SIGN UP
     </button>
-  </div>
 
-  <p class="powered-by">POWERED BY</p>
-  <div class="tech-container">
-    <div class="image-container">
-      <img src="/assets/logos/angular-svgrepo-com.svg" alt="Angular">
-      <p>Angular</p>
-    </div>
+    <div class="powered-by-container">
+      <p class="powered-by">POWERED BY</p>
+      <div class="tech-container">
+        <div class="image-container">
+          <img src="/assets/logos/angular-svgrepo-com.svg" alt="Angular">
+          <p>Angular</p>
+        </div>
 
-    <div class="image-container">
-      <img src="/assets/logos/spring-svgrepo-com.svg" alt="Spring">
-      <p>Spring Boot</p>
-    </div>
+        <div class="image-container">
+          <img src="/assets/logos/spring-svgrepo-com.svg" alt="Spring">
+          <p>Spring Boot</p>
+        </div>
 
-    <div class="image-container">
-      <img src="/assets/logos/mariadb-svgrepo-com.svg" alt="MariaDB">
-      <p>MariaDB</p>
-    </div>
+        <div class="image-container">
+          <img src="/assets/logos/mariadb-svgrepo-com.svg" alt="MariaDB">
+          <p>MariaDB</p>
+        </div>
 
-    <div class="image-container">
-      <img src="/assets/logos/docker-svgrepo-com.svg" alt="Docker">
-      <p>Docker</p>
-    </div>
+        <div class="image-container">
+          <img src="/assets/logos/docker-svgrepo-com.svg" alt="Docker">
+          <p>Docker</p>
+        </div>
 
-    <div class="image-container">
-      <img src="/assets/logos/auth_logo_icon_145471.svg" alt="Auth0">
-      <p>Auth0</p>
-    </div>
+        <div class="image-container">
+          <img src="/assets/logos/google-cloud-svgrepo-com.svg" alt="Google Cloud">
+          <p>Google Cloud</p>
+        </div>
 
-    <div class="image-container">
-      <img src="/assets/logos/google-cloud-svgrepo-com.svg" alt="Google Cloud">
-      <p>Google Cloud</p>
-    </div>
+        <div class="image-container">
+          <img src="/assets/logos/vercel-logo-svgrepo-com.svg" alt="Vercel Logo">
+          <p>Vercel</p>
+        </div>
 
-    <div class="image-container">
-      <img src="/assets/logos/vercel-logo-svgrepo-com.svg" alt="Vercel Logo">
-      <p>Vercel</p>
+        <div class="image-container">
+          <img src="/assets/logos/auth_logo_icon_145471.svg" alt="Auth0">
+          <p>Auth0</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="betkick">
-    <h3>But what is BetKick?</h3>
+    <h3>What is BetKick?</h3>
     <p>BetKick stands as a football betting simulation platform, providing users with a risk-free environment
       to engage with real football data.
       This project allows users to explore and interact with football matches and standings, bet on game results
@@ -57,7 +59,8 @@
   <div class="feature">
     <div class="text left">
       <h3>All The Features, Zero Risk</h3>
-      <p>Filter matches by date or competition, check out live and today's games, and have fun betting on any match without
+      <p>Filter matches by date or competition, check out live and today's games, and have fun betting on any match
+        without
         the stress of losing money. </p>
     </div>
     <img class="medium-img" src="../../assets/images/home3.png">
@@ -92,7 +95,7 @@
 
   <div class="cta">
     <h3>Ready to get started?</h3>
-    <button (click)="auth.login()">
+    <button routerLink="/home">
       Try For Free
     </button>
   </div>

@@ -282,7 +282,7 @@ export class MatchesComponent implements OnInit {
              :
              number
   ) {
-    if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0) {
+    if (this.weekMatches[week] === undefined || this.weekMatches[week].length === 0 || week < 0) {
       week++;
       for (week; week < this.weekMatches.length; week++) {
         if (this.weekMatches[week] !== undefined && this.weekMatches[week].length > 0)
