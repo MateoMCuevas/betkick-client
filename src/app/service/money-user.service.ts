@@ -30,7 +30,7 @@ export class MoneyUserService {
     let params = new HttpParams();
     params = params.set('userId', encodedUserId);
 
-    return this.http.get<any>('api/user/balance', {params})
+    return this.http.get<any>('https://34.71.77.27:8080/api/user/balance', {params})
   }
 
   sendWithdrawRequest(withdrawAmount: number) {

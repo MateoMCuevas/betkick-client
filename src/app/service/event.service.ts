@@ -7,10 +7,10 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class EventService {
-  competitionsUrl: string = 'api/active-competitions';
-  competitionsWithStandingsUrl: string = 'api/competitions-with-standings';
-  matchesUrl: string = 'api/matches';
-  standingsUrl: string = 'api/standings'
+  competitionsUrl: string = 'https://34.71.77.27:8080/api/active-competitions';
+  competitionsWithStandingsUrl: string = 'https://34.71.77.27:8080/api/competitions-with-standings';
+  matchesUrl: string = 'https://34.71.77.27:8080/api/matches';
+  standingsUrl: string = 'https://34.71.77.27:8080/api/standings'
   matches: Match[] = [];
 
 
@@ -57,7 +57,7 @@ export class EventService {
   }
 
   getLeaderboard(competitionId?: number): Observable<UserBetSummary[]> {
-    return this.http.get<UserBetSummary[]>('api/leaderboard')
+    return this.http.get<UserBetSummary[]>('https://34.71.77.27:8080/api/leaderboard')
       .pipe(
         catchError(this.handleError<UserBetSummary[]>('getLeaderboard', []))
       );
