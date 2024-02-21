@@ -76,7 +76,7 @@ button:hover {
   font-size: 0.85rem;
   margin: 0 auto;
   padding-bottom: 0.6rem;
-  padding-top: 0.6rem;
+  padding-top: 1rem;
 }
 
 .tech-container {
@@ -109,7 +109,7 @@ button:hover {
   white-space: nowrap;
 }
 
-.betkick {
+.what-is-betkick {
   background-image: url('/assets/images/header4.jpg');
   background-position: bottom;
   background-size: cover;
@@ -124,7 +124,7 @@ button:hover {
   padding: 3rem 1.5rem;
 }
 
-.betkick h3 {
+.what-is-betkick h3 {
   color: white;
   text-align: center;
   margin-bottom: 0;
@@ -133,7 +133,7 @@ button:hover {
   letter-spacing: 2px;
 }
 
-.betkick p {
+.what-is-betkick p {
   color: white;
   text-align: center;
   padding: 0 2rem;
@@ -237,7 +237,7 @@ button:hover {
     transform: none;
   }
 
-  .betkick {
+  .what-is-betkick {
     margin-top: 0;
     width: 100%;
     border-radius: 0;
@@ -245,7 +245,7 @@ button:hover {
     padding-right: 0;
   }
 
-  .betkick p {
+  .what-is-betkick p {
     letter-spacing: 0;
   }
 

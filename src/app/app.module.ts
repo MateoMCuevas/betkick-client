@@ -45,6 +45,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSortModule} from "@angular/material/sort";
 import {MatSelectModule} from "@angular/material/select";
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     StandingsCompetitionsComponent,
     StandingsComponent,
     LandingPageComponent,
+    NotFoundComponent,
   ],
     imports: [
         AppRoutingModule,

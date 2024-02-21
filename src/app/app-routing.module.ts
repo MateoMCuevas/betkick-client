@@ -10,6 +10,7 @@ import {LeaderboardComponent} from "./leaderboard/leaderboard.component";
 import {StandingsTableComponent} from "./standings-table/standings-table.component";
 import {StandingsComponent} from "./standings/standings.component";
 import {LandingPageComponent} from "./landing-page/landing-page.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
   { path: 'leaderboard', component: LeaderboardComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   },
   {path: 'deposit', component: DepositComponent,canActivate:[AuthGuard]},
   {path: 'withdraw', component: WithdrawComponent,canActivate:[AuthGuard]},
-  {path: 'my-bets', component: MyBetsComponent,canActivate:[AuthGuard]}
+  {path: 'my-bets', component: MyBetsComponent,canActivate:[AuthGuard]},
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
