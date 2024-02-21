@@ -44,14 +44,14 @@ export class BetService {
     let params = new HttpParams();
     params = params.set('userId', userId);
 
-    return this.http.post<any>('http://34.71.77.27:8080/api/bet', modifiedData, { params });
+    return this.http.post<any>('https://betkick-api.leandroruhl.com/api/bet', modifiedData, { params });
   }
 
   cancelBet(betId: number) {
     let params = new HttpParams();
     params = params.set('betId', betId);
 
-    return this.http.delete<any>('http://34.71.77.27:8080/api/user/bet', { params })
+    return this.http.delete<any>('https://betkick-api.leandroruhl.com/api/user/bet', { params })
   }
 
   getBetHistory() {
@@ -59,7 +59,7 @@ export class BetService {
     let params = new HttpParams();
     params = params.set('userId', userId);
 
-    return this.http.get<any>('http://34.71.77.27:8080/api/user/bets', { params });
+    return this.http.get<any>('https://betkick-api.leandroruhl.com/api/user/bets', { params });
   }
 
   setBetAmount(form: FormGroup, newAmount: number) {
