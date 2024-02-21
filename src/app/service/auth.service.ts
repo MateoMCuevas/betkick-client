@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   getUser(): Observable<User> {
-    return this.http.get<User>('/api/user', {headers}, )
+    return this.http.get<User>('https://34.71.77.27:8080/api/user', {headers}, )
       .pipe(map((response: User) => {
           if (response !== null) {
             this.$authenticationState.next(true);
@@ -37,11 +37,11 @@ export class AuthService {
   }
 
   login(): void {
-    location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/okta')}`;
+    location.href = `${location.origin}${this.location.prepareExternalUrl('https://34.71.77.27:8080/oauth2/authorization/okta')}`;
   }
 
   logout(): void {
-    this.http.post('/api/logout', {}, { withCredentials: true }).subscribe(
+    this.http.post('https://34.71.77.27:8080/api/logout', {}, { withCredentials: true }).subscribe(
       (response: any) => {
         // Redirect to the logout URL received from the server
         window.location.href = response.logoutUrl;

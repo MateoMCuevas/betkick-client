@@ -37,7 +37,7 @@ export class MoneyUserService {
     const userId = this.authService.userId!;
     const params = new HttpParams().set('userId', userId);
 
-    return this.http.post<any>('/api/user/withdraw', withdrawAmount, {params})
+    return this.http.post<any>('https://34.71.77.27:8080/api/user/withdraw', withdrawAmount, {params})
       .subscribe(
         (response) => {
           this.showAlertMsj('Successful withdrawal');
@@ -52,7 +52,7 @@ export class MoneyUserService {
     const userId = this.authService.userId!;
     const params = new HttpParams().set('userId', userId);
 
-    return this.http.post<any>('/api/user/deposit', depositAmount, {params})
+    return this.http.post<any>('https://34.71.77.27:8080/api/user/deposit', depositAmount, {params})
       .subscribe(
         (response) => {
           this.showAlertMsj('Successful deposit');
