@@ -7,10 +7,10 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class EventService {
-  competitionsUrl: string = 'https://betkick-api.leandroruhl.com/api/active-competitions';
-  competitionsWithStandingsUrl: string = 'https://betkick-api.leandroruhl.com/api/competitions-with-standings';
-  matchesUrl: string = 'https://betkick-api.leandroruhl.com/api/matches';
-  standingsUrl: string = 'https://betkick-api.leandroruhl.com/api/standings'
+  competitionsUrl: string = 'http://betkick-api.leandroruhl.com:8080/api/active-competitions';
+  competitionsWithStandingsUrl: string = 'http://betkick-api.leandroruhl.com:8080/api/competitions-with-standings';
+  matchesUrl: string = 'http://betkick-api.leandroruhl.com:8080/api/matches';
+  standingsUrl: string = 'http://betkick-api.leandroruhl.com:8080/api/standings'
   matches: Match[] = [];
 
 
@@ -57,7 +57,7 @@ export class EventService {
   }
 
   getLeaderboard(competitionId?: number): Observable<UserBetSummary[]> {
-    return this.http.get<UserBetSummary[]>('https://betkick-api.leandroruhl.com/api/leaderboard')
+    return this.http.get<UserBetSummary[]>('http://betkick-api.leandroruhl.com:8080/api/leaderboard')
       .pipe(
         catchError(this.handleError<UserBetSummary[]>('getLeaderboard', []))
       );
