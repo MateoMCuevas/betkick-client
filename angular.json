@@ -61,10 +61,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "BetKick:build:production"
+              "browserTarget": "BetKick:build:production",
+              "proxyConfig": "src/proxy.conf.js"
             },
             "development": {
-              "browserTarget": "BetKick:build:development"
+              "browserTarget": "BetKick:build:development",
+              "proxyConfig": "src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
