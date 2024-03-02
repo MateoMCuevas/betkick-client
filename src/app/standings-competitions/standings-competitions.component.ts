@@ -34,7 +34,7 @@ export class StandingsCompetitionsComponent implements OnInit {
   getCompetitions(): void {
     this.eventService.getCompetitionsWithStandings()
       .subscribe(competitions => {
-        this.competitions = competitions;
+        this.competitions = competitions.data;
         this.competitionsToShow = this.competitions.reverse();
       });
   }

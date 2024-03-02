@@ -177,11 +177,12 @@ export class MatchesComponent implements OnInit {
     }
   }
 
-  getMatches(competitionId ?: number)
+  getMatches(competitionId?: number)
     :
     void {
     this.eventService.getMatches()
-      .subscribe(matches => {
+      .subscribe(response => {
+        let matches: Match[] = response;
         if (competitionId !== undefined) {
           // Filter matches only when competitionId is defined
           matches = matches.filter(match => match.competition.id === competitionId);

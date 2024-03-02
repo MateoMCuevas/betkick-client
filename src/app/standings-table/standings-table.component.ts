@@ -44,8 +44,9 @@ export class StandingsTableComponent implements OnInit {
     this.sortedDataSources = [];
 
     this.eventService.getStandings(competitionId)
-      .subscribe(compStandings => {
-        compStandings.forEach(compStanding => {
+      .subscribe(response => {
+        let standings: CompetitionStandings[] = response.data;
+        standings.forEach(compStanding => {
           let tableStandings = new MatTableDataSource<Standing>([]);
           tableStandings.data = compStanding.standings;
           let tableData: TableData = {

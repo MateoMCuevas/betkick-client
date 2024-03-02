@@ -46,6 +46,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatSelectModule} from "@angular/material/select";
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     StandingsComponent,
     LandingPageComponent,
     NotFoundComponent,
+    LoginFormComponent,
   ],
     imports: [
         AppRoutingModule,

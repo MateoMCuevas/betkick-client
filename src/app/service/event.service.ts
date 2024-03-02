@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {catchError, Observable, of, tap} from "rxjs";
+import {catchError, from, map, Observable, of, tap} from "rxjs";
 import {Competition, CompetitionStandings, Match, UserBetSummary} from "../model";
 import {HttpClient} from "@angular/common/http";
+import {AxiosService} from "./axios.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,51 +14,64 @@ export class EventService {
   standingsUrl: string = '/api/standings'
   matches: Match[] = [];
 
-
-  constructor(private http: HttpClient) {
+  constructor(private axiosService: AxiosService) {
   }
 
-  getActiveCompetitions(): Observable<Competition[]> {
-    return this.http.get<Competition[]>(this.competitionsUrl)
+  getActiveCompetitions()  {
+    const apiUrl = this.competitionsUrl;
+
+    // Make the request using the custom request method
+    return from(this.axiosService.request('get', apiUrl))
       .pipe(
         catchError(this.handleError<Competition[]>('getActiveCompetitions', []))
       );
   }
 
-  getCompetitionsWithStandings(): Observable<Competition[]> {
-    return this.http.get<Competition[]>(this.competitionsWithStandingsUrl)
+
+  getCompetitionsWithStandings() {
+    const apiUrl = this.competitionsWithStandingsUrl;
+
+    // Make the request using the custom request method
+    return from(this.axiosService.request('get', apiUrl))
       .pipe(
         catchError(this.handleError<Competition[]>('getCompetitionsWithStandings', []))
       );
   }
 
-  getMatches(): Observable<Match[]> {
+  getMatches() {
     if (this.matches.length > 0) {
       // If matches is not empty, return it immediately
       return of(this.matches);
     }
 
-    const url = this.matchesUrl;
+    const apiUrl = this.matchesUrl;
 
-    return this.http.get<Match[]>(url)
+    // Make the request using the custom request method
+    return from(this.axiosService.request('get', apiUrl))
       .pipe(
-        tap((data) => {
-          this.matches = data;
+        tap((response) => {
+          this.matches = response.data;
         }),
+        map(response => response.data),
         catchError(this.handleError<Match[]>('getMatches', []))
       );
   }
 
-  getStandings(competitionId?: number): Observable<CompetitionStandings[]> {
-    const url = this.standingsUrl + `?competitionId=${competitionId}`;
-    return this.http.get<CompetitionStandings[]>(url)
+  getStandings(competitionId?: number) {
+    const apiUrl = this.standingsUrl + `?competitionId=${competitionId}`;
+
+    // Make the request using the custom request method
+    return from(this.axiosService.request('get', apiUrl))
       .pipe(
         catchError(this.handleError<CompetitionStandings[]>('getStandings', []))
       );
   }
 
-  getLeaderboard(competitionId?: number): Observable<UserBetSummary[]> {
-    return this.http.get<UserBetSummary[]>('/api/leaderboard')
+  getLeaderboard(competitionId?: number) {
+    const apiUrl = '/api/leaderboard';
+
+    // Make the request using the custom request method
+    return from(this.axiosService.request('get', apiUrl))
       .pipe(
         catchError(this.handleError<UserBetSummary[]>('getLeaderboard', []))
       );

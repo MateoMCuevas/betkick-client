@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {FormGroup, FormBuilder} from '@angular/forms';
-import {HttpClient, HttpParams} from "@angular/common/http";
 import {AuthService} from "./auth.service";
-import { UserBetSummary } from '../model';
+import {AxiosService} from "./axios.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class BetService {
   private listBets = new BehaviorSubject<FormGroup[]>([]);
   listBets$ = this.listBets.asObservable();
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private axiosService: AxiosService, private authService: AuthService) {
   }
 
   addData(data: any) {
@@ -40,26 +39,28 @@ export class BetService {
       matchId: parseInt(item.matchId) // Parse matchId to integer
     }));
 
-    // Construct query parameters
-    let params = new HttpParams();
-    params = params.set('userId', userId);
+    // Construct the URL
+    const apiUrl = '/api/bet';
 
-    return this.http.post<any>('/api/bet', modifiedData, { params });
+    // Make the request using the custom request method
+    return this.axiosService.request('post', apiUrl, modifiedData, { userId });
   }
 
   cancelBet(betId: number) {
-    let params = new HttpParams();
-    params = params.set('betId', betId);
+    const apiUrl = '/api/user/bet';
+    let params = { betId: betId };
 
-    return this.http.delete<any>('/api/user/bet', { params })
+    // Make the request using the custom request method
+    return this.axiosService.request('delete', apiUrl, null, params);
   }
 
   getBetHistory() {
+    const apiUrl = '/api/user/bets';
     const userId = this.authService.userId!;
-    let params = new HttpParams();
-    params = params.set('userId', userId);
+    let params = { userId: userId };
 
-    return this.http.get<any>('/api/user/bets', { params });
+    // Make the request using the custom request method
+    return this.axiosService.request('get', apiUrl, null, params);
   }
 
   setBetAmount(form: FormGroup, newAmount: number) {

@@ -5,9 +5,8 @@ import { CardMatchComponent } from '../card-match/card-match.component';
 import { MoneyUserService } from '../service/money-user.service';
 import { BetService } from "../service/bet.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthGuard } from '../auth-guard.guard';
 import { AuthService } from '../service/auth.service';
-import {map, Observable} from "rxjs";
+import {from, map, Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -41,8 +40,8 @@ export class CardBetComponent implements OnInit {
   }
   getUserMoney(): Observable<number> {
     return this.moneyUser.getUserBalance().pipe(
-      map((balance: number) => {
-        return balance;
+      map((response) => {
+        return response.data;
       })
     );
   }
@@ -95,7 +94,7 @@ export class CardBetComponent implements OnInit {
       if (enoughUserMoney && this.checkBetAmounts() && this.listBetsLength > 0) {
         this.alertBetAmount = false
         this.alertUserMoney = false
-        this.betService.sendDataToBackend()
+        from(this.betService.sendDataToBackend())
           .subscribe(
           (response) => {
             this.moneyUser.showAlertMsj('Your bets have been placed!')

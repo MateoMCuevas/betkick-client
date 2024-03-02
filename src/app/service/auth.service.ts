@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, lastValueFrom, map, Observable} from "rxjs";
 import {User} from "../model";
 import {Location} from '@angular/common';
+import {AxiosService} from "./axios.service";
+import {Router} from "@angular/router";
 
 const headers = new HttpHeaders().set('Accept', 'application/json');
 
@@ -10,48 +12,90 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
   providedIn: 'root'
 })
 export class AuthService {
-  $authenticationState = new BehaviorSubject<boolean>(false);
   userId: string | undefined;
-  userName: string | undefined;
+  username: string | undefined;
+  user: User;
   loginBoolean: boolean = false;
-  constructor(private http: HttpClient, private location: Location) {
+
+  constructor(private router: Router, private axiosService: AxiosService) {
+    if (this.user === undefined) {
+      // @ts-ignore
+      let user = JSON.parse(window.localStorage.getItem("user"));
+      if (user !== null) {
+        this.user = user;
+        this.userId = user.id;
+        this.username = user.login;
+        this.loginBoolean = true;
+      } else {
+        this.loginBoolean = false;
+      }
+    }
   }
 
-  getUser(): Observable<User> {
-    return this.http.get<User>('/api/user', {headers}, )
-      .pipe(map((response: User) => {
-          if (response !== null) {
-            this.$authenticationState.next(true);
-            this.userId = response.sub;
-            this.userName = response.nickname;
-            this.loginBoolean = true;
-          }
-          return response;
-        })
-      );
+  getLoginBoolean(): boolean {
+    return this.loginBoolean;
+  }
+
+  getUser(): User {
+    // @ts-ignore
+    return JSON.parse(window.localStorage.getItem("user"));
   }
 
   async isAuthenticated(): Promise<boolean> {
-    const user = await lastValueFrom(this.getUser());
-    return user !== null;
+    return this.axiosService.getAuthToken() !== null;
   }
 
-  login(): void {
-    location.href = `${location.origin}${this.location.prepareExternalUrl('/oauth2/authorization/okta')}`;
-  }
-
-  logout(): void {
-    this.http.post('/api/logout', {}, { withCredentials: true }).subscribe(
-      (response: any) => {
-        // Redirect to the logout URL received from the server
-        window.location.href = response.logoutUrl;
-      },
-      (error) => {
+  login(input: any): void {
+    this.axiosService.request(
+      "POST",
+      "api/login",
+      {
+        login: input.login,
+        password: input.password
+      }).then(
+      response => {
+        this.loadUser(response);
+      }).catch(
+      error => {
+        this.axiosService.setAuthToken(null);
+        console.warn("Error logging in")
       }
     );
   }
 
-  getLoginBoolean():boolean{
-    return this.loginBoolean
+  register(input: any): void {
+    this.axiosService.request(
+      "POST",
+      "api/register",
+      {
+        firstName: input.firstName,
+        lastName: input.lastName,
+        login: input.login,
+        password: input.password
+      }).then(
+      response => {
+        this.loadUser(response);
+      }).catch(
+      error => {
+        this.axiosService.setAuthToken(null);
+      }
+    );
   }
+
+   private loadUser(response: any) {
+    this.axiosService.setAuthToken(response.data.token);
+    this.user = response.data;
+    this.userId = response.data.id;
+    this.username = response.data.login;
+    this.loginBoolean = true;
+    window.localStorage.setItem("user", JSON.stringify(response.data))
+    location.href = 'home';
+  }
+
+  logout(): void {
+    this.axiosService.setAuthToken(null);
+    window.localStorage.removeItem("user")
+    location.href = 'home';
+  }
+
 }

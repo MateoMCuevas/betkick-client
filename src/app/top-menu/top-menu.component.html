@@ -36,7 +36,7 @@
   <div class="menu-options">
     <div *ngIf="user; else login" (click)="getUserBalance()">
       <button mat-button [matMenuTriggerFor]="menu" id="account-menu" *ngIf="!isSmallScreenBool">
-        {{ auth.userName }}
+        {{ auth.username }}
         <mat-icon id="account-icon">account_circle</mat-icon>
       </button>
       <button mat-button [matMenuTriggerFor]="menu" id="account-menu-small" *ngIf="isSmallScreenBool">
@@ -74,11 +74,11 @@
       </mat-menu>
     </div>
     <ng-template #login>
-      <button mat-button (click)="auth.login()" id="login" *ngIf="!isSmallScreenBool">
+      <button mat-button routerLink="/login" id="login" *ngIf="!isSmallScreenBool">
         <mat-icon id="lock">lock</mat-icon>
         Login
       </button>
-      <button mat-button (click)="auth.login()" id="login-small" *ngIf="isSmallScreenBool">
+      <button mat-button routerLink="/login" id="login-small" *ngIf="isSmallScreenBool">
         <mat-icon id="lock-small">lock</mat-icon>
         Login
       </button>

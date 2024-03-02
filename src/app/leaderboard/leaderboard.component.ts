@@ -27,9 +27,10 @@ export class LeaderboardComponent implements AfterViewInit {
 
   getLeaderboard() {
     this.eventService.getLeaderboard()
-      .subscribe(data => {
-        this.dataSource.data = data;
-        this.sortedDataSource.data = data;
+      .subscribe(response => {
+        let leaderboard: UserBetSummary[] = response.data;
+        this.dataSource.data = leaderboard;
+        this.sortedDataSource.data = leaderboard;
       });
   }
 

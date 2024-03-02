@@ -31,8 +31,8 @@ export class WithdrawComponent implements OnInit {
     if (this.withdrawForm.valid) {
       // @ts-ignore
       const transactionAmount = parseFloat(this.withdrawForm.get('transactionAmount').value);
-      this.moneyUser.getUserBalance().subscribe(balance => {
-        if (balance < transactionAmount) {
+      this.moneyUser.getUserBalance().subscribe(response => {
+        if (response.data < transactionAmount) {
           this.moneyUser.showAlertMsj("You don't have enough balance to make this transaction");
         } else {
           this.moneyUser.sendWithdrawRequest(transactionAmount);

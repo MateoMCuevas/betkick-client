@@ -42,9 +42,11 @@ export interface Match {
 }
 
 export class User {
-  sub!: string;
-  email!: number;
-  nickname!: string;
+  id!: number;
+  firstName!: string;
+  lastName!: string;
+  login!: string;
+  token!: string;
 }
 
 export interface Standing {
@@ -66,7 +68,7 @@ export interface CompetitionStandings {
 
 export interface UserBetSummary {
   "position": number;
-  "name": string;
+  "login": string;
   "earnings": number;
   "betsWon": number;
   "betsLost": number;

@@ -3,6 +3,7 @@ import {BetService} from '../service/bet.service';
 import {AuthService} from '../service/auth.service';
 import {User} from '../model';
 import {MoneyUserService} from '../service/money-user.service';
+import {from} from "rxjs";
 
 @Component({
   selector: 'app-my-bets',
@@ -26,20 +27,21 @@ export class MyBetsComponent implements OnInit {
 
   async ngOnInit() {
     this.isAuthenticated = await this.auth.isAuthenticated();
-    await this.auth.getUser().subscribe(data => this.user = data);
+    this.user = this.auth.getUser();
     this.getBetHistory()
   }
 
   getBetHistory() {
-    this.betService.getBetHistory().subscribe(
+    from(this.betService.getBetHistory())
+      .subscribe(
       (response) => {
-        this.myActiveBets = response.filter(function (bet: any) {
+        this.myActiveBets = response.data.filter(function (bet: any) {
           return bet.match.status == 'SCHEDULED' || bet.match.status == 'TIMED' || bet.match.status == 'CANCELLED' || bet.match.status == 'POSTPONED' || bet.match.status == 'SUSPENDED'
         })
-        this.myFinishedBets = response.filter(function (bet: any) {
+        this.myFinishedBets = response.data.filter(function (bet: any) {
           return bet.match.status == 'FINISHED' || bet.match.status == 'AWARDED'
         })
-        this.myLiveBets = response.filter(function (bet: any) {
+        this.myLiveBets = response.data.filter(function (bet: any) {
           return bet.match.status == 'IN_PLAY' || bet.match.status == 'PAUSED'
         })
         this.showList(1)
@@ -51,7 +53,8 @@ export class MyBetsComponent implements OnInit {
   }
 
   cancelBet(bet: any, index: number) {
-    this.betService.cancelBet(bet.id).subscribe((number: number) => {
+    from(this.betService.cancelBet(bet.id))
+      .subscribe((number: number) => {
       this.money = number;
     });
     this.selectedList.splice(index, 1)

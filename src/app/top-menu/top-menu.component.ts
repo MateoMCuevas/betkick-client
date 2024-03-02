@@ -5,6 +5,7 @@ import {AuthService} from "../service/auth.service";
 import {BetService} from "../service/bet.service";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, tap} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-top-menu',
@@ -31,9 +32,9 @@ export class TopMenuComponent implements OnInit {
   async ngOnInit() {
     this.isAuthenticated = await this.auth.isAuthenticated();
     if (this.isAuthenticated) {
-      this.auth.getUser().subscribe(data => this.user = data);
-      this.moneyUser.getUserBalance().subscribe((number: number) => {
-        this.money = number;
+      this.user = this.auth.getUser();
+      this.moneyUser.getUserBalance().subscribe((response) => {
+        this.money = response.data;
       });
     }
     this.isSmallScreen$.subscribe(isSmallScreen => {
@@ -42,9 +43,10 @@ export class TopMenuComponent implements OnInit {
   }
 
   getUserBalance() {
-    this.moneyUser.getUserBalance().subscribe(balance => {
-      this.money = balance;
+    this.moneyUser.getUserBalance().subscribe(response => {
+      this.money = response.data;
     });
   }
+
 
 }
