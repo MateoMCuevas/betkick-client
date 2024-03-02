@@ -1,0 +1,87 @@
+<mat-toolbar [ngClass]="{'small-toolbar': isSmallScreenBool}">
+
+  <ng-container *ngIf="isSmallScreen$ | async">
+    <app-top-menu-dropdown></app-top-menu-dropdown>
+  </ng-container>
+
+  <a href="/src">
+    <div class="header">
+      <div id="logo">
+        <mat-icon id="player">directions_run</mat-icon>
+        <mat-icon id="ball">sports_soccer</mat-icon>
+      </div>
+      <h1 class="title" *ngIf="!isSmallScreenBool">
+        BetKick
+      </h1>
+    </div>
+  </a>
+
+  <div class="menu-options navigation-options" *ngIf="!isSmallScreenBool">
+    <button mat-button routerLink="/standings" id="standings">
+      Standings
+      <mat-icon id="standings-icon">format_list_numbered_rtl</mat-icon>
+    </button>
+
+    <button mat-button routerLink="/home" id="home">
+      Home
+      <mat-icon id="home-icon">home</mat-icon>
+    </button>
+
+    <button mat-button routerLink="/leaderboard" id="leaderboard">
+      Leaderboard
+      <mat-icon id="leaderboard-icon">star_border</mat-icon>
+    </button>
+  </div>
+
+  <div class="menu-options">
+    <div *ngIf="user; else login" (click)="getUserBalance()">
+      <button mat-button [matMenuTriggerFor]="menu" id="account-menu" *ngIf="!isSmallScreenBool">
+        {{ auth.username }}
+        <mat-icon id="account-icon">account_circle</mat-icon>
+      </button>
+      <button mat-button [matMenuTriggerFor]="menu" id="account-menu-small" *ngIf="isSmallScreenBool">
+        <mat-icon id="account-icon-small">account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <p mat-menu-item style="cursor: default">
+          <mat-icon>money</mat-icon>
+          Balance: {{ money | currency: 'USD' }}
+        </p>
+        <a routerLink="/deposit">
+          <button mat-menu-item>
+            <mat-icon>payment</mat-icon>
+            Deposit
+          </button>
+        </a>
+        <a routerLink="/withdraw">
+          <button mat-menu-item>
+            <mat-icon>account_balance</mat-icon>
+            Withdraw
+          </button>
+        </a>
+        <a routerLink="/my-bets">
+          <button mat-menu-item>
+            <mat-icon>subject</mat-icon>
+            My Bets
+          </button>
+        </a>
+        <a routerLink="/home">
+          <button mat-menu-item (click)="auth.logout()" id="logout">
+            <mat-icon>highlight_off</mat-icon>
+            Logout
+          </button>
+        </a>
+      </mat-menu>
+    </div>
+    <ng-template #login>
+      <button mat-button routerLink="/login" id="login" *ngIf="!isSmallScreenBool">
+        <mat-icon id="lock">lock</mat-icon>
+        Login
+      </button>
+      <button mat-button routerLink="/login" id="login-small" *ngIf="isSmallScreenBool">
+        <mat-icon id="lock-small">lock</mat-icon>
+        Login
+      </button>
+    </ng-template>
+  </div>
+</mat-toolbar>

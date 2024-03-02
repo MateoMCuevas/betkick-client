@@ -1,8 +1,0 @@
-<div class="competitions">
-  <div class="competition" *ngFor="let competition of competitionsToShow"
-       routerLink="{{competition.id}}" routerLinkActive="active" (click)="onClick($event)">
-    <img src="{{competition.emblem}}" class="comp-emblem" alt="" routerLinkActive="markerClass">
-    <p class="comp-name" routerLinkActive="markerClass">
-      {{ competition.shortName == undefined ? competition.name : competition.shortName}}</p>
-  </div>
-</div>

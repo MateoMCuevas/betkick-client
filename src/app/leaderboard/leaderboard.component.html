@@ -3,7 +3,7 @@
 
     <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="sortedDataSource">
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> <span style="margin-left: 25px">Position</span></th>
+        <th mat-header-cell *matHeaderCellDef><span style="margin-left: 25px">Position</span></th>
         <td mat-cell *matCellDef="let user">
           <div class="position-cell-container">
             <mat-icon [ngClass]="{'star-icon-gold': user.position === 1, 'star-icon-silver': user.position === 2,

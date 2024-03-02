@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="button-group">
+    <button class="button" (click)="showList(1)">Active
+    </button>
+    <button class="button" (click)="showList(2)">Live
+    </button>
+    <button class="button" (click)="showList(3)">Finished
+    </button>
+  </div>
+
+  <div class="bet-list">
+    <div *ngIf="!isListEmpty() ; else emptyListMessage">
+      <mat-card class="card-container" *ngFor="let bet of selectedList; let index = index">
+        <div class="card-title" [ngStyle]="{ 'border-bottom': selectedListType === 2 ? '0' : '1px solid #2D2D2D' }">
+            <span style="color: white">Bet #{{ bet.id }} | Placed on
+              {{ adjustedDate(bet.placedAt) | date:"MMM dd, yyyy 'at' hh:mm a" }} </span>
+          <p *ngIf="selectedListType === 3 && bet.isWon" class="betResult" style="background-color: #02b202">
+            WON
+          </p>
+          <p *ngIf="selectedListType === 3 && !bet.isWon" class="betResult" style="background-color: #bd0101">
+            LOST
+          </p>
+        </div>
+        <mat-progress-bar *ngIf="selectedListType === 2" mode="indeterminate"></mat-progress-bar>
+        <mat-card-header class="card-header">
+          <div class="betInfo">
+            <mat-card-title>{{ bet.match.homeTeam.shortName }}</mat-card-title>
+            <mat-card-title>{{ bet.match.awayTeam.shortName }}</mat-card-title>
+            <mat-card-subtitle class="green">
+              {{ adjustedDate(bet.match.utcDate) | date:"MMM dd, yyyy 'at' hh:mm a" }}
+            </mat-card-subtitle>
+          </div>
+          <div class="crests">
+            <img src="{{  bet.match.homeTeam.crest }}" class="team-crest" alt="">
+            <p *ngIf="selectedListType === 1" class="versus">vs</p>
+            <p *ngIf="selectedListType === 2 || selectedListType === 3" class="score">
+              <span> {{ bet.match.score.home }} </span>
+              <span> {{ ' - ' }} </span>
+              <span> {{ bet.match.score.away }} </span>
+            </p>
+            <img src="{{  bet.match.awayTeam.crest }}" class="team-crest" alt="">
+          </div>
+          <div class="box">
+            <p *ngIf="selectedListType === 3">Match Result</p>
+            <p *ngIf="bet.match.winner ==='AWAY_TEAM' && selectedListType === 3"
+               class="green">{{ bet.match.awayTeam.shortName }}
+              wins</p>
+            <p *ngIf="bet.match.winner ==='HOME_TEAM' && selectedListType === 3"
+               class="green">{{ bet.match.homeTeam.shortName }}
+              wins</p>
+            <p *ngIf="bet.match.winner ==='DRAW' && selectedListType === 3" class="green">Draw</p>
+
+            <p *ngIf="selectedListType !== 3">Prediction</p>
+            <p *ngIf="bet.winner ==='AWAY_TEAM' && selectedListType !== 3"
+               class="green">{{ bet.match.awayTeam.shortName }}
+              wins</p>
+            <p *ngIf="bet.winner ==='HOME_TEAM' && selectedListType !== 3"
+               class="green">{{ bet.match.homeTeam.shortName }}
+              wins</p>
+            <p *ngIf="bet.winner ==='DRAW' && selectedListType !== 3" class="green">Draw</p>
+          </div>
+        </mat-card-header>
+        <mat-divider style="background-color: #2D2D2D;"></mat-divider>
+        <mat-card-content class="card-content">
+          <div class="box">
+            <p>Bet Amount</p>
+            <p class="green">{{ bet.amount | currency: 'USD' }}</p>
+          </div>
+          <div class="box">
+            <p>Odds</p>
+            <p class="green">X{{ bet.odds | number:'1.1-1' }}</p>
+          </div>
+          <div class="box">
+            <p *ngIf="selectedListType !== 3">Potential Earnings</p>
+            <p *ngIf="selectedListType === 3 && bet.isWon">Earnings</p>
+            <p *ngIf="selectedListType !== 3 || bet.isWon" class="green">
+              {{ calculateEarnings(bet.amount, bet.odds) | currency: 'USD' }}</p>
+
+            <p *ngIf="selectedListType === 3 && !bet.isWon">Prediction</p>
+            <p *ngIf="bet.winner === 'AWAY_TEAM' && selectedListType === 3 && !bet.isWon"
+               class="red">{{ bet.match.awayTeam.shortName }} wins</p>
+            <p *ngIf="bet.winner === 'HOME_TEAM' && selectedListType === 3 && !bet.isWon"
+               class="red">{{ bet.match.homeTeam.shortName }} wins</p>
+            <p *ngIf="bet.winner === 'DRAW' && selectedListType === 3 && !bet.isWon" class="red">Draw</p>
+
+          </div>
+        </mat-card-content>
+        <mat-card-actions *ngIf="selectedListType === 1" class="footer">
+          <button mat-raised-button class="cancelButton" (click)="cancelBet(bet, index)">
+            Cancel bet
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <ng-template #emptyListMessage>
+      <p class="noBetsMessage">Bet history is empty. <a routerLink="/home">Place some bets!</a></p>
+    </ng-template>
+  </div>
+</div>

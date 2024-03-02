@@ -30,6 +30,7 @@ body {
     font-size: 18px;
   }
 }
+
 /*
 /* Large devices (laptops/desktops, 992px and up)
 @media only screen and (min-width: 992px) {
@@ -45,5 +46,11 @@ body {
   }
 } */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

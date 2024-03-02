@@ -1,0 +1,57 @@
+<div class="form-container">
+  <div class="form-header">
+    <mat-icon>payment</mat-icon>
+    Deposit Form
+  </div>
+  <form class="mat-elevation-z8" [formGroup]="depositForm" (ngSubmit)="submitForm()">
+    <mat-form-field>
+      <input matInput placeholder="Card Number" formControlName="cardNumber">
+      <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('required')">Card Number is required</mat-error>
+      <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('pattern')">Invalid Card Number (must be 16 digits)
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="CVV" formControlName="cvv">
+      <mat-error *ngIf="depositForm.get('cvv')?.hasError('required')">CVV is required</mat-error>
+      <mat-error *ngIf="depositForm.get('cvv')?.hasError('pattern')">CVV must be a 3-digit number</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Expiration Date" formControlName="expirationDate">
+      <mat-error *ngIf="depositForm.get('expirationDate')?.hasError('required')">Expiration Date is required</mat-error>
+      <mat-error *ngIf="depositForm.get('expirationDate')?.hasError('pattern')">Invalid Expiration Date (must be in
+        MM/YYYY format)
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Card Holder Name" formControlName="cardHolderName">
+      <mat-error *ngIf="depositForm.get('cardHolderName')?.hasError('required')">Card Holder Name is required
+      </mat-error>
+      <mat-error *ngIf="depositForm.get('cardHolderName')?.hasError('pattern')">Invalid characters in Card Holder Name
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Card Type</mat-label>
+      <mat-select formControlName="cardType">
+        <mat-option value="visa">Visa</mat-option>
+        <mat-option value="mastercard">MasterCard</mat-option>
+      </mat-select>
+      <mat-error *ngIf="depositForm.get('cardType')?.hasError('required')">Card Type is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Transaction Amount" formControlName="transactionAmount">
+      <mat-error *ngIf="depositForm.get('transactionAmount')?.hasError('required')">Transaction Amount is required
+      </mat-error>
+      <mat-error *ngIf="depositForm.get('transactionAmount')?.hasError('pattern')">Invalid Transaction Amount
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="depositForm.invalid">
+      Make transaction
+    </button>
+  </form>
+</div>

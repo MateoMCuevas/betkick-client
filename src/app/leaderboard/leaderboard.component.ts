@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {UserBetSummary} from "../model";
 import {MatPaginator} from "@angular/material/paginator";
-import {EventService} from "../service/event.service";
+import {EventService} from "../services/event.service";
 import {Sort} from "@angular/material/sort";
 
 @Component({
