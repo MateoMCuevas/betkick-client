@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import axios from 'axios';
+import {jwtDecode} from "jwt-decode";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +25,29 @@ export class AxiosService {
     }
   }
 
+  private isTokenExpired(token: string): boolean {
+    try {
+      const decodedToken: any = jwtDecode(token);
+      const currentTimeInSeconds = Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
+      return decodedToken.exp < currentTimeInSeconds;
+    } catch (error) {
+      console.warn("Invalid or expired JWT")
+      return true; // Error decoding or no 'exp' claim
+    }
+  }
+
   request(method: string, url: string, data?: any, params?: any): Promise<any> {
     let headers = {};
 
-    if (this.getAuthToken() !== null) {
-      headers = {"Authorization": "Bearer " + this.getAuthToken()};
+    const authToken = this.getAuthToken();
+
+    if (authToken !== null && !this.isTokenExpired(authToken)) {
+      headers = {"Authorization": "Bearer " + authToken};
+    } else if (authToken !== null && this.isTokenExpired(authToken)) { // if there is a token but it is expired
+      this.setAuthToken(null);
+      window.localStorage.removeItem("user")
+      location.href = 'home';
+      console.warn("Expired token has been invalidated")
     }
 
     if (params) {
