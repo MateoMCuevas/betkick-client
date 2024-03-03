@@ -12,6 +12,7 @@ import {LandingPageComponent} from "./landing-page/landing-page.component";
 import {NotFoundComponent} from "./404-not-found/not-found.component";
 import {LoginFormComponent} from "./login-register-components/login-form/login-form.component";
 import {RegisterFormComponent} from "./login-register-components/register-form/register-form.component";
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -34,9 +35,9 @@ const routes: Routes = [
     ]
   },
   {path: 'leaderboard', component: LeaderboardComponent},
-  {path: 'deposit', component: DepositComponent},
-  {path: 'withdraw', component: WithdrawComponent},
-  {path: 'my-bets', component: MyBetsComponent},
+  {path: 'deposit', component: DepositComponent, canActivate: [AuthGuard]},
+  {path: 'withdraw', component: WithdrawComponent, canActivate: [AuthGuard]},
+  {path: 'my-bets', component: MyBetsComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundComponent},
 ];
 
