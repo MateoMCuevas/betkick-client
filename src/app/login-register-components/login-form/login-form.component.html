@@ -1,15 +1,51 @@
-<form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
+<div class="form-container">
+  <form class="mat-elevation-z8" [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
 
-  <div class="form-outline mb-4">
-    <input type="login" id="loginName" name="login" class="form-control" [(ngModel)]="login"/>
-    <label class="form-label" for="loginName">Username</label>
-  </div>
+    <div class="logo-and-message">
+      <div id="logo">
+        <mat-icon id="player">directions_run</mat-icon>
+        <mat-icon id="ball">sports_soccer</mat-icon>
+      </div>
+      <h3>Welcome</h3>
+      <p>Log in to access your account</p>
+    </div>
 
-  <div class="form-outline mb-4">
-    <input type="password" id="loginPassword" name="password" class="form-control" [(ngModel)]="password"/>
-    <label class="form-label" for="loginPassword">Password</label>
-  </div>
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Username" formControlName="login">
+      <mat-error *ngIf="loginForm.get('login')?.hasError('required')">Username is required</mat-error>
+      <mat-error *ngIf="loginForm.get('login')?.hasError('minlength')">Username must be at least 3 characters long
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('login')?.hasError('maxlength')">Username cannot be more than 10 characters long
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('login')?.hasError('pattern')">Username must contain only letters, numbers,
+        underscores, and hyphens
+      </mat-error>
+    </mat-form-field>
 
-  <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix class="visibility-button"
+                (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}
+      </mat-icon>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8 characters long
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('pattern')">Password must contain at least one lowercase
+        letter, one uppercase letter, one digit, and one special character
+      </mat-error>
+    </mat-form-field>
 
-</form>
+    <button *ngIf="!authService.loginBoolean" mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+      Log in
+    </button>
+
+    <p *ngIf="!authService.loginBoolean">
+      Don't have an account? <a href="/register">Sign up</a>
+    </p>
+
+    <p class="warning" *ngIf="authService.loginBoolean">
+      You're already logged in. Please logout if you want to change accounts
+    </p>
+
+  </form>
+</div>

@@ -1,27 +1,66 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
 })
-export class RegisterFormComponent {
+export class RegisterFormComponent implements OnInit {
+  registerForm: FormGroup;
+  hide: boolean;
 
-  constructor(private authService: AuthService) {
+  constructor(protected authService: AuthService, private fb: FormBuilder) {
   }
 
-  firstName: string = "";
-  lastName: string = "";
-  login: string = "";
-  password: string = "";
+  ngOnInit(): void {
+    this.registerForm = this.fb.group({
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(10),
+          Validators.pattern(/^[a-zA-Z]+$/)
+        ]
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(10),
+          Validators.pattern(/^[a-zA-Z]+$/)
+        ]
+      ],
+      login: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(10),
+          Validators.pattern(/^[a-zA-Z0-9_-]+$/)
+        ]
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
+        ]
+      ],
+    });
+  }
 
   onSubmitRegister(): void {
-    this.authService.register({
-      "firstName": this.firstName,
-      "lastName": this.lastName,
-      "login": this.login,
-      "password": this.password
-    });
+    if (this.registerForm.valid) {
+      this.authService.register({"login": this.registerForm.get('login')?.value,
+        "firstName": this.registerForm.get('firstName')?.value, "lastName": this.registerForm.get('lastName')?.value,
+        "password": this.registerForm.get('password')?.value});
+    } else {
+      this.authService.showAlertMsj('Invalid form data. Please check and try again');
+    }
   }
 }

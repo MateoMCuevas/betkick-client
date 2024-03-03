@@ -3,6 +3,7 @@ import {HttpHeaders} from "@angular/common/http";
 import {User} from "../model";
 import {AxiosService} from "./axios.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 const headers = new HttpHeaders().set('Accept', 'application/json');
 
@@ -15,7 +16,7 @@ export class AuthService {
   user: User;
   loginBoolean: boolean = false;
 
-  constructor(private router: Router, private axiosService: AxiosService) {
+  constructor(private snackBar: MatSnackBar, private axiosService: AxiosService) {
     if (this.user === undefined) {
       // @ts-ignore
       let user = JSON.parse(window.localStorage.getItem("user"));
@@ -56,7 +57,7 @@ export class AuthService {
       }).catch(
       error => {
         this.axiosService.setAuthToken(null);
-        console.warn("Error logging in")
+        this.showAlertMsj("Incorrect username or password");
       }
     );
   }
@@ -76,6 +77,7 @@ export class AuthService {
       }).catch(
       error => {
         this.axiosService.setAuthToken(null);
+        this.showAlertMsj("Username is already taken or is invalid");
       }
     );
   }
@@ -94,6 +96,14 @@ export class AuthService {
     this.axiosService.setAuthToken(null);
     window.localStorage.removeItem("user")
     location.href = 'home';
+  }
+
+  showAlertMsj(msj: string): void {
+    const alertMsj = this.snackBar.open(msj, 'Close', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+    });
   }
 
 }

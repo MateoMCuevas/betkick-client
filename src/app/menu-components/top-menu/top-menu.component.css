@@ -9,31 +9,6 @@ mat-toolbar {
   max-height: 45px;
 }
 
-@media (min-width: 1200px) {
-  mat-toolbar {
-    padding-left: 7vw;
-    padding-right: 7vw;
-  }
-}
-
-@media (min-width: 1550px) {
-  mat-toolbar {
-    padding-left: 12vw;
-    padding-right: 12vw;
-  }
-}
-
-@media (min-width: 1700px) {
-  mat-toolbar {
-    padding-left: 16vw;
-    padding-right: 16vw;
-  }
-}
-
-
-@media (max-width: 700px) {
-
-}
 
 a {
   text-decoration: none;
@@ -152,7 +127,7 @@ mat-icon {
 }
 
 #login-small {
-  font-size: 0.9rem;
+  scale: 1.2;
 }
 
 #lock-small {
@@ -162,4 +137,26 @@ mat-icon {
 }
 
 #login:hover mat-icon, #leaderboard:hover mat-icon, #standings:hover mat-icon, #account-menu:hover mat-icon {
+}
+
+
+@media (min-width: 1200px) {
+  mat-toolbar {
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
+}
+
+@media (min-width: 1550px) {
+  mat-toolbar {
+    padding-left: 12vw;
+    padding-right: 12vw;
+  }
+}
+
+@media (min-width: 1700px) {
+  mat-toolbar {
+    padding-left: 16vw;
+    padding-right: 16vw;
+  }
 }

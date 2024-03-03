@@ -15,7 +15,7 @@ import {MatCardModule} from '@angular/material/card';
 import {CardBetComponent} from './betting-card-components/card-bet/card-bet.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {CardMatchComponent} from './betting-card-components/card-match/card-match.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatchesComponent} from './home-components/matches/matches.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -101,7 +101,14 @@ import {RegisterFormComponent} from './login-register-components/register-form/r
     MatSortModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        subscriptSizing: 'dynamic'
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
