@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Competition} from "../../model";
 import {EventService} from "../../services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,7 +12,7 @@ export class CompetitionsComponent implements OnInit {
   competitions: Competition[] = [];
   competitionsToShow: Competition[] = [];
 
-  constructor(private eventService: EventService, private route: ActivatedRoute, private router: Router) {
+  constructor(private eventService: EventService, private router: Router) {
   }
 
   ngOnInit(): void {

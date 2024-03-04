@@ -37,7 +37,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 mat-form-field {
@@ -52,7 +52,6 @@ button {
   .form-container {
     padding: 0;
     border-top: 1px solid #2D2D2D;
-    height: 600px;
     background-color: white;
   }
 
@@ -78,7 +77,6 @@ button {
 
 @media screen and (max-width: 475px) {
   .form-container {
-    height: 600px;
     background-color: white;
   }
 

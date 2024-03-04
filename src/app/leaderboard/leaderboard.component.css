@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: flex-start; /* Optional: Adjust as needed */
   align-items: center; /* Optional: Adjust as needed */
-  overflow: scroll;
+  overflow: auto;
   margin-bottom: 3rem;
   min-height: 570px;
 }
@@ -20,8 +20,8 @@
 table, mat-paginator {
   width: 100%; /* Ensure the table takes 100% of its container */
   font-size: 0.85rem;
-  min-width: 395px;
-  overflow-x: scroll;
+  min-width: 560px;
+  overflow-x: auto;
 }
 
 mat-paginator {

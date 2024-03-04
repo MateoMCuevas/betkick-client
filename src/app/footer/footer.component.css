@@ -1,5 +1,5 @@
 .footer {
-  padding: 1rem;
+  padding: 1.5rem;
   background: #0A0A0A;
   color: #e5e5e5;
   text-align: left;
@@ -12,7 +12,8 @@ br {
 
 h3 {
   font-size: 1.1rem;
-  font-weight: bolder;
+  letter-spacing: 1px;
+  font-weight: 600;
   text-align: center;
   margin: 0 0 0.6rem;
 }

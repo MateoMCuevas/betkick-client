@@ -47,7 +47,7 @@ p {
 .team-container p {
   align-self: center;
   justify-self: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .team-container img {
@@ -64,7 +64,7 @@ p {
   gap: 1.5rem;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .odds-container button {
@@ -121,7 +121,7 @@ p {
   .team-container p {
     align-self: center;
     justify-self: center;
-    font-weight: bold;
+    font-weight: 500;
     font-size: small;
   }
 

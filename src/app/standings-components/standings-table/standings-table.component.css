@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: flex-start; /* Optional: Adjust as needed */
   align-items: center; /* Optional: Adjust as needed */
-  overflow: scroll;
   margin: 0 auto;
 }
 

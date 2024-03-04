@@ -7,18 +7,6 @@
   border: 1px solid #d7d7d7;
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1090px) {
-  .competitions {
-    justify-content: center;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .competitions {
-    border-bottom: 0;
-  }
-}
 
 .competition {
   flex: 0 0 auto;
@@ -66,4 +54,17 @@
   white-space: normal;
   /*overflow: hidden;
   text-overflow: ellipsis; */
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1090px) {
+  .competitions {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .competitions {
+    border-bottom: 0;
+  }
 }

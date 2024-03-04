@@ -26,14 +26,14 @@ h3 {
 h1 {
   margin-top: auto;
   font-size: 2.3rem;
-  font-weight: bolder;
+  font-weight: 500;
   text-align: center;
   color: white;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
 }
 
 .hero p {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   text-align: center;
   color: white;
   letter-spacing: 2px;
@@ -41,6 +41,7 @@ h1 {
 
 button {
   border: none;
+  letter-spacing: 3px;
   font-family: 'Roboto', serif;
   font-weight: bolder;
   font-size: 1rem;
@@ -53,7 +54,6 @@ button {
   margin: 0.2rem;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
-  letter-spacing: 1px;
 }
 
 button:hover {
@@ -67,13 +67,13 @@ button:hover {
 }
 
 .powered-by-container .powered-by {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.85);
   color: white;
   text-align: center;
+  font-weight: 500;
   display: block;
-  font-weight: bold;
   letter-spacing: 3px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin: 0 auto;
   padding-bottom: 0.6rem;
   padding-top: 1rem;
@@ -85,7 +85,7 @@ button:hover {
   justify-content: center;
   gap: 6rem;
   padding-bottom: 0.6rem;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.85);
 }
 
 .image-container {
@@ -102,9 +102,8 @@ button:hover {
 
 .image-container p {
   color: white;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   margin-top: 0.3rem;
-  font-weight: bold;
   margin-bottom: 0;
   white-space: nowrap;
 }
@@ -129,7 +128,7 @@ button:hover {
   text-align: center;
   margin-bottom: 0;
   font-weight: 500;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   letter-spacing: 2px;
 }
 
@@ -137,7 +136,7 @@ button:hover {
   color: white;
   text-align: center;
   padding: 0 2rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   letter-spacing: 1px;
 }
@@ -210,7 +209,7 @@ button:hover {
 
 .cta h3 {
   font-size: 2.1rem;
-  font-weight: bolder;
+  font-weight: 500;
   text-align: center;
   color: white;
   letter-spacing: 3px;
@@ -222,7 +221,7 @@ button:hover {
 
 @media only screen and (max-width: 1065px) {
   .hero {
-    max-height: 500px;
+    max-height: 700px;
     background-image: url('/assets/images/stadium3.jpg');
   }
 
@@ -238,7 +237,6 @@ button:hover {
   }
 
   .what-is-betkick {
-    margin-top: 0;
     width: 100%;
     border-radius: 0;
     padding-left: 0;
@@ -291,12 +289,32 @@ button:hover {
 
 @media only screen and (max-width: 600px) {
   .hero {
-    max-height: 400px;
+    max-height: 600px;
+  }
+
+  .what-is-betkick {
+    margin-top: 0;
+    height: 600px;
+  }
+
+  .what-is-betkick p {
+    font-size: 1rem;
+  }
+
+  .hero {
+    gap: 0.3rem;
   }
 
   .hero h1 {
     font-size: 1.8rem;
     margin-bottom: 0;
+    letter-spacing: 2px;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
   }
 
   .feature {
@@ -313,7 +331,7 @@ button:hover {
 
 @media only screen and (max-width: 480px) {
   .hero {
-    max-height: 350px;
+    max-height: 600px;
   }
 
   .cta {

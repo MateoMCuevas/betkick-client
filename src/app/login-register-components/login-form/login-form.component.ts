@@ -12,6 +12,7 @@ export class LoginFormComponent implements OnInit {
   hide: boolean;
 
   constructor(protected authService: AuthService, private fb: FormBuilder) {
+    this.hide = true;
   }
 
   ngOnInit(): void {
