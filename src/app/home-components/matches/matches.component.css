@@ -129,6 +129,9 @@ mat-paginator {
 }
 
 @media only screen and (max-width: 500px) {
+  .listMatchesContainer {
+    gap: 1rem;
+  }
 
   .label {
     padding: 1.5rem;

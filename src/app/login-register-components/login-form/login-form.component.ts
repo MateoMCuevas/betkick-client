@@ -30,8 +30,7 @@ export class LoginFormComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
+          Validators.minLength(8)
         ]
       ],
     });

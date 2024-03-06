@@ -30,9 +30,6 @@
       <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
       <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8 characters long
       </mat-error>
-      <mat-error *ngIf="loginForm.get('password')?.hasError('pattern')">Password must contain at least one lowercase
-        letter, one uppercase letter, one digit, and one special character
-      </mat-error>
     </mat-form-field>
 
     <button *ngIf="!authService.loginBoolean" mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">

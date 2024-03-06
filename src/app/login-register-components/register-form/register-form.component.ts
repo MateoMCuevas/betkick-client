@@ -22,7 +22,7 @@ export class RegisterFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(10),
+          Validators.maxLength(20),
           Validators.pattern(/^[a-zA-Z]+$/)
         ]
       ],
@@ -31,7 +31,7 @@ export class RegisterFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(10),
+          Validators.maxLength(20),
           Validators.pattern(/^[a-zA-Z]+$/)
         ]
       ],
@@ -49,7 +49,6 @@ export class RegisterFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
         ]
       ],
     });
