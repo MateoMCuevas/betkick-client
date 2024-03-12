@@ -1,27 +1,42 @@
-# BetKick
+# BetKick Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+BetKick is a web application that provides a risk-free simulation environment for football betting. Users can explore real football matches and competitions, place virtual bets on match outcomes, and compete with others to see who makes the best predictions. This repository contains the frontend codebase built with Angular. For the backend repository see [BetKick API](https://github.com/LeandroFernandezRuhl/betkick-api).
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The BetKick frontend offers the following features:
 
-## Code scaffolding
+- **Match Exploration**: Browse and search for upcoming football matches, view match details, and filter matches by date and competition.
+- **Bet Placement**: Place virtual bets on match outcomes, view active bets, and cancel active bets.
+- **User Dashboard**: View and manage user profile, deposit/withdraw virtual funds, and access bet history.
+- **Leaderboard**: View a leaderboard of users ranked by their betting performance and total virtual funds.
+- **Standings**: View team standings for different competitions, sorted by various statistics.
+- **Responsive Design**: The application is designed to be responsive and accessible across different devices and screen sizes.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies
 
-## Build
+The BetKick frontend is built using the following technologies:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Angular 16.x
+- TypeScript
+- HTML
+- CSS
+- Angular Material
 
-## Running unit tests
+## Getting Started
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Prerequisites
 
-## Running end-to-end tests
+- Node.js (v14 or later)
+- Angular CLI
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Installation
 
-## Further help
+1. Clone the repository: `git clone https://github.com/LeandroFernandezRuhl/betkick-client.git`
+2. Navigate to the project directory: `cd betkick-client`
+3. Install dependencies: `npm install`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Running the Application
+
+1. Start the development server: `ng serve`
+2. Navigate to `http://localhost:4200/` in your web browser
