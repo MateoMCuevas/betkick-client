@@ -28,7 +28,7 @@
       </mat-error>
       <mat-error *ngIf="registerForm.get('lastName')?.hasError('maxlength')">Last name cannot be more than 20 characters long
       </mat-error>
-      <mat-error *ngIf="registerForm.get('firstName')?.hasError('pattern')">Last name must contain only letters
+      <mat-error *ngIf="registerForm.get('lastName')?.hasError('pattern')">Last name must contain only letters
       </mat-error>
     </mat-form-field>
 
