@@ -260,12 +260,17 @@ export class MatchesComponent implements OnInit {
           return;
         }
         this.liveMatches.push(match);
-      } else if (this.isTodayMatch(match)) {
         this.todayMatches.push(match);
-        /* if (!this.weekMatches[0]) { It's useless to have today's matches in the weekMatches array
+        if (!this.weekMatches[0]) {
           this.weekMatches[0] = [];
         }
-        this.weekMatches[0].push(match); */
+        this.weekMatches[0].push(match);
+      } else if (this.isTodayMatch(match)) {
+        this.todayMatches.push(match);
+        if (!this.weekMatches[0]) {
+          this.weekMatches[0] = [];
+        }
+        this.weekMatches[0].push(match);
       } else {
         const weekNumber = this.getWeekNumber(match.utcDate);
 
