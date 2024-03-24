@@ -46,8 +46,8 @@
   color: #08f905;
   grid-row: 1;
   justify-self: end;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 27px;
+  height: 27px;
 }
 
 @media (max-width: 768px) {
@@ -56,5 +56,10 @@
     justify-self: end;
     text-align: right;
     width: 80%;
+  }
+
+  .deleteBtn {
+    width: 25px;
+    height: 25px;
   }
 }
