@@ -32,7 +32,7 @@ The BetKick frontend is built using the following technologies:
 
 ### Installation
 
-1. Clone the repository: `git clone https://github.com/LeandroFernandezRuhl/betkick-client.git`
+1. Clone the repository: `git clone https://github.com/MateoMCuevas/betkick-client.git`
 2. Navigate to the project directory: `cd betkick-client`
 3. Install dependencies: `npm install`
 
